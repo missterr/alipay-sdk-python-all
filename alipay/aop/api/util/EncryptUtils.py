@@ -28,7 +28,7 @@ def aes_encrypt_content(content, encrypt_key, charset):
         length = len(bytes(content, encoding=charset))
     else:
         length = len(bytes(content))
-    padded_content = pad(content, length)
+    padded_content = pad(content, length).encode("utf-8")
     iv = b'\0' * BLOCK_SIZE
     cryptor = AES.new(base64.b64decode(encrypt_key), AES.MODE_CBC, iv)
     encrypted_content = cryptor.encrypt(padded_content)
