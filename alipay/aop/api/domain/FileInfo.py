@@ -8,11 +8,27 @@ from alipay.aop.api.constant.ParamConstants import *
 class FileInfo(object):
 
     def __init__(self):
+        self._biz_label = None
+        self._data_transmission_method = None
         self._data_type = None
         self._file_biz_type = None
         self._file_url = None
         self._origin_file_id = None
 
+    @property
+    def biz_label(self):
+        return self._biz_label
+
+    @biz_label.setter
+    def biz_label(self, value):
+        self._biz_label = value
+    @property
+    def data_transmission_method(self):
+        return self._data_transmission_method
+
+    @data_transmission_method.setter
+    def data_transmission_method(self, value):
+        self._data_transmission_method = value
     @property
     def data_type(self):
         return self._data_type
@@ -45,6 +61,16 @@ class FileInfo(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_label:
+            if hasattr(self.biz_label, 'to_alipay_dict'):
+                params['biz_label'] = self.biz_label.to_alipay_dict()
+            else:
+                params['biz_label'] = self.biz_label
+        if self.data_transmission_method:
+            if hasattr(self.data_transmission_method, 'to_alipay_dict'):
+                params['data_transmission_method'] = self.data_transmission_method.to_alipay_dict()
+            else:
+                params['data_transmission_method'] = self.data_transmission_method
         if self.data_type:
             if hasattr(self.data_type, 'to_alipay_dict'):
                 params['data_type'] = self.data_type.to_alipay_dict()
@@ -72,6 +98,10 @@ class FileInfo(object):
         if not d:
             return None
         o = FileInfo()
+        if 'biz_label' in d:
+            o.biz_label = d['biz_label']
+        if 'data_transmission_method' in d:
+            o.data_transmission_method = d['data_transmission_method']
         if 'data_type' in d:
             o.data_type = d['data_type']
         if 'file_biz_type' in d:

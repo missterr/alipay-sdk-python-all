@@ -10,8 +10,10 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipaySecurityRiskComplaintInfoQueryResponse, self).__init__()
+        self._certify_info = None
         self._complain_amount = None
         self._complain_content = None
+        self._complain_url = None
         self._complaint_trade_info_list = None
         self._contact = None
         self._gmt_complain = None
@@ -31,6 +33,16 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
         self._trade_no = None
 
     @property
+    def certify_info(self):
+        return self._certify_info
+
+    @certify_info.setter
+    def certify_info(self, value):
+        if isinstance(value, list):
+            self._certify_info = list()
+            for i in value:
+                self._certify_info.append(i)
+    @property
     def complain_amount(self):
         return self._complain_amount
 
@@ -44,6 +56,13 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
     @complain_content.setter
     def complain_content(self, value):
         self._complain_content = value
+    @property
+    def complain_url(self):
+        return self._complain_url
+
+    @complain_url.setter
+    def complain_url(self, value):
+        self._complain_url = value
     @property
     def complaint_trade_info_list(self):
         return self._complaint_trade_info_list
@@ -175,10 +194,14 @@ class AlipaySecurityRiskComplaintInfoQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipaySecurityRiskComplaintInfoQueryResponse, self).parse_response_content(response_content)
+        if 'certify_info' in response:
+            self.certify_info = response['certify_info']
         if 'complain_amount' in response:
             self.complain_amount = response['complain_amount']
         if 'complain_content' in response:
             self.complain_content = response['complain_content']
+        if 'complain_url' in response:
+            self.complain_url = response['complain_url']
         if 'complaint_trade_info_list' in response:
             self.complaint_trade_info_list = response['complaint_trade_info_list']
         if 'contact' in response:

@@ -4,11 +4,14 @@ import json
 
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AddressInfoVO import AddressInfoVO
+from alipay.aop.api.domain.BookingInfoDTO import BookingInfoDTO
 from alipay.aop.api.domain.ContactInfoVO import ContactInfoVO
 from alipay.aop.api.domain.AddressInfoVO import AddressInfoVO
 from alipay.aop.api.domain.DeliveryDetailInfoVO import DeliveryDetailInfoVO
 from alipay.aop.api.domain.OrderDetailInfoVO import OrderDetailInfoVO
 from alipay.aop.api.domain.RefundInfoVO import RefundInfoVO
+from alipay.aop.api.domain.ShopInfoDTO import ShopInfoDTO
+from alipay.aop.api.domain.StagePayPlanVO import StagePayPlanVO
 
 
 class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
@@ -16,6 +19,7 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenMiniOrderQueryResponse, self).__init__()
         self._address_info = None
+        self._booking_info = None
         self._contact_info = None
         self._create_time = None
         self._default_receiving_address = None
@@ -23,11 +27,14 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         self._merchant_biz_type = None
         self._open_id = None
         self._order_detail = None
+        self._order_id = None
         self._out_order_id = None
         self._path = None
         self._receive_time = None
         self._refund_info = None
         self._settle_type = None
+        self._shop_info = None
+        self._stage_pay_plans = None
         self._status = None
         self._trade_no = None
         self._user_id = None
@@ -42,6 +49,16 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self._address_info = value
         else:
             self._address_info = AddressInfoVO.from_alipay_dict(value)
+    @property
+    def booking_info(self):
+        return self._booking_info
+
+    @booking_info.setter
+    def booking_info(self, value):
+        if isinstance(value, BookingInfoDTO):
+            self._booking_info = value
+        else:
+            self._booking_info = BookingInfoDTO.from_alipay_dict(value)
     @property
     def contact_info(self):
         return self._contact_info
@@ -104,6 +121,13 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         else:
             self._order_detail = OrderDetailInfoVO.from_alipay_dict(value)
     @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
+    @property
     def out_order_id(self):
         return self._out_order_id
 
@@ -142,6 +166,29 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
     def settle_type(self, value):
         self._settle_type = value
     @property
+    def shop_info(self):
+        return self._shop_info
+
+    @shop_info.setter
+    def shop_info(self, value):
+        if isinstance(value, ShopInfoDTO):
+            self._shop_info = value
+        else:
+            self._shop_info = ShopInfoDTO.from_alipay_dict(value)
+    @property
+    def stage_pay_plans(self):
+        return self._stage_pay_plans
+
+    @stage_pay_plans.setter
+    def stage_pay_plans(self, value):
+        if isinstance(value, list):
+            self._stage_pay_plans = list()
+            for i in value:
+                if isinstance(i, StagePayPlanVO):
+                    self._stage_pay_plans.append(i)
+                else:
+                    self._stage_pay_plans.append(StagePayPlanVO.from_alipay_dict(i))
+    @property
     def status(self):
         return self._status
 
@@ -167,6 +214,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
         response = super(AlipayOpenMiniOrderQueryResponse, self).parse_response_content(response_content)
         if 'address_info' in response:
             self.address_info = response['address_info']
+        if 'booking_info' in response:
+            self.booking_info = response['booking_info']
         if 'contact_info' in response:
             self.contact_info = response['contact_info']
         if 'create_time' in response:
@@ -181,6 +230,8 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.open_id = response['open_id']
         if 'order_detail' in response:
             self.order_detail = response['order_detail']
+        if 'order_id' in response:
+            self.order_id = response['order_id']
         if 'out_order_id' in response:
             self.out_order_id = response['out_order_id']
         if 'path' in response:
@@ -191,6 +242,10 @@ class AlipayOpenMiniOrderQueryResponse(AlipayResponse):
             self.refund_info = response['refund_info']
         if 'settle_type' in response:
             self.settle_type = response['settle_type']
+        if 'shop_info' in response:
+            self.shop_info = response['shop_info']
+        if 'stage_pay_plans' in response:
+            self.stage_pay_plans = response['stage_pay_plans']
         if 'status' in response:
             self.status = response['status']
         if 'trade_no' in response:

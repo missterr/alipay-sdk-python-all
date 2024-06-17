@@ -5,7 +5,10 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.ItemDescInfoVO import ItemDescInfoVO
+from alipay.aop.api.domain.GuideInfoVO import GuideInfoVO
+from alipay.aop.api.domain.ItemEnrollFreezeContent import ItemEnrollFreezeContent
 from alipay.aop.api.domain.ItemRiskInfo import ItemRiskInfo
+from alipay.aop.api.domain.ItemSceneRiskInfo import ItemSceneRiskInfo
 from alipay.aop.api.domain.ItemSkuSearchVO import ItemSkuSearchVO
 
 
@@ -14,22 +17,28 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
     def __init__(self):
         super(AlipayOpenAppItemQueryResponse, self).__init__()
         self._attrs = None
+        self._auto_marketing_delivery = None
         self._barcode = None
         self._category_id = None
         self._create_time = None
         self._desc = None
         self._desc_info = None
         self._direct_path = None
+        self._guide_info = None
         self._head_img = None
         self._image_list = None
         self._is_online = None
+        self._item_details_page_model = None
+        self._item_enroll_freeze_content = None
         self._item_id = None
+        self._item_type = None
         self._original_price = None
         self._out_item_id = None
         self._path = None
         self._price_unit = None
         self._risk_info = None
         self._sale_price = None
+        self._scene_risk_info = None
         self._skus = None
         self._spu_status = None
         self._stock_num = None
@@ -49,6 +58,13 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
                     self._attrs.append(i)
                 else:
                     self._attrs.append(AppItemAttrVO.from_alipay_dict(i))
+    @property
+    def auto_marketing_delivery(self):
+        return self._auto_marketing_delivery
+
+    @auto_marketing_delivery.setter
+    def auto_marketing_delivery(self, value):
+        self._auto_marketing_delivery = value
     @property
     def barcode(self):
         return self._barcode
@@ -95,6 +111,19 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
     def direct_path(self, value):
         self._direct_path = value
     @property
+    def guide_info(self):
+        return self._guide_info
+
+    @guide_info.setter
+    def guide_info(self, value):
+        if isinstance(value, list):
+            self._guide_info = list()
+            for i in value:
+                if isinstance(i, GuideInfoVO):
+                    self._guide_info.append(i)
+                else:
+                    self._guide_info.append(GuideInfoVO.from_alipay_dict(i))
+    @property
     def head_img(self):
         return self._head_img
 
@@ -119,12 +148,36 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
     def is_online(self, value):
         self._is_online = value
     @property
+    def item_details_page_model(self):
+        return self._item_details_page_model
+
+    @item_details_page_model.setter
+    def item_details_page_model(self, value):
+        self._item_details_page_model = value
+    @property
+    def item_enroll_freeze_content(self):
+        return self._item_enroll_freeze_content
+
+    @item_enroll_freeze_content.setter
+    def item_enroll_freeze_content(self, value):
+        if isinstance(value, ItemEnrollFreezeContent):
+            self._item_enroll_freeze_content = value
+        else:
+            self._item_enroll_freeze_content = ItemEnrollFreezeContent.from_alipay_dict(value)
+    @property
     def item_id(self):
         return self._item_id
 
     @item_id.setter
     def item_id(self, value):
         self._item_id = value
+    @property
+    def item_type(self):
+        return self._item_type
+
+    @item_type.setter
+    def item_type(self, value):
+        self._item_type = value
     @property
     def original_price(self):
         return self._original_price
@@ -174,6 +227,19 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
     def sale_price(self, value):
         self._sale_price = value
     @property
+    def scene_risk_info(self):
+        return self._scene_risk_info
+
+    @scene_risk_info.setter
+    def scene_risk_info(self, value):
+        if isinstance(value, list):
+            self._scene_risk_info = list()
+            for i in value:
+                if isinstance(i, ItemSceneRiskInfo):
+                    self._scene_risk_info.append(i)
+                else:
+                    self._scene_risk_info.append(ItemSceneRiskInfo.from_alipay_dict(i))
+    @property
     def skus(self):
         return self._skus
 
@@ -219,6 +285,8 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
         response = super(AlipayOpenAppItemQueryResponse, self).parse_response_content(response_content)
         if 'attrs' in response:
             self.attrs = response['attrs']
+        if 'auto_marketing_delivery' in response:
+            self.auto_marketing_delivery = response['auto_marketing_delivery']
         if 'barcode' in response:
             self.barcode = response['barcode']
         if 'category_id' in response:
@@ -231,14 +299,22 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
             self.desc_info = response['desc_info']
         if 'direct_path' in response:
             self.direct_path = response['direct_path']
+        if 'guide_info' in response:
+            self.guide_info = response['guide_info']
         if 'head_img' in response:
             self.head_img = response['head_img']
         if 'image_list' in response:
             self.image_list = response['image_list']
         if 'is_online' in response:
             self.is_online = response['is_online']
+        if 'item_details_page_model' in response:
+            self.item_details_page_model = response['item_details_page_model']
+        if 'item_enroll_freeze_content' in response:
+            self.item_enroll_freeze_content = response['item_enroll_freeze_content']
         if 'item_id' in response:
             self.item_id = response['item_id']
+        if 'item_type' in response:
+            self.item_type = response['item_type']
         if 'original_price' in response:
             self.original_price = response['original_price']
         if 'out_item_id' in response:
@@ -251,6 +327,8 @@ class AlipayOpenAppItemQueryResponse(AlipayResponse):
             self.risk_info = response['risk_info']
         if 'sale_price' in response:
             self.sale_price = response['sale_price']
+        if 'scene_risk_info' in response:
+            self.scene_risk_info = response['scene_risk_info']
         if 'skus' in response:
             self.skus = response['skus']
         if 'spu_status' in response:

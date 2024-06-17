@@ -20,6 +20,7 @@ class AssetReverseItem(object):
         self._biz_line = None
         self._biz_tag = None
         self._count = None
+        self._ext_info = None
         self._from_address = None
         self._item_id = None
         self._item_name = None
@@ -65,10 +66,13 @@ class AssetReverseItem(object):
 
     @asset_reverse_goods_items.setter
     def asset_reverse_goods_items(self, value):
-        if isinstance(value, AssetReverseGoodsItem):
-            self._asset_reverse_goods_items = value
-        else:
-            self._asset_reverse_goods_items = AssetReverseGoodsItem.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._asset_reverse_goods_items = list()
+            for i in value:
+                if isinstance(i, AssetReverseGoodsItem):
+                    self._asset_reverse_goods_items.append(i)
+                else:
+                    self._asset_reverse_goods_items.append(AssetReverseGoodsItem.from_alipay_dict(i))
     @property
     def assign_item_id(self):
         return self._assign_item_id
@@ -97,6 +101,13 @@ class AssetReverseItem(object):
     @count.setter
     def count(self, value):
         self._count = value
+    @property
+    def ext_info(self):
+        return self._ext_info
+
+    @ext_info.setter
+    def ext_info(self, value):
+        self._ext_info = value
     @property
     def from_address(self):
         return self._from_address
@@ -245,6 +256,11 @@ class AssetReverseItem(object):
             else:
                 params['apply_order_item_id'] = self.apply_order_item_id
         if self.asset_reverse_goods_items:
+            if isinstance(self.asset_reverse_goods_items, list):
+                for i in range(0, len(self.asset_reverse_goods_items)):
+                    element = self.asset_reverse_goods_items[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.asset_reverse_goods_items[i] = element.to_alipay_dict()
             if hasattr(self.asset_reverse_goods_items, 'to_alipay_dict'):
                 params['asset_reverse_goods_items'] = self.asset_reverse_goods_items.to_alipay_dict()
             else:
@@ -269,6 +285,11 @@ class AssetReverseItem(object):
                 params['count'] = self.count.to_alipay_dict()
             else:
                 params['count'] = self.count
+        if self.ext_info:
+            if hasattr(self.ext_info, 'to_alipay_dict'):
+                params['ext_info'] = self.ext_info.to_alipay_dict()
+            else:
+                params['ext_info'] = self.ext_info
         if self.from_address:
             if hasattr(self.from_address, 'to_alipay_dict'):
                 params['from_address'] = self.from_address.to_alipay_dict()
@@ -377,6 +398,8 @@ class AssetReverseItem(object):
             o.biz_tag = d['biz_tag']
         if 'count' in d:
             o.count = d['count']
+        if 'ext_info' in d:
+            o.ext_info = d['ext_info']
         if 'from_address' in d:
             o.from_address = d['from_address']
         if 'item_id' in d:

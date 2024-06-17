@@ -15,9 +15,12 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
+        self._liveness_strategy = None
+        self._nation = None
         self._outer_biz_no = None
         self._phone = None
         self._reserved = None
+        self._security_strategy = None
         self._file_content = None
         self._version = "1.0"
         self._terminal_type = None
@@ -58,6 +61,20 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
     def cert_type(self, value):
         self._cert_type = value
     @property
+    def liveness_strategy(self):
+        return self._liveness_strategy
+
+    @liveness_strategy.setter
+    def liveness_strategy(self, value):
+        self._liveness_strategy = value
+    @property
+    def nation(self):
+        return self._nation
+
+    @nation.setter
+    def nation(self, value):
+        self._nation = value
+    @property
     def outer_biz_no(self):
         return self._outer_biz_no
 
@@ -78,6 +95,13 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
     @reserved.setter
     def reserved(self, value):
         self._reserved = value
+    @property
+    def security_strategy(self):
+        return self._security_strategy
+
+    @security_strategy.setter
+    def security_strategy(self, value):
+        self._security_strategy = value
 
     @property
     def file_content(self):
@@ -181,6 +205,16 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
                 params['cert_type'] = json.dumps(obj=self.cert_type.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['cert_type'] = self.cert_type
+        if self.liveness_strategy:
+            if hasattr(self.liveness_strategy, 'to_alipay_dict'):
+                params['liveness_strategy'] = json.dumps(obj=self.liveness_strategy.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['liveness_strategy'] = self.liveness_strategy
+        if self.nation:
+            if hasattr(self.nation, 'to_alipay_dict'):
+                params['nation'] = json.dumps(obj=self.nation.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['nation'] = self.nation
         if self.outer_biz_no:
             if hasattr(self.outer_biz_no, 'to_alipay_dict'):
                 params['outer_biz_no'] = json.dumps(obj=self.outer_biz_no.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
@@ -196,6 +230,11 @@ class DatadigitalFincloudGeneralsaasFaceSourceCertifyRequest(object):
                 params['reserved'] = json.dumps(obj=self.reserved.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['reserved'] = self.reserved
+        if self.security_strategy:
+            if hasattr(self.security_strategy, 'to_alipay_dict'):
+                params['security_strategy'] = json.dumps(obj=self.security_strategy.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['security_strategy'] = self.security_strategy
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:

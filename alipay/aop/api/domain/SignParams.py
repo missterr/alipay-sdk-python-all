@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AccessParams import AccessParams
 from alipay.aop.api.domain.PeriodRuleParams import PeriodRuleParams
+from alipay.aop.api.domain.OpenApiSpecifiedChannelParamsPojo import OpenApiSpecifiedChannelParamsPojo
 from alipay.aop.api.domain.SignMerchantParams import SignMerchantParams
 
 
@@ -13,10 +14,13 @@ class SignParams(object):
     def __init__(self):
         self._access_params = None
         self._allow_huazhi_degrade = None
+        self._effect_time = None
         self._external_agreement_no = None
         self._external_logon_id = None
         self._period_rule_params = None
         self._personal_product_code = None
+        self._product_code = None
+        self._recommend_sort_channel_params = None
         self._sign_notify_url = None
         self._sign_scene = None
         self._sub_merchant = None
@@ -38,6 +42,13 @@ class SignParams(object):
     @allow_huazhi_degrade.setter
     def allow_huazhi_degrade(self, value):
         self._allow_huazhi_degrade = value
+    @property
+    def effect_time(self):
+        return self._effect_time
+
+    @effect_time.setter
+    def effect_time(self, value):
+        self._effect_time = value
     @property
     def external_agreement_no(self):
         return self._external_agreement_no
@@ -69,6 +80,26 @@ class SignParams(object):
     @personal_product_code.setter
     def personal_product_code(self, value):
         self._personal_product_code = value
+    @property
+    def product_code(self):
+        return self._product_code
+
+    @product_code.setter
+    def product_code(self, value):
+        self._product_code = value
+    @property
+    def recommend_sort_channel_params(self):
+        return self._recommend_sort_channel_params
+
+    @recommend_sort_channel_params.setter
+    def recommend_sort_channel_params(self, value):
+        if isinstance(value, list):
+            self._recommend_sort_channel_params = list()
+            for i in value:
+                if isinstance(i, OpenApiSpecifiedChannelParamsPojo):
+                    self._recommend_sort_channel_params.append(i)
+                else:
+                    self._recommend_sort_channel_params.append(OpenApiSpecifiedChannelParamsPojo.from_alipay_dict(i))
     @property
     def sign_notify_url(self):
         return self._sign_notify_url
@@ -107,6 +138,11 @@ class SignParams(object):
                 params['allow_huazhi_degrade'] = self.allow_huazhi_degrade.to_alipay_dict()
             else:
                 params['allow_huazhi_degrade'] = self.allow_huazhi_degrade
+        if self.effect_time:
+            if hasattr(self.effect_time, 'to_alipay_dict'):
+                params['effect_time'] = self.effect_time.to_alipay_dict()
+            else:
+                params['effect_time'] = self.effect_time
         if self.external_agreement_no:
             if hasattr(self.external_agreement_no, 'to_alipay_dict'):
                 params['external_agreement_no'] = self.external_agreement_no.to_alipay_dict()
@@ -127,6 +163,21 @@ class SignParams(object):
                 params['personal_product_code'] = self.personal_product_code.to_alipay_dict()
             else:
                 params['personal_product_code'] = self.personal_product_code
+        if self.product_code:
+            if hasattr(self.product_code, 'to_alipay_dict'):
+                params['product_code'] = self.product_code.to_alipay_dict()
+            else:
+                params['product_code'] = self.product_code
+        if self.recommend_sort_channel_params:
+            if isinstance(self.recommend_sort_channel_params, list):
+                for i in range(0, len(self.recommend_sort_channel_params)):
+                    element = self.recommend_sort_channel_params[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.recommend_sort_channel_params[i] = element.to_alipay_dict()
+            if hasattr(self.recommend_sort_channel_params, 'to_alipay_dict'):
+                params['recommend_sort_channel_params'] = self.recommend_sort_channel_params.to_alipay_dict()
+            else:
+                params['recommend_sort_channel_params'] = self.recommend_sort_channel_params
         if self.sign_notify_url:
             if hasattr(self.sign_notify_url, 'to_alipay_dict'):
                 params['sign_notify_url'] = self.sign_notify_url.to_alipay_dict()
@@ -153,6 +204,8 @@ class SignParams(object):
             o.access_params = d['access_params']
         if 'allow_huazhi_degrade' in d:
             o.allow_huazhi_degrade = d['allow_huazhi_degrade']
+        if 'effect_time' in d:
+            o.effect_time = d['effect_time']
         if 'external_agreement_no' in d:
             o.external_agreement_no = d['external_agreement_no']
         if 'external_logon_id' in d:
@@ -161,6 +214,10 @@ class SignParams(object):
             o.period_rule_params = d['period_rule_params']
         if 'personal_product_code' in d:
             o.personal_product_code = d['personal_product_code']
+        if 'product_code' in d:
+            o.product_code = d['product_code']
+        if 'recommend_sort_channel_params' in d:
+            o.recommend_sort_channel_params = d['recommend_sort_channel_params']
         if 'sign_notify_url' in d:
             o.sign_notify_url = d['sign_notify_url']
         if 'sign_scene' in d:

@@ -10,6 +10,8 @@ class AlipayCommerceEcEmployeeAddResponse(AlipayResponse):
     def __init__(self):
         super(AlipayCommerceEcEmployeeAddResponse, self).__init__()
         self._employee_id = None
+        self._iot_unique_id = None
+        self._share_code = None
         self._sign_url = None
 
     @property
@@ -19,6 +21,20 @@ class AlipayCommerceEcEmployeeAddResponse(AlipayResponse):
     @employee_id.setter
     def employee_id(self, value):
         self._employee_id = value
+    @property
+    def iot_unique_id(self):
+        return self._iot_unique_id
+
+    @iot_unique_id.setter
+    def iot_unique_id(self, value):
+        self._iot_unique_id = value
+    @property
+    def share_code(self):
+        return self._share_code
+
+    @share_code.setter
+    def share_code(self, value):
+        self._share_code = value
     @property
     def sign_url(self):
         return self._sign_url
@@ -31,5 +47,9 @@ class AlipayCommerceEcEmployeeAddResponse(AlipayResponse):
         response = super(AlipayCommerceEcEmployeeAddResponse, self).parse_response_content(response_content)
         if 'employee_id' in response:
             self.employee_id = response['employee_id']
+        if 'iot_unique_id' in response:
+            self.iot_unique_id = response['iot_unique_id']
+        if 'share_code' in response:
+            self.share_code = response['share_code']
         if 'sign_url' in response:
             self.sign_url = response['sign_url']

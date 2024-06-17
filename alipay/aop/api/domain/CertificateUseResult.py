@@ -4,16 +4,23 @@ import json
 
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
+from alipay.aop.api.domain.CertificateSerialInfo import CertificateSerialInfo
+from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
 
 
 class CertificateUseResult(object):
 
     def __init__(self):
         self._amount_info = None
+        self._certificate_id = None
         self._code = None
         self._encrypted_code = None
         self._msg = None
+        self._order_id = None
+        self._out_order_id = None
         self._result = None
+        self._serial_info_list = None
+        self._sku_info = None
         self._use_order_no = None
 
     @property
@@ -26,6 +33,13 @@ class CertificateUseResult(object):
             self._amount_info = value
         else:
             self._amount_info = CertificateInstanceAmountInfo.from_alipay_dict(value)
+    @property
+    def certificate_id(self):
+        return self._certificate_id
+
+    @certificate_id.setter
+    def certificate_id(self, value):
+        self._certificate_id = value
     @property
     def code(self):
         return self._code
@@ -48,12 +62,49 @@ class CertificateUseResult(object):
     def msg(self, value):
         self._msg = value
     @property
+    def order_id(self):
+        return self._order_id
+
+    @order_id.setter
+    def order_id(self, value):
+        self._order_id = value
+    @property
+    def out_order_id(self):
+        return self._out_order_id
+
+    @out_order_id.setter
+    def out_order_id(self, value):
+        self._out_order_id = value
+    @property
     def result(self):
         return self._result
 
     @result.setter
     def result(self, value):
         self._result = value
+    @property
+    def serial_info_list(self):
+        return self._serial_info_list
+
+    @serial_info_list.setter
+    def serial_info_list(self, value):
+        if isinstance(value, list):
+            self._serial_info_list = list()
+            for i in value:
+                if isinstance(i, CertificateSerialInfo):
+                    self._serial_info_list.append(i)
+                else:
+                    self._serial_info_list.append(CertificateSerialInfo.from_alipay_dict(i))
+    @property
+    def sku_info(self):
+        return self._sku_info
+
+    @sku_info.setter
+    def sku_info(self, value):
+        if isinstance(value, CertificateSkuInfo):
+            self._sku_info = value
+        else:
+            self._sku_info = CertificateSkuInfo.from_alipay_dict(value)
     @property
     def use_order_no(self):
         return self._use_order_no
@@ -70,6 +121,11 @@ class CertificateUseResult(object):
                 params['amount_info'] = self.amount_info.to_alipay_dict()
             else:
                 params['amount_info'] = self.amount_info
+        if self.certificate_id:
+            if hasattr(self.certificate_id, 'to_alipay_dict'):
+                params['certificate_id'] = self.certificate_id.to_alipay_dict()
+            else:
+                params['certificate_id'] = self.certificate_id
         if self.code:
             if hasattr(self.code, 'to_alipay_dict'):
                 params['code'] = self.code.to_alipay_dict()
@@ -85,11 +141,36 @@ class CertificateUseResult(object):
                 params['msg'] = self.msg.to_alipay_dict()
             else:
                 params['msg'] = self.msg
+        if self.order_id:
+            if hasattr(self.order_id, 'to_alipay_dict'):
+                params['order_id'] = self.order_id.to_alipay_dict()
+            else:
+                params['order_id'] = self.order_id
+        if self.out_order_id:
+            if hasattr(self.out_order_id, 'to_alipay_dict'):
+                params['out_order_id'] = self.out_order_id.to_alipay_dict()
+            else:
+                params['out_order_id'] = self.out_order_id
         if self.result:
             if hasattr(self.result, 'to_alipay_dict'):
                 params['result'] = self.result.to_alipay_dict()
             else:
                 params['result'] = self.result
+        if self.serial_info_list:
+            if isinstance(self.serial_info_list, list):
+                for i in range(0, len(self.serial_info_list)):
+                    element = self.serial_info_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.serial_info_list[i] = element.to_alipay_dict()
+            if hasattr(self.serial_info_list, 'to_alipay_dict'):
+                params['serial_info_list'] = self.serial_info_list.to_alipay_dict()
+            else:
+                params['serial_info_list'] = self.serial_info_list
+        if self.sku_info:
+            if hasattr(self.sku_info, 'to_alipay_dict'):
+                params['sku_info'] = self.sku_info.to_alipay_dict()
+            else:
+                params['sku_info'] = self.sku_info
         if self.use_order_no:
             if hasattr(self.use_order_no, 'to_alipay_dict'):
                 params['use_order_no'] = self.use_order_no.to_alipay_dict()
@@ -104,14 +185,24 @@ class CertificateUseResult(object):
         o = CertificateUseResult()
         if 'amount_info' in d:
             o.amount_info = d['amount_info']
+        if 'certificate_id' in d:
+            o.certificate_id = d['certificate_id']
         if 'code' in d:
             o.code = d['code']
         if 'encrypted_code' in d:
             o.encrypted_code = d['encrypted_code']
         if 'msg' in d:
             o.msg = d['msg']
+        if 'order_id' in d:
+            o.order_id = d['order_id']
+        if 'out_order_id' in d:
+            o.out_order_id = d['out_order_id']
         if 'result' in d:
             o.result = d['result']
+        if 'serial_info_list' in d:
+            o.serial_info_list = d['serial_info_list']
+        if 'sku_info' in d:
+            o.sku_info = d['sku_info']
         if 'use_order_no' in d:
             o.use_order_no = d['use_order_no']
         return o

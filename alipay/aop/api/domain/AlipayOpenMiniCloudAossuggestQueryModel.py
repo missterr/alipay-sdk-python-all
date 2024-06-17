@@ -13,9 +13,9 @@ class AlipayOpenMiniCloudAossuggestQueryModel(object):
         self._device_id = None
         self._latitude = None
         self._longitude = None
+        self._open_id = None
         self._project_id = None
         self._query = None
-        self._relevant_id = None
         self._size = None
         self._user_id = None
         self._user_id_type = None
@@ -56,6 +56,13 @@ class AlipayOpenMiniCloudAossuggestQueryModel(object):
     def longitude(self, value):
         self._longitude = value
     @property
+    def open_id(self):
+        return self._open_id
+
+    @open_id.setter
+    def open_id(self, value):
+        self._open_id = value
+    @property
     def project_id(self):
         return self._project_id
 
@@ -69,13 +76,6 @@ class AlipayOpenMiniCloudAossuggestQueryModel(object):
     @query.setter
     def query(self, value):
         self._query = value
-    @property
-    def relevant_id(self):
-        return self._relevant_id
-
-    @relevant_id.setter
-    def relevant_id(self, value):
-        self._relevant_id = value
     @property
     def size(self):
         return self._size
@@ -126,6 +126,11 @@ class AlipayOpenMiniCloudAossuggestQueryModel(object):
                 params['longitude'] = self.longitude.to_alipay_dict()
             else:
                 params['longitude'] = self.longitude
+        if self.open_id:
+            if hasattr(self.open_id, 'to_alipay_dict'):
+                params['open_id'] = self.open_id.to_alipay_dict()
+            else:
+                params['open_id'] = self.open_id
         if self.project_id:
             if hasattr(self.project_id, 'to_alipay_dict'):
                 params['project_id'] = self.project_id.to_alipay_dict()
@@ -136,11 +141,6 @@ class AlipayOpenMiniCloudAossuggestQueryModel(object):
                 params['query'] = self.query.to_alipay_dict()
             else:
                 params['query'] = self.query
-        if self.relevant_id:
-            if hasattr(self.relevant_id, 'to_alipay_dict'):
-                params['relevant_id'] = self.relevant_id.to_alipay_dict()
-            else:
-                params['relevant_id'] = self.relevant_id
         if self.size:
             if hasattr(self.size, 'to_alipay_dict'):
                 params['size'] = self.size.to_alipay_dict()
@@ -173,12 +173,12 @@ class AlipayOpenMiniCloudAossuggestQueryModel(object):
             o.latitude = d['latitude']
         if 'longitude' in d:
             o.longitude = d['longitude']
+        if 'open_id' in d:
+            o.open_id = d['open_id']
         if 'project_id' in d:
             o.project_id = d['project_id']
         if 'query' in d:
             o.query = d['query']
-        if 'relevant_id' in d:
-            o.relevant_id = d['relevant_id']
         if 'size' in d:
             o.size = d['size']
         if 'user_id' in d:

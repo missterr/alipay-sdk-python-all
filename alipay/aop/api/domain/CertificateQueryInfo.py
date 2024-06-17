@@ -5,6 +5,8 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CertificateInstanceAmountInfo import CertificateInstanceAmountInfo
 from alipay.aop.api.domain.CertificateSkuInfo import CertificateSkuInfo
+from alipay.aop.api.domain.CertificateTimesCardInfo import CertificateTimesCardInfo
+from alipay.aop.api.domain.CertificateUseRuleInfo import CertificateUseRuleInfo
 
 
 class CertificateQueryInfo(object):
@@ -14,8 +16,11 @@ class CertificateQueryInfo(object):
         self._can_use = None
         self._certificate_id = None
         self._code = None
+        self._out_order_id = None
         self._sku_info = None
         self._status = None
+        self._times_card_info = None
+        self._use_rule_info = None
         self._valid_begin_time = None
         self._valid_end_time = None
 
@@ -51,6 +56,13 @@ class CertificateQueryInfo(object):
     def code(self, value):
         self._code = value
     @property
+    def out_order_id(self):
+        return self._out_order_id
+
+    @out_order_id.setter
+    def out_order_id(self, value):
+        self._out_order_id = value
+    @property
     def sku_info(self):
         return self._sku_info
 
@@ -67,6 +79,26 @@ class CertificateQueryInfo(object):
     @status.setter
     def status(self, value):
         self._status = value
+    @property
+    def times_card_info(self):
+        return self._times_card_info
+
+    @times_card_info.setter
+    def times_card_info(self, value):
+        if isinstance(value, CertificateTimesCardInfo):
+            self._times_card_info = value
+        else:
+            self._times_card_info = CertificateTimesCardInfo.from_alipay_dict(value)
+    @property
+    def use_rule_info(self):
+        return self._use_rule_info
+
+    @use_rule_info.setter
+    def use_rule_info(self, value):
+        if isinstance(value, CertificateUseRuleInfo):
+            self._use_rule_info = value
+        else:
+            self._use_rule_info = CertificateUseRuleInfo.from_alipay_dict(value)
     @property
     def valid_begin_time(self):
         return self._valid_begin_time
@@ -105,6 +137,11 @@ class CertificateQueryInfo(object):
                 params['code'] = self.code.to_alipay_dict()
             else:
                 params['code'] = self.code
+        if self.out_order_id:
+            if hasattr(self.out_order_id, 'to_alipay_dict'):
+                params['out_order_id'] = self.out_order_id.to_alipay_dict()
+            else:
+                params['out_order_id'] = self.out_order_id
         if self.sku_info:
             if hasattr(self.sku_info, 'to_alipay_dict'):
                 params['sku_info'] = self.sku_info.to_alipay_dict()
@@ -115,6 +152,16 @@ class CertificateQueryInfo(object):
                 params['status'] = self.status.to_alipay_dict()
             else:
                 params['status'] = self.status
+        if self.times_card_info:
+            if hasattr(self.times_card_info, 'to_alipay_dict'):
+                params['times_card_info'] = self.times_card_info.to_alipay_dict()
+            else:
+                params['times_card_info'] = self.times_card_info
+        if self.use_rule_info:
+            if hasattr(self.use_rule_info, 'to_alipay_dict'):
+                params['use_rule_info'] = self.use_rule_info.to_alipay_dict()
+            else:
+                params['use_rule_info'] = self.use_rule_info
         if self.valid_begin_time:
             if hasattr(self.valid_begin_time, 'to_alipay_dict'):
                 params['valid_begin_time'] = self.valid_begin_time.to_alipay_dict()
@@ -140,10 +187,16 @@ class CertificateQueryInfo(object):
             o.certificate_id = d['certificate_id']
         if 'code' in d:
             o.code = d['code']
+        if 'out_order_id' in d:
+            o.out_order_id = d['out_order_id']
         if 'sku_info' in d:
             o.sku_info = d['sku_info']
         if 'status' in d:
             o.status = d['status']
+        if 'times_card_info' in d:
+            o.times_card_info = d['times_card_info']
+        if 'use_rule_info' in d:
+            o.use_rule_info = d['use_rule_info']
         if 'valid_begin_time' in d:
             o.valid_begin_time = d['valid_begin_time']
         if 'valid_end_time' in d:

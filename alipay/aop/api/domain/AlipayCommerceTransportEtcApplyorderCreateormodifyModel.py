@@ -11,6 +11,7 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
         self._alipay_order_id = None
         self._apply_scene = None
         self._apply_sub_scene = None
+        self._bank_rule_id = None
         self._city_code = None
         self._mobile_no = None
         self._open_id = None
@@ -20,7 +21,9 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
         self._plate_color = None
         self._plate_no = None
         self._seller_id = None
+        self._spu_code = None
         self._user_id = None
+        self._veh_biz_scene = None
         self._vi_license_apc = None
         self._vi_license_brand_model = None
         self._vi_license_car_type = None
@@ -55,6 +58,13 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     @apply_sub_scene.setter
     def apply_sub_scene(self, value):
         self._apply_sub_scene = value
+    @property
+    def bank_rule_id(self):
+        return self._bank_rule_id
+
+    @bank_rule_id.setter
+    def bank_rule_id(self, value):
+        self._bank_rule_id = value
     @property
     def city_code(self):
         return self._city_code
@@ -119,12 +129,26 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
     def seller_id(self, value):
         self._seller_id = value
     @property
+    def spu_code(self):
+        return self._spu_code
+
+    @spu_code.setter
+    def spu_code(self, value):
+        self._spu_code = value
+    @property
     def user_id(self):
         return self._user_id
 
     @user_id.setter
     def user_id(self, value):
         self._user_id = value
+    @property
+    def veh_biz_scene(self):
+        return self._veh_biz_scene
+
+    @veh_biz_scene.setter
+    def veh_biz_scene(self, value):
+        self._veh_biz_scene = value
     @property
     def vi_license_apc(self):
         return self._vi_license_apc
@@ -228,6 +252,11 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['apply_sub_scene'] = self.apply_sub_scene.to_alipay_dict()
             else:
                 params['apply_sub_scene'] = self.apply_sub_scene
+        if self.bank_rule_id:
+            if hasattr(self.bank_rule_id, 'to_alipay_dict'):
+                params['bank_rule_id'] = self.bank_rule_id.to_alipay_dict()
+            else:
+                params['bank_rule_id'] = self.bank_rule_id
         if self.city_code:
             if hasattr(self.city_code, 'to_alipay_dict'):
                 params['city_code'] = self.city_code.to_alipay_dict()
@@ -273,11 +302,21 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
                 params['seller_id'] = self.seller_id.to_alipay_dict()
             else:
                 params['seller_id'] = self.seller_id
+        if self.spu_code:
+            if hasattr(self.spu_code, 'to_alipay_dict'):
+                params['spu_code'] = self.spu_code.to_alipay_dict()
+            else:
+                params['spu_code'] = self.spu_code
         if self.user_id:
             if hasattr(self.user_id, 'to_alipay_dict'):
                 params['user_id'] = self.user_id.to_alipay_dict()
             else:
                 params['user_id'] = self.user_id
+        if self.veh_biz_scene:
+            if hasattr(self.veh_biz_scene, 'to_alipay_dict'):
+                params['veh_biz_scene'] = self.veh_biz_scene.to_alipay_dict()
+            else:
+                params['veh_biz_scene'] = self.veh_biz_scene
         if self.vi_license_apc:
             if hasattr(self.vi_license_apc, 'to_alipay_dict'):
                 params['vi_license_apc'] = self.vi_license_apc.to_alipay_dict()
@@ -351,6 +390,8 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
             o.apply_scene = d['apply_scene']
         if 'apply_sub_scene' in d:
             o.apply_sub_scene = d['apply_sub_scene']
+        if 'bank_rule_id' in d:
+            o.bank_rule_id = d['bank_rule_id']
         if 'city_code' in d:
             o.city_code = d['city_code']
         if 'mobile_no' in d:
@@ -369,8 +410,12 @@ class AlipayCommerceTransportEtcApplyorderCreateormodifyModel(object):
             o.plate_no = d['plate_no']
         if 'seller_id' in d:
             o.seller_id = d['seller_id']
+        if 'spu_code' in d:
+            o.spu_code = d['spu_code']
         if 'user_id' in d:
             o.user_id = d['user_id']
+        if 'veh_biz_scene' in d:
+            o.veh_biz_scene = d['veh_biz_scene']
         if 'vi_license_apc' in d:
             o.vi_license_apc = d['vi_license_apc']
         if 'vi_license_brand_model' in d:

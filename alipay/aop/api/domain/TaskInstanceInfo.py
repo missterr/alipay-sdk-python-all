@@ -16,10 +16,13 @@ class TaskInstanceInfo(object):
         self._published_point_amount = None
         self._status = None
         self._target_indicator = None
+        self._task_desc = None
         self._task_end_time = None
+        self._task_img = None
         self._task_instance_id = None
         self._task_logo = None
         self._task_name = None
+        self._task_rule_pic = None
         self._task_start_time = None
         self._task_template_id = None
         self._task_type = None
@@ -83,12 +86,26 @@ class TaskInstanceInfo(object):
     def target_indicator(self, value):
         self._target_indicator = value
     @property
+    def task_desc(self):
+        return self._task_desc
+
+    @task_desc.setter
+    def task_desc(self, value):
+        self._task_desc = value
+    @property
     def task_end_time(self):
         return self._task_end_time
 
     @task_end_time.setter
     def task_end_time(self, value):
         self._task_end_time = value
+    @property
+    def task_img(self):
+        return self._task_img
+
+    @task_img.setter
+    def task_img(self, value):
+        self._task_img = value
     @property
     def task_instance_id(self):
         return self._task_instance_id
@@ -110,6 +127,13 @@ class TaskInstanceInfo(object):
     @task_name.setter
     def task_name(self, value):
         self._task_name = value
+    @property
+    def task_rule_pic(self):
+        return self._task_rule_pic
+
+    @task_rule_pic.setter
+    def task_rule_pic(self, value):
+        self._task_rule_pic = value
     @property
     def task_start_time(self):
         return self._task_start_time
@@ -189,11 +213,21 @@ class TaskInstanceInfo(object):
                 params['target_indicator'] = self.target_indicator.to_alipay_dict()
             else:
                 params['target_indicator'] = self.target_indicator
+        if self.task_desc:
+            if hasattr(self.task_desc, 'to_alipay_dict'):
+                params['task_desc'] = self.task_desc.to_alipay_dict()
+            else:
+                params['task_desc'] = self.task_desc
         if self.task_end_time:
             if hasattr(self.task_end_time, 'to_alipay_dict'):
                 params['task_end_time'] = self.task_end_time.to_alipay_dict()
             else:
                 params['task_end_time'] = self.task_end_time
+        if self.task_img:
+            if hasattr(self.task_img, 'to_alipay_dict'):
+                params['task_img'] = self.task_img.to_alipay_dict()
+            else:
+                params['task_img'] = self.task_img
         if self.task_instance_id:
             if hasattr(self.task_instance_id, 'to_alipay_dict'):
                 params['task_instance_id'] = self.task_instance_id.to_alipay_dict()
@@ -209,6 +243,11 @@ class TaskInstanceInfo(object):
                 params['task_name'] = self.task_name.to_alipay_dict()
             else:
                 params['task_name'] = self.task_name
+        if self.task_rule_pic:
+            if hasattr(self.task_rule_pic, 'to_alipay_dict'):
+                params['task_rule_pic'] = self.task_rule_pic.to_alipay_dict()
+            else:
+                params['task_rule_pic'] = self.task_rule_pic
         if self.task_start_time:
             if hasattr(self.task_start_time, 'to_alipay_dict'):
                 params['task_start_time'] = self.task_start_time.to_alipay_dict()
@@ -257,14 +296,20 @@ class TaskInstanceInfo(object):
             o.status = d['status']
         if 'target_indicator' in d:
             o.target_indicator = d['target_indicator']
+        if 'task_desc' in d:
+            o.task_desc = d['task_desc']
         if 'task_end_time' in d:
             o.task_end_time = d['task_end_time']
+        if 'task_img' in d:
+            o.task_img = d['task_img']
         if 'task_instance_id' in d:
             o.task_instance_id = d['task_instance_id']
         if 'task_logo' in d:
             o.task_logo = d['task_logo']
         if 'task_name' in d:
             o.task_name = d['task_name']
+        if 'task_rule_pic' in d:
+            o.task_rule_pic = d['task_rule_pic']
         if 'task_start_time' in d:
             o.task_start_time = d['task_start_time']
         if 'task_template_id' in d:

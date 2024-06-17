@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEcEmployeeAddModel(object):
 
     def __init__(self):
+        self._create_share_code = None
         self._department_ids = None
         self._employee_cert_no = None
         self._employee_cert_type = None
@@ -15,15 +16,27 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._employee_mobile = None
         self._employee_name = None
         self._employee_no = None
+        self._encrypt_cert_no = None
+        self._encrypt_mobile = None
         self._enterprise_id = None
         self._identity = None
         self._identity_open_id = None
         self._identity_type = None
         self._iot_check_type = None
         self._iot_vid = None
+        self._profiles = None
         self._role_list = None
         self._sign_return_url = None
+        self._sign_url_carry_info = None
+        self._withholding_sign_str = None
 
+    @property
+    def create_share_code(self):
+        return self._create_share_code
+
+    @create_share_code.setter
+    def create_share_code(self, value):
+        self._create_share_code = value
     @property
     def department_ids(self):
         return self._department_ids
@@ -77,6 +90,20 @@ class AlipayCommerceEcEmployeeAddModel(object):
     def employee_no(self, value):
         self._employee_no = value
     @property
+    def encrypt_cert_no(self):
+        return self._encrypt_cert_no
+
+    @encrypt_cert_no.setter
+    def encrypt_cert_no(self, value):
+        self._encrypt_cert_no = value
+    @property
+    def encrypt_mobile(self):
+        return self._encrypt_mobile
+
+    @encrypt_mobile.setter
+    def encrypt_mobile(self, value):
+        self._encrypt_mobile = value
+    @property
     def enterprise_id(self):
         return self._enterprise_id
 
@@ -119,6 +146,13 @@ class AlipayCommerceEcEmployeeAddModel(object):
     def iot_vid(self, value):
         self._iot_vid = value
     @property
+    def profiles(self):
+        return self._profiles
+
+    @profiles.setter
+    def profiles(self, value):
+        self._profiles = value
+    @property
     def role_list(self):
         return self._role_list
 
@@ -135,10 +169,29 @@ class AlipayCommerceEcEmployeeAddModel(object):
     @sign_return_url.setter
     def sign_return_url(self, value):
         self._sign_return_url = value
+    @property
+    def sign_url_carry_info(self):
+        return self._sign_url_carry_info
+
+    @sign_url_carry_info.setter
+    def sign_url_carry_info(self, value):
+        self._sign_url_carry_info = value
+    @property
+    def withholding_sign_str(self):
+        return self._withholding_sign_str
+
+    @withholding_sign_str.setter
+    def withholding_sign_str(self, value):
+        self._withholding_sign_str = value
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.create_share_code:
+            if hasattr(self.create_share_code, 'to_alipay_dict'):
+                params['create_share_code'] = self.create_share_code.to_alipay_dict()
+            else:
+                params['create_share_code'] = self.create_share_code
         if self.department_ids:
             if isinstance(self.department_ids, list):
                 for i in range(0, len(self.department_ids)):
@@ -179,6 +232,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['employee_no'] = self.employee_no.to_alipay_dict()
             else:
                 params['employee_no'] = self.employee_no
+        if self.encrypt_cert_no:
+            if hasattr(self.encrypt_cert_no, 'to_alipay_dict'):
+                params['encrypt_cert_no'] = self.encrypt_cert_no.to_alipay_dict()
+            else:
+                params['encrypt_cert_no'] = self.encrypt_cert_no
+        if self.encrypt_mobile:
+            if hasattr(self.encrypt_mobile, 'to_alipay_dict'):
+                params['encrypt_mobile'] = self.encrypt_mobile.to_alipay_dict()
+            else:
+                params['encrypt_mobile'] = self.encrypt_mobile
         if self.enterprise_id:
             if hasattr(self.enterprise_id, 'to_alipay_dict'):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
@@ -209,6 +272,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['iot_vid'] = self.iot_vid.to_alipay_dict()
             else:
                 params['iot_vid'] = self.iot_vid
+        if self.profiles:
+            if hasattr(self.profiles, 'to_alipay_dict'):
+                params['profiles'] = self.profiles.to_alipay_dict()
+            else:
+                params['profiles'] = self.profiles
         if self.role_list:
             if isinstance(self.role_list, list):
                 for i in range(0, len(self.role_list)):
@@ -224,6 +292,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['sign_return_url'] = self.sign_return_url.to_alipay_dict()
             else:
                 params['sign_return_url'] = self.sign_return_url
+        if self.sign_url_carry_info:
+            if hasattr(self.sign_url_carry_info, 'to_alipay_dict'):
+                params['sign_url_carry_info'] = self.sign_url_carry_info.to_alipay_dict()
+            else:
+                params['sign_url_carry_info'] = self.sign_url_carry_info
+        if self.withholding_sign_str:
+            if hasattr(self.withholding_sign_str, 'to_alipay_dict'):
+                params['withholding_sign_str'] = self.withholding_sign_str.to_alipay_dict()
+            else:
+                params['withholding_sign_str'] = self.withholding_sign_str
         return params
 
     @staticmethod
@@ -231,6 +309,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
         if not d:
             return None
         o = AlipayCommerceEcEmployeeAddModel()
+        if 'create_share_code' in d:
+            o.create_share_code = d['create_share_code']
         if 'department_ids' in d:
             o.department_ids = d['department_ids']
         if 'employee_cert_no' in d:
@@ -245,6 +325,10 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.employee_name = d['employee_name']
         if 'employee_no' in d:
             o.employee_no = d['employee_no']
+        if 'encrypt_cert_no' in d:
+            o.encrypt_cert_no = d['encrypt_cert_no']
+        if 'encrypt_mobile' in d:
+            o.encrypt_mobile = d['encrypt_mobile']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
         if 'identity' in d:
@@ -257,10 +341,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.iot_check_type = d['iot_check_type']
         if 'iot_vid' in d:
             o.iot_vid = d['iot_vid']
+        if 'profiles' in d:
+            o.profiles = d['profiles']
         if 'role_list' in d:
             o.role_list = d['role_list']
         if 'sign_return_url' in d:
             o.sign_return_url = d['sign_return_url']
+        if 'sign_url_carry_info' in d:
+            o.sign_url_carry_info = d['sign_url_carry_info']
+        if 'withholding_sign_str' in d:
+            o.withholding_sign_str = d['withholding_sign_str']
         return o
 
 

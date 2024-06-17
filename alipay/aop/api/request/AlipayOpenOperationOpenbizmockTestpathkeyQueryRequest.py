@@ -16,7 +16,10 @@ class AlipayOpenOperationOpenbizmockTestpathkeyQueryRequest(object):
         self._b = None
         self._c = None
         self._d = None
+        self._e = None
         self._keykey = None
+        self._test_price = None
+        self._f = None
         self._version = "1.0"
         self._terminal_type = None
         self._terminal_info = None
@@ -63,13 +66,36 @@ class AlipayOpenOperationOpenbizmockTestpathkeyQueryRequest(object):
     def d(self, value):
         self._d = value
     @property
+    def e(self):
+        return self._e
+
+    @e.setter
+    def e(self, value):
+        self._e = value
+    @property
     def keykey(self):
         return self._keykey
 
     @keykey.setter
     def keykey(self, value):
         self._keykey = value
+    @property
+    def test_price(self):
+        return self._test_price
 
+    @test_price.setter
+    def test_price(self, value):
+        self._test_price = value
+
+    @property
+    def f(self):
+        return self._f
+
+    @f.setter
+    def f(self, value):
+        if not isinstance(value, FileItem):
+            return
+        self._f = value
 
     @property
     def version(self):
@@ -168,11 +194,21 @@ class AlipayOpenOperationOpenbizmockTestpathkeyQueryRequest(object):
                 params['d'] = json.dumps(obj=self.d.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['d'] = self.d
+        if self.e:
+            if hasattr(self.e, 'to_alipay_dict'):
+                params['e'] = json.dumps(obj=self.e.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['e'] = self.e
         if self.keykey:
             if hasattr(self.keykey, 'to_alipay_dict'):
                 params['keykey'] = json.dumps(obj=self.keykey.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
             else:
                 params['keykey'] = self.keykey
+        if self.test_price:
+            if hasattr(self.test_price, 'to_alipay_dict'):
+                params['test_price'] = json.dumps(obj=self.test_price.to_alipay_dict(), ensure_ascii=False, sort_keys=True, separators=(',', ':'))
+            else:
+                params['test_price'] = self.test_price
         if self.terminal_type:
             params['terminal_type'] = self.terminal_type
         if self.terminal_info:
@@ -189,4 +225,6 @@ class AlipayOpenOperationOpenbizmockTestpathkeyQueryRequest(object):
 
     def get_multipart_params(self):
         multipart_params = dict()
+        if self.f:
+            multipart_params['f'] = self.f
         return multipart_params

@@ -8,11 +8,13 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayOpenIotvspUserwithimageCreateModel(object):
 
     def __init__(self):
+        self._bio_in_client = None
         self._cert_name = None
         self._cert_no = None
         self._cert_type = None
         self._component_out_id = None
         self._ext = None
+        self._ftoken = None
         self._image = None
         self._isv_pid = None
         self._label_out_no = None
@@ -20,6 +22,13 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
         self._phone = None
         self._vid = None
 
+    @property
+    def bio_in_client(self):
+        return self._bio_in_client
+
+    @bio_in_client.setter
+    def bio_in_client(self, value):
+        self._bio_in_client = value
     @property
     def cert_name(self):
         return self._cert_name
@@ -55,6 +64,13 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
     @ext.setter
     def ext(self, value):
         self._ext = value
+    @property
+    def ftoken(self):
+        return self._ftoken
+
+    @ftoken.setter
+    def ftoken(self, value):
+        self._ftoken = value
     @property
     def image(self):
         return self._image
@@ -101,6 +117,11 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.bio_in_client:
+            if hasattr(self.bio_in_client, 'to_alipay_dict'):
+                params['bio_in_client'] = self.bio_in_client.to_alipay_dict()
+            else:
+                params['bio_in_client'] = self.bio_in_client
         if self.cert_name:
             if hasattr(self.cert_name, 'to_alipay_dict'):
                 params['cert_name'] = self.cert_name.to_alipay_dict()
@@ -126,6 +147,11 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
                 params['ext'] = self.ext.to_alipay_dict()
             else:
                 params['ext'] = self.ext
+        if self.ftoken:
+            if hasattr(self.ftoken, 'to_alipay_dict'):
+                params['ftoken'] = self.ftoken.to_alipay_dict()
+            else:
+                params['ftoken'] = self.ftoken
         if self.image:
             if hasattr(self.image, 'to_alipay_dict'):
                 params['image'] = self.image.to_alipay_dict()
@@ -163,6 +189,8 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
         if not d:
             return None
         o = AlipayOpenIotvspUserwithimageCreateModel()
+        if 'bio_in_client' in d:
+            o.bio_in_client = d['bio_in_client']
         if 'cert_name' in d:
             o.cert_name = d['cert_name']
         if 'cert_no' in d:
@@ -173,6 +201,8 @@ class AlipayOpenIotvspUserwithimageCreateModel(object):
             o.component_out_id = d['component_out_id']
         if 'ext' in d:
             o.ext = d['ext']
+        if 'ftoken' in d:
+            o.ftoken = d['ftoken']
         if 'image' in d:
             o.image = d['image']
         if 'isv_pid' in d:

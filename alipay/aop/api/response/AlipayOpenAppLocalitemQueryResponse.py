@@ -5,6 +5,9 @@ import json
 from alipay.aop.api.response.AlipayResponse import AlipayResponse
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.PhoneStructVO import PhoneStructVO
+from alipay.aop.api.domain.GuideInfoVO import GuideInfoVO
+from alipay.aop.api.domain.ItemRiskInfo import ItemRiskInfo
+from alipay.aop.api.domain.ItemSceneRiskInfo import ItemSceneRiskInfo
 from alipay.aop.api.domain.LocalItemSkuQueryVO import LocalItemSkuQueryVO
 from alipay.aop.api.domain.TimeRangeStructVO import TimeRangeStructVO
 
@@ -17,6 +20,7 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
         self._category_id = None
         self._create_time = None
         self._customer_service_mobile = None
+        self._guide_info = None
         self._head_img = None
         self._image_list = None
         self._is_online = None
@@ -26,8 +30,11 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
         self._merchant_name = None
         self._out_item_id = None
         self._path = None
+        self._risk_info = None
+        self._scene_risk_info = None
         self._skus = None
         self._sold_time = None
+        self._spu_id = None
         self._spu_status = None
         self._stock_num = None
         self._title = None
@@ -39,10 +46,13 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
 
     @attrs.setter
     def attrs(self, value):
-        if isinstance(value, AppItemAttrVO):
-            self._attrs = value
-        else:
-            self._attrs = AppItemAttrVO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._attrs = list()
+            for i in value:
+                if isinstance(i, AppItemAttrVO):
+                    self._attrs.append(i)
+                else:
+                    self._attrs.append(AppItemAttrVO.from_alipay_dict(i))
     @property
     def category_id(self):
         return self._category_id
@@ -67,6 +77,19 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
             self._customer_service_mobile = value
         else:
             self._customer_service_mobile = PhoneStructVO.from_alipay_dict(value)
+    @property
+    def guide_info(self):
+        return self._guide_info
+
+    @guide_info.setter
+    def guide_info(self, value):
+        if isinstance(value, list):
+            self._guide_info = list()
+            for i in value:
+                if isinstance(i, GuideInfoVO):
+                    self._guide_info.append(i)
+                else:
+                    self._guide_info.append(GuideInfoVO.from_alipay_dict(i))
     @property
     def head_img(self):
         return self._head_img
@@ -134,6 +157,32 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
     def path(self, value):
         self._path = value
     @property
+    def risk_info(self):
+        return self._risk_info
+
+    @risk_info.setter
+    def risk_info(self, value):
+        if isinstance(value, list):
+            self._risk_info = list()
+            for i in value:
+                if isinstance(i, ItemRiskInfo):
+                    self._risk_info.append(i)
+                else:
+                    self._risk_info.append(ItemRiskInfo.from_alipay_dict(i))
+    @property
+    def scene_risk_info(self):
+        return self._scene_risk_info
+
+    @scene_risk_info.setter
+    def scene_risk_info(self, value):
+        if isinstance(value, list):
+            self._scene_risk_info = list()
+            for i in value:
+                if isinstance(i, ItemSceneRiskInfo):
+                    self._scene_risk_info.append(i)
+                else:
+                    self._scene_risk_info.append(ItemSceneRiskInfo.from_alipay_dict(i))
+    @property
     def skus(self):
         return self._skus
 
@@ -156,6 +205,13 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
             self._sold_time = value
         else:
             self._sold_time = TimeRangeStructVO.from_alipay_dict(value)
+    @property
+    def spu_id(self):
+        return self._spu_id
+
+    @spu_id.setter
+    def spu_id(self, value):
+        self._spu_id = value
     @property
     def spu_status(self):
         return self._spu_status
@@ -195,6 +251,8 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
             self.create_time = response['create_time']
         if 'customer_service_mobile' in response:
             self.customer_service_mobile = response['customer_service_mobile']
+        if 'guide_info' in response:
+            self.guide_info = response['guide_info']
         if 'head_img' in response:
             self.head_img = response['head_img']
         if 'image_list' in response:
@@ -213,10 +271,16 @@ class AlipayOpenAppLocalitemQueryResponse(AlipayResponse):
             self.out_item_id = response['out_item_id']
         if 'path' in response:
             self.path = response['path']
+        if 'risk_info' in response:
+            self.risk_info = response['risk_info']
+        if 'scene_risk_info' in response:
+            self.scene_risk_info = response['scene_risk_info']
         if 'skus' in response:
             self.skus = response['skus']
         if 'sold_time' in response:
             self.sold_time = response['sold_time']
+        if 'spu_id' in response:
+            self.spu_id = response['spu_id']
         if 'spu_status' in response:
             self.spu_status = response['spu_status']
         if 'stock_num' in response:

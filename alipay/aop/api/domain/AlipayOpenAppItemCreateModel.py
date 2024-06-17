@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.ItemDescInfoVO import ItemDescInfoVO
+from alipay.aop.api.domain.GuideInfoVO import GuideInfoVO
 from alipay.aop.api.domain.ItemSkuCreateVO import ItemSkuCreateVO
 
 
@@ -12,19 +13,24 @@ class AlipayOpenAppItemCreateModel(object):
 
     def __init__(self):
         self._attrs = None
+        self._auto_marketing_delivery = None
         self._barcode = None
         self._category_id = None
         self._desc = None
         self._desc_info = None
         self._direct_path = None
+        self._guide_info = None
         self._head_img = None
         self._image_list = None
+        self._item_details_page_model = None
+        self._item_type = None
         self._original_price = None
         self._out_item_id = None
         self._path = None
         self._price_unit = None
         self._sale_price = None
         self._sale_status = None
+        self._skip_algorithm_check = None
         self._skus = None
         self._stock_num = None
         self._title = None
@@ -42,6 +48,13 @@ class AlipayOpenAppItemCreateModel(object):
                     self._attrs.append(i)
                 else:
                     self._attrs.append(AppItemAttrVO.from_alipay_dict(i))
+    @property
+    def auto_marketing_delivery(self):
+        return self._auto_marketing_delivery
+
+    @auto_marketing_delivery.setter
+    def auto_marketing_delivery(self, value):
+        self._auto_marketing_delivery = value
     @property
     def barcode(self):
         return self._barcode
@@ -81,6 +94,19 @@ class AlipayOpenAppItemCreateModel(object):
     def direct_path(self, value):
         self._direct_path = value
     @property
+    def guide_info(self):
+        return self._guide_info
+
+    @guide_info.setter
+    def guide_info(self, value):
+        if isinstance(value, list):
+            self._guide_info = list()
+            for i in value:
+                if isinstance(i, GuideInfoVO):
+                    self._guide_info.append(i)
+                else:
+                    self._guide_info.append(GuideInfoVO.from_alipay_dict(i))
+    @property
     def head_img(self):
         return self._head_img
 
@@ -97,6 +123,20 @@ class AlipayOpenAppItemCreateModel(object):
             self._image_list = list()
             for i in value:
                 self._image_list.append(i)
+    @property
+    def item_details_page_model(self):
+        return self._item_details_page_model
+
+    @item_details_page_model.setter
+    def item_details_page_model(self, value):
+        self._item_details_page_model = value
+    @property
+    def item_type(self):
+        return self._item_type
+
+    @item_type.setter
+    def item_type(self, value):
+        self._item_type = value
     @property
     def original_price(self):
         return self._original_price
@@ -140,6 +180,13 @@ class AlipayOpenAppItemCreateModel(object):
     def sale_status(self, value):
         self._sale_status = value
     @property
+    def skip_algorithm_check(self):
+        return self._skip_algorithm_check
+
+    @skip_algorithm_check.setter
+    def skip_algorithm_check(self, value):
+        self._skip_algorithm_check = value
+    @property
     def skus(self):
         return self._skus
 
@@ -180,6 +227,11 @@ class AlipayOpenAppItemCreateModel(object):
                 params['attrs'] = self.attrs.to_alipay_dict()
             else:
                 params['attrs'] = self.attrs
+        if self.auto_marketing_delivery:
+            if hasattr(self.auto_marketing_delivery, 'to_alipay_dict'):
+                params['auto_marketing_delivery'] = self.auto_marketing_delivery.to_alipay_dict()
+            else:
+                params['auto_marketing_delivery'] = self.auto_marketing_delivery
         if self.barcode:
             if hasattr(self.barcode, 'to_alipay_dict'):
                 params['barcode'] = self.barcode.to_alipay_dict()
@@ -205,6 +257,16 @@ class AlipayOpenAppItemCreateModel(object):
                 params['direct_path'] = self.direct_path.to_alipay_dict()
             else:
                 params['direct_path'] = self.direct_path
+        if self.guide_info:
+            if isinstance(self.guide_info, list):
+                for i in range(0, len(self.guide_info)):
+                    element = self.guide_info[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.guide_info[i] = element.to_alipay_dict()
+            if hasattr(self.guide_info, 'to_alipay_dict'):
+                params['guide_info'] = self.guide_info.to_alipay_dict()
+            else:
+                params['guide_info'] = self.guide_info
         if self.head_img:
             if hasattr(self.head_img, 'to_alipay_dict'):
                 params['head_img'] = self.head_img.to_alipay_dict()
@@ -220,6 +282,16 @@ class AlipayOpenAppItemCreateModel(object):
                 params['image_list'] = self.image_list.to_alipay_dict()
             else:
                 params['image_list'] = self.image_list
+        if self.item_details_page_model:
+            if hasattr(self.item_details_page_model, 'to_alipay_dict'):
+                params['item_details_page_model'] = self.item_details_page_model.to_alipay_dict()
+            else:
+                params['item_details_page_model'] = self.item_details_page_model
+        if self.item_type:
+            if hasattr(self.item_type, 'to_alipay_dict'):
+                params['item_type'] = self.item_type.to_alipay_dict()
+            else:
+                params['item_type'] = self.item_type
         if self.original_price:
             if hasattr(self.original_price, 'to_alipay_dict'):
                 params['original_price'] = self.original_price.to_alipay_dict()
@@ -250,6 +322,11 @@ class AlipayOpenAppItemCreateModel(object):
                 params['sale_status'] = self.sale_status.to_alipay_dict()
             else:
                 params['sale_status'] = self.sale_status
+        if self.skip_algorithm_check:
+            if hasattr(self.skip_algorithm_check, 'to_alipay_dict'):
+                params['skip_algorithm_check'] = self.skip_algorithm_check.to_alipay_dict()
+            else:
+                params['skip_algorithm_check'] = self.skip_algorithm_check
         if self.skus:
             if isinstance(self.skus, list):
                 for i in range(0, len(self.skus)):
@@ -279,6 +356,8 @@ class AlipayOpenAppItemCreateModel(object):
         o = AlipayOpenAppItemCreateModel()
         if 'attrs' in d:
             o.attrs = d['attrs']
+        if 'auto_marketing_delivery' in d:
+            o.auto_marketing_delivery = d['auto_marketing_delivery']
         if 'barcode' in d:
             o.barcode = d['barcode']
         if 'category_id' in d:
@@ -289,10 +368,16 @@ class AlipayOpenAppItemCreateModel(object):
             o.desc_info = d['desc_info']
         if 'direct_path' in d:
             o.direct_path = d['direct_path']
+        if 'guide_info' in d:
+            o.guide_info = d['guide_info']
         if 'head_img' in d:
             o.head_img = d['head_img']
         if 'image_list' in d:
             o.image_list = d['image_list']
+        if 'item_details_page_model' in d:
+            o.item_details_page_model = d['item_details_page_model']
+        if 'item_type' in d:
+            o.item_type = d['item_type']
         if 'original_price' in d:
             o.original_price = d['original_price']
         if 'out_item_id' in d:
@@ -305,6 +390,8 @@ class AlipayOpenAppItemCreateModel(object):
             o.sale_price = d['sale_price']
         if 'sale_status' in d:
             o.sale_status = d['sale_status']
+        if 'skip_algorithm_check' in d:
+            o.skip_algorithm_check = d['skip_algorithm_check']
         if 'skus' in d:
             o.skus = d['skus']
         if 'stock_num' in d:

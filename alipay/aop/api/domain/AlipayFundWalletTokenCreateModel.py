@@ -9,12 +9,15 @@ class AlipayFundWalletTokenCreateModel(object):
 
     def __init__(self):
         self._agreement_pay_sign = None
+        self._back_url = None
         self._biz_scene = None
         self._identity = None
+        self._identity_open_id = None
         self._identity_type = None
         self._out_biz_no = None
         self._product_code = None
         self._real_name = None
+        self._skip_result = None
         self._wallet_template_id = None
 
     @property
@@ -24,6 +27,13 @@ class AlipayFundWalletTokenCreateModel(object):
     @agreement_pay_sign.setter
     def agreement_pay_sign(self, value):
         self._agreement_pay_sign = value
+    @property
+    def back_url(self):
+        return self._back_url
+
+    @back_url.setter
+    def back_url(self, value):
+        self._back_url = value
     @property
     def biz_scene(self):
         return self._biz_scene
@@ -38,6 +48,13 @@ class AlipayFundWalletTokenCreateModel(object):
     @identity.setter
     def identity(self, value):
         self._identity = value
+    @property
+    def identity_open_id(self):
+        return self._identity_open_id
+
+    @identity_open_id.setter
+    def identity_open_id(self, value):
+        self._identity_open_id = value
     @property
     def identity_type(self):
         return self._identity_type
@@ -67,6 +84,13 @@ class AlipayFundWalletTokenCreateModel(object):
     def real_name(self, value):
         self._real_name = value
     @property
+    def skip_result(self):
+        return self._skip_result
+
+    @skip_result.setter
+    def skip_result(self, value):
+        self._skip_result = value
+    @property
     def wallet_template_id(self):
         return self._wallet_template_id
 
@@ -82,6 +106,11 @@ class AlipayFundWalletTokenCreateModel(object):
                 params['agreement_pay_sign'] = self.agreement_pay_sign.to_alipay_dict()
             else:
                 params['agreement_pay_sign'] = self.agreement_pay_sign
+        if self.back_url:
+            if hasattr(self.back_url, 'to_alipay_dict'):
+                params['back_url'] = self.back_url.to_alipay_dict()
+            else:
+                params['back_url'] = self.back_url
         if self.biz_scene:
             if hasattr(self.biz_scene, 'to_alipay_dict'):
                 params['biz_scene'] = self.biz_scene.to_alipay_dict()
@@ -92,6 +121,11 @@ class AlipayFundWalletTokenCreateModel(object):
                 params['identity'] = self.identity.to_alipay_dict()
             else:
                 params['identity'] = self.identity
+        if self.identity_open_id:
+            if hasattr(self.identity_open_id, 'to_alipay_dict'):
+                params['identity_open_id'] = self.identity_open_id.to_alipay_dict()
+            else:
+                params['identity_open_id'] = self.identity_open_id
         if self.identity_type:
             if hasattr(self.identity_type, 'to_alipay_dict'):
                 params['identity_type'] = self.identity_type.to_alipay_dict()
@@ -112,6 +146,11 @@ class AlipayFundWalletTokenCreateModel(object):
                 params['real_name'] = self.real_name.to_alipay_dict()
             else:
                 params['real_name'] = self.real_name
+        if self.skip_result:
+            if hasattr(self.skip_result, 'to_alipay_dict'):
+                params['skip_result'] = self.skip_result.to_alipay_dict()
+            else:
+                params['skip_result'] = self.skip_result
         if self.wallet_template_id:
             if hasattr(self.wallet_template_id, 'to_alipay_dict'):
                 params['wallet_template_id'] = self.wallet_template_id.to_alipay_dict()
@@ -126,10 +165,14 @@ class AlipayFundWalletTokenCreateModel(object):
         o = AlipayFundWalletTokenCreateModel()
         if 'agreement_pay_sign' in d:
             o.agreement_pay_sign = d['agreement_pay_sign']
+        if 'back_url' in d:
+            o.back_url = d['back_url']
         if 'biz_scene' in d:
             o.biz_scene = d['biz_scene']
         if 'identity' in d:
             o.identity = d['identity']
+        if 'identity_open_id' in d:
+            o.identity_open_id = d['identity_open_id']
         if 'identity_type' in d:
             o.identity_type = d['identity_type']
         if 'out_biz_no' in d:
@@ -138,6 +181,8 @@ class AlipayFundWalletTokenCreateModel(object):
             o.product_code = d['product_code']
         if 'real_name' in d:
             o.real_name = d['real_name']
+        if 'skip_result' in d:
+            o.skip_result = d['skip_result']
         if 'wallet_template_id' in d:
             o.wallet_template_id = d['wallet_template_id']
         return o

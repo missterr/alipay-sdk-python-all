@@ -10,11 +10,15 @@ from alipay.aop.api.domain.DefaultSettleRule import DefaultSettleRule
 from alipay.aop.api.domain.MerchantInvoiceInfo import MerchantInvoiceInfo
 from alipay.aop.api.domain.IndustryQualificationInfo import IndustryQualificationInfo
 from alipay.aop.api.domain.SiteInfo import SiteInfo
+from alipay.aop.api.domain.ZFTWithholdingInfo import ZFTWithholdingInfo
 
 
 class AntMerchantExpandIndirectZftConsultModel(object):
 
     def __init__(self):
+        self._additional_cert_image = None
+        self._additional_cert_no = None
+        self._additional_cert_type = None
         self._alias_name = None
         self._alipay_logon_id = None
         self._binding_alipay_logon_id = None
@@ -50,7 +54,30 @@ class AntMerchantExpandIndirectZftConsultModel(object):
         self._service_phone = None
         self._sign_time_with_isv = None
         self._sites = None
+        self._trade_scene = None
+        self._zft_withholding_info = None
 
+    @property
+    def additional_cert_image(self):
+        return self._additional_cert_image
+
+    @additional_cert_image.setter
+    def additional_cert_image(self, value):
+        self._additional_cert_image = value
+    @property
+    def additional_cert_no(self):
+        return self._additional_cert_no
+
+    @additional_cert_no.setter
+    def additional_cert_no(self, value):
+        self._additional_cert_no = value
+    @property
+    def additional_cert_type(self):
+        return self._additional_cert_type
+
+    @additional_cert_type.setter
+    def additional_cert_type(self, value):
+        self._additional_cert_type = value
     @property
     def alias_name(self):
         return self._alias_name
@@ -338,10 +365,45 @@ class AntMerchantExpandIndirectZftConsultModel(object):
                     self._sites.append(i)
                 else:
                     self._sites.append(SiteInfo.from_alipay_dict(i))
+    @property
+    def trade_scene(self):
+        return self._trade_scene
+
+    @trade_scene.setter
+    def trade_scene(self, value):
+        if isinstance(value, list):
+            self._trade_scene = list()
+            for i in value:
+                self._trade_scene.append(i)
+    @property
+    def zft_withholding_info(self):
+        return self._zft_withholding_info
+
+    @zft_withholding_info.setter
+    def zft_withholding_info(self, value):
+        if isinstance(value, ZFTWithholdingInfo):
+            self._zft_withholding_info = value
+        else:
+            self._zft_withholding_info = ZFTWithholdingInfo.from_alipay_dict(value)
 
 
     def to_alipay_dict(self):
         params = dict()
+        if self.additional_cert_image:
+            if hasattr(self.additional_cert_image, 'to_alipay_dict'):
+                params['additional_cert_image'] = self.additional_cert_image.to_alipay_dict()
+            else:
+                params['additional_cert_image'] = self.additional_cert_image
+        if self.additional_cert_no:
+            if hasattr(self.additional_cert_no, 'to_alipay_dict'):
+                params['additional_cert_no'] = self.additional_cert_no.to_alipay_dict()
+            else:
+                params['additional_cert_no'] = self.additional_cert_no
+        if self.additional_cert_type:
+            if hasattr(self.additional_cert_type, 'to_alipay_dict'):
+                params['additional_cert_type'] = self.additional_cert_type.to_alipay_dict()
+            else:
+                params['additional_cert_type'] = self.additional_cert_type
         if self.alias_name:
             if hasattr(self.alias_name, 'to_alipay_dict'):
                 params['alias_name'] = self.alias_name.to_alipay_dict()
@@ -552,6 +614,21 @@ class AntMerchantExpandIndirectZftConsultModel(object):
                 params['sites'] = self.sites.to_alipay_dict()
             else:
                 params['sites'] = self.sites
+        if self.trade_scene:
+            if isinstance(self.trade_scene, list):
+                for i in range(0, len(self.trade_scene)):
+                    element = self.trade_scene[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.trade_scene[i] = element.to_alipay_dict()
+            if hasattr(self.trade_scene, 'to_alipay_dict'):
+                params['trade_scene'] = self.trade_scene.to_alipay_dict()
+            else:
+                params['trade_scene'] = self.trade_scene
+        if self.zft_withholding_info:
+            if hasattr(self.zft_withholding_info, 'to_alipay_dict'):
+                params['zft_withholding_info'] = self.zft_withholding_info.to_alipay_dict()
+            else:
+                params['zft_withholding_info'] = self.zft_withholding_info
         return params
 
     @staticmethod
@@ -559,6 +636,12 @@ class AntMerchantExpandIndirectZftConsultModel(object):
         if not d:
             return None
         o = AntMerchantExpandIndirectZftConsultModel()
+        if 'additional_cert_image' in d:
+            o.additional_cert_image = d['additional_cert_image']
+        if 'additional_cert_no' in d:
+            o.additional_cert_no = d['additional_cert_no']
+        if 'additional_cert_type' in d:
+            o.additional_cert_type = d['additional_cert_type']
         if 'alias_name' in d:
             o.alias_name = d['alias_name']
         if 'alipay_logon_id' in d:
@@ -629,6 +712,10 @@ class AntMerchantExpandIndirectZftConsultModel(object):
             o.sign_time_with_isv = d['sign_time_with_isv']
         if 'sites' in d:
             o.sites = d['sites']
+        if 'trade_scene' in d:
+            o.trade_scene = d['trade_scene']
+        if 'zft_withholding_info' in d:
+            o.zft_withholding_info = d['zft_withholding_info']
         return o
 
 

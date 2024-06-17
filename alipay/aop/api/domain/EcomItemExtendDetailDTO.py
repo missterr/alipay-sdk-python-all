@@ -12,6 +12,9 @@ class EcomItemExtendDetailDTO(object):
         self._card_use_amount = None
         self._card_use_count = None
         self._card_use_period = None
+        self._charge_box_no = None
+        self._charge_box_plug_total = None
+        self._charge_box_type = None
         self._charge_station_address = None
         self._charge_station_area = None
         self._charge_station_city = None
@@ -21,6 +24,7 @@ class EcomItemExtendDetailDTO(object):
         self._charge_station_town = None
         self._charge_type = None
         self._ext_info = None
+        self._factory_ins_end_time = None
         self._game_account = None
         self._game_account_client = None
         self._game_account_client_id = None
@@ -28,6 +32,9 @@ class EcomItemExtendDetailDTO(object):
         self._game_name = None
         self._game_trade_mode = None
         self._lockable_device = None
+        self._pet_id = None
+        self._pet_type = None
+        self._pet_version = None
         self._plug_no = None
 
     @property
@@ -58,6 +65,27 @@ class EcomItemExtendDetailDTO(object):
     @card_use_period.setter
     def card_use_period(self, value):
         self._card_use_period = value
+    @property
+    def charge_box_no(self):
+        return self._charge_box_no
+
+    @charge_box_no.setter
+    def charge_box_no(self, value):
+        self._charge_box_no = value
+    @property
+    def charge_box_plug_total(self):
+        return self._charge_box_plug_total
+
+    @charge_box_plug_total.setter
+    def charge_box_plug_total(self, value):
+        self._charge_box_plug_total = value
+    @property
+    def charge_box_type(self):
+        return self._charge_box_type
+
+    @charge_box_type.setter
+    def charge_box_type(self, value):
+        self._charge_box_type = value
     @property
     def charge_station_address(self):
         return self._charge_station_address
@@ -122,6 +150,13 @@ class EcomItemExtendDetailDTO(object):
     def ext_info(self, value):
         self._ext_info = value
     @property
+    def factory_ins_end_time(self):
+        return self._factory_ins_end_time
+
+    @factory_ins_end_time.setter
+    def factory_ins_end_time(self, value):
+        self._factory_ins_end_time = value
+    @property
     def game_account(self):
         return self._game_account
 
@@ -171,6 +206,27 @@ class EcomItemExtendDetailDTO(object):
     def lockable_device(self, value):
         self._lockable_device = value
     @property
+    def pet_id(self):
+        return self._pet_id
+
+    @pet_id.setter
+    def pet_id(self, value):
+        self._pet_id = value
+    @property
+    def pet_type(self):
+        return self._pet_type
+
+    @pet_type.setter
+    def pet_type(self, value):
+        self._pet_type = value
+    @property
+    def pet_version(self):
+        return self._pet_version
+
+    @pet_version.setter
+    def pet_version(self, value):
+        self._pet_version = value
+    @property
     def plug_no(self):
         return self._plug_no
 
@@ -201,6 +257,21 @@ class EcomItemExtendDetailDTO(object):
                 params['card_use_period'] = self.card_use_period.to_alipay_dict()
             else:
                 params['card_use_period'] = self.card_use_period
+        if self.charge_box_no:
+            if hasattr(self.charge_box_no, 'to_alipay_dict'):
+                params['charge_box_no'] = self.charge_box_no.to_alipay_dict()
+            else:
+                params['charge_box_no'] = self.charge_box_no
+        if self.charge_box_plug_total:
+            if hasattr(self.charge_box_plug_total, 'to_alipay_dict'):
+                params['charge_box_plug_total'] = self.charge_box_plug_total.to_alipay_dict()
+            else:
+                params['charge_box_plug_total'] = self.charge_box_plug_total
+        if self.charge_box_type:
+            if hasattr(self.charge_box_type, 'to_alipay_dict'):
+                params['charge_box_type'] = self.charge_box_type.to_alipay_dict()
+            else:
+                params['charge_box_type'] = self.charge_box_type
         if self.charge_station_address:
             if hasattr(self.charge_station_address, 'to_alipay_dict'):
                 params['charge_station_address'] = self.charge_station_address.to_alipay_dict()
@@ -246,6 +317,11 @@ class EcomItemExtendDetailDTO(object):
                 params['ext_info'] = self.ext_info.to_alipay_dict()
             else:
                 params['ext_info'] = self.ext_info
+        if self.factory_ins_end_time:
+            if hasattr(self.factory_ins_end_time, 'to_alipay_dict'):
+                params['factory_ins_end_time'] = self.factory_ins_end_time.to_alipay_dict()
+            else:
+                params['factory_ins_end_time'] = self.factory_ins_end_time
         if self.game_account:
             if hasattr(self.game_account, 'to_alipay_dict'):
                 params['game_account'] = self.game_account.to_alipay_dict()
@@ -281,6 +357,21 @@ class EcomItemExtendDetailDTO(object):
                 params['lockable_device'] = self.lockable_device.to_alipay_dict()
             else:
                 params['lockable_device'] = self.lockable_device
+        if self.pet_id:
+            if hasattr(self.pet_id, 'to_alipay_dict'):
+                params['pet_id'] = self.pet_id.to_alipay_dict()
+            else:
+                params['pet_id'] = self.pet_id
+        if self.pet_type:
+            if hasattr(self.pet_type, 'to_alipay_dict'):
+                params['pet_type'] = self.pet_type.to_alipay_dict()
+            else:
+                params['pet_type'] = self.pet_type
+        if self.pet_version:
+            if hasattr(self.pet_version, 'to_alipay_dict'):
+                params['pet_version'] = self.pet_version.to_alipay_dict()
+            else:
+                params['pet_version'] = self.pet_version
         if self.plug_no:
             if hasattr(self.plug_no, 'to_alipay_dict'):
                 params['plug_no'] = self.plug_no.to_alipay_dict()
@@ -301,6 +392,12 @@ class EcomItemExtendDetailDTO(object):
             o.card_use_count = d['card_use_count']
         if 'card_use_period' in d:
             o.card_use_period = d['card_use_period']
+        if 'charge_box_no' in d:
+            o.charge_box_no = d['charge_box_no']
+        if 'charge_box_plug_total' in d:
+            o.charge_box_plug_total = d['charge_box_plug_total']
+        if 'charge_box_type' in d:
+            o.charge_box_type = d['charge_box_type']
         if 'charge_station_address' in d:
             o.charge_station_address = d['charge_station_address']
         if 'charge_station_area' in d:
@@ -319,6 +416,8 @@ class EcomItemExtendDetailDTO(object):
             o.charge_type = d['charge_type']
         if 'ext_info' in d:
             o.ext_info = d['ext_info']
+        if 'factory_ins_end_time' in d:
+            o.factory_ins_end_time = d['factory_ins_end_time']
         if 'game_account' in d:
             o.game_account = d['game_account']
         if 'game_account_client' in d:
@@ -333,6 +432,12 @@ class EcomItemExtendDetailDTO(object):
             o.game_trade_mode = d['game_trade_mode']
         if 'lockable_device' in d:
             o.lockable_device = d['lockable_device']
+        if 'pet_id' in d:
+            o.pet_id = d['pet_id']
+        if 'pet_type' in d:
+            o.pet_type = d['pet_type']
+        if 'pet_version' in d:
+            o.pet_version = d['pet_version']
         if 'plug_no' in d:
             o.plug_no = d['plug_no']
         return o

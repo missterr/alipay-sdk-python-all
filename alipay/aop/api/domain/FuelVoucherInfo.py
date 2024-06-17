@@ -9,9 +9,11 @@ class FuelVoucherInfo(object):
 
     def __init__(self):
         self._activity_code = None
+        self._activity_type = None
         self._alipay_amount = None
         self._amount = None
         self._merchant_amount = None
+        self._service_fee_discount = None
         self._voucher_id = None
 
     @property
@@ -21,6 +23,13 @@ class FuelVoucherInfo(object):
     @activity_code.setter
     def activity_code(self, value):
         self._activity_code = value
+    @property
+    def activity_type(self):
+        return self._activity_type
+
+    @activity_type.setter
+    def activity_type(self, value):
+        self._activity_type = value
     @property
     def alipay_amount(self):
         return self._alipay_amount
@@ -43,6 +52,13 @@ class FuelVoucherInfo(object):
     def merchant_amount(self, value):
         self._merchant_amount = value
     @property
+    def service_fee_discount(self):
+        return self._service_fee_discount
+
+    @service_fee_discount.setter
+    def service_fee_discount(self, value):
+        self._service_fee_discount = value
+    @property
     def voucher_id(self):
         return self._voucher_id
 
@@ -58,6 +74,11 @@ class FuelVoucherInfo(object):
                 params['activity_code'] = self.activity_code.to_alipay_dict()
             else:
                 params['activity_code'] = self.activity_code
+        if self.activity_type:
+            if hasattr(self.activity_type, 'to_alipay_dict'):
+                params['activity_type'] = self.activity_type.to_alipay_dict()
+            else:
+                params['activity_type'] = self.activity_type
         if self.alipay_amount:
             if hasattr(self.alipay_amount, 'to_alipay_dict'):
                 params['alipay_amount'] = self.alipay_amount.to_alipay_dict()
@@ -73,6 +94,11 @@ class FuelVoucherInfo(object):
                 params['merchant_amount'] = self.merchant_amount.to_alipay_dict()
             else:
                 params['merchant_amount'] = self.merchant_amount
+        if self.service_fee_discount:
+            if hasattr(self.service_fee_discount, 'to_alipay_dict'):
+                params['service_fee_discount'] = self.service_fee_discount.to_alipay_dict()
+            else:
+                params['service_fee_discount'] = self.service_fee_discount
         if self.voucher_id:
             if hasattr(self.voucher_id, 'to_alipay_dict'):
                 params['voucher_id'] = self.voucher_id.to_alipay_dict()
@@ -87,12 +113,16 @@ class FuelVoucherInfo(object):
         o = FuelVoucherInfo()
         if 'activity_code' in d:
             o.activity_code = d['activity_code']
+        if 'activity_type' in d:
+            o.activity_type = d['activity_type']
         if 'alipay_amount' in d:
             o.alipay_amount = d['alipay_amount']
         if 'amount' in d:
             o.amount = d['amount']
         if 'merchant_amount' in d:
             o.merchant_amount = d['merchant_amount']
+        if 'service_fee_discount' in d:
+            o.service_fee_discount = d['service_fee_discount']
         if 'voucher_id' in d:
             o.voucher_id = d['voucher_id']
         return o

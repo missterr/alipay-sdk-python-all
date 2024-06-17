@@ -9,9 +9,11 @@ class UserVoucherBaseInfo(object):
 
     def __init__(self):
         self._associate_trade_no = None
+        self._belong_merchant_id = None
         self._create_time = None
         self._valid_begin_time = None
         self._valid_end_time = None
+        self._voucher_code = None
         self._voucher_id = None
         self._voucher_max_use_times = None
         self._voucher_name = None
@@ -25,6 +27,13 @@ class UserVoucherBaseInfo(object):
     @associate_trade_no.setter
     def associate_trade_no(self, value):
         self._associate_trade_no = value
+    @property
+    def belong_merchant_id(self):
+        return self._belong_merchant_id
+
+    @belong_merchant_id.setter
+    def belong_merchant_id(self, value):
+        self._belong_merchant_id = value
     @property
     def create_time(self):
         return self._create_time
@@ -46,6 +55,13 @@ class UserVoucherBaseInfo(object):
     @valid_end_time.setter
     def valid_end_time(self, value):
         self._valid_end_time = value
+    @property
+    def voucher_code(self):
+        return self._voucher_code
+
+    @voucher_code.setter
+    def voucher_code(self, value):
+        self._voucher_code = value
     @property
     def voucher_id(self):
         return self._voucher_id
@@ -90,6 +106,11 @@ class UserVoucherBaseInfo(object):
                 params['associate_trade_no'] = self.associate_trade_no.to_alipay_dict()
             else:
                 params['associate_trade_no'] = self.associate_trade_no
+        if self.belong_merchant_id:
+            if hasattr(self.belong_merchant_id, 'to_alipay_dict'):
+                params['belong_merchant_id'] = self.belong_merchant_id.to_alipay_dict()
+            else:
+                params['belong_merchant_id'] = self.belong_merchant_id
         if self.create_time:
             if hasattr(self.create_time, 'to_alipay_dict'):
                 params['create_time'] = self.create_time.to_alipay_dict()
@@ -105,6 +126,11 @@ class UserVoucherBaseInfo(object):
                 params['valid_end_time'] = self.valid_end_time.to_alipay_dict()
             else:
                 params['valid_end_time'] = self.valid_end_time
+        if self.voucher_code:
+            if hasattr(self.voucher_code, 'to_alipay_dict'):
+                params['voucher_code'] = self.voucher_code.to_alipay_dict()
+            else:
+                params['voucher_code'] = self.voucher_code
         if self.voucher_id:
             if hasattr(self.voucher_id, 'to_alipay_dict'):
                 params['voucher_id'] = self.voucher_id.to_alipay_dict()
@@ -139,12 +165,16 @@ class UserVoucherBaseInfo(object):
         o = UserVoucherBaseInfo()
         if 'associate_trade_no' in d:
             o.associate_trade_no = d['associate_trade_no']
+        if 'belong_merchant_id' in d:
+            o.belong_merchant_id = d['belong_merchant_id']
         if 'create_time' in d:
             o.create_time = d['create_time']
         if 'valid_begin_time' in d:
             o.valid_begin_time = d['valid_begin_time']
         if 'valid_end_time' in d:
             o.valid_end_time = d['valid_end_time']
+        if 'voucher_code' in d:
+            o.voucher_code = d['voucher_code']
         if 'voucher_id' in d:
             o.voucher_id = d['voucher_id']
         if 'voucher_max_use_times' in d:

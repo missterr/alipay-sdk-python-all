@@ -5,6 +5,7 @@ import json
 from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.AppItemAttrVO import AppItemAttrVO
 from alipay.aop.api.domain.PhoneStructVO import PhoneStructVO
+from alipay.aop.api.domain.GuideInfoVO import GuideInfoVO
 from alipay.aop.api.domain.LocalItemSkuModifyVO import LocalItemSkuModifyVO
 from alipay.aop.api.domain.TimeRangeStructVO import TimeRangeStructVO
 
@@ -15,6 +16,7 @@ class AlipayOpenAppLocalitemModifyModel(object):
         self._attrs = None
         self._category_id = None
         self._customer_service_mobile = None
+        self._guide_info = None
         self._head_img = None
         self._image_list = None
         self._item_details_page_model = None
@@ -25,6 +27,7 @@ class AlipayOpenAppLocalitemModifyModel(object):
         self._path = None
         self._skus = None
         self._sold_time = None
+        self._spu_id = None
         self._title = None
 
     @property
@@ -57,6 +60,19 @@ class AlipayOpenAppLocalitemModifyModel(object):
             self._customer_service_mobile = value
         else:
             self._customer_service_mobile = PhoneStructVO.from_alipay_dict(value)
+    @property
+    def guide_info(self):
+        return self._guide_info
+
+    @guide_info.setter
+    def guide_info(self, value):
+        if isinstance(value, list):
+            self._guide_info = list()
+            for i in value:
+                if isinstance(i, GuideInfoVO):
+                    self._guide_info.append(i)
+                else:
+                    self._guide_info.append(GuideInfoVO.from_alipay_dict(i))
     @property
     def head_img(self):
         return self._head_img
@@ -137,6 +153,13 @@ class AlipayOpenAppLocalitemModifyModel(object):
         else:
             self._sold_time = TimeRangeStructVO.from_alipay_dict(value)
     @property
+    def spu_id(self):
+        return self._spu_id
+
+    @spu_id.setter
+    def spu_id(self, value):
+        self._spu_id = value
+    @property
     def title(self):
         return self._title
 
@@ -167,6 +190,16 @@ class AlipayOpenAppLocalitemModifyModel(object):
                 params['customer_service_mobile'] = self.customer_service_mobile.to_alipay_dict()
             else:
                 params['customer_service_mobile'] = self.customer_service_mobile
+        if self.guide_info:
+            if isinstance(self.guide_info, list):
+                for i in range(0, len(self.guide_info)):
+                    element = self.guide_info[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.guide_info[i] = element.to_alipay_dict()
+            if hasattr(self.guide_info, 'to_alipay_dict'):
+                params['guide_info'] = self.guide_info.to_alipay_dict()
+            else:
+                params['guide_info'] = self.guide_info
         if self.head_img:
             if hasattr(self.head_img, 'to_alipay_dict'):
                 params['head_img'] = self.head_img.to_alipay_dict()
@@ -222,6 +255,11 @@ class AlipayOpenAppLocalitemModifyModel(object):
                 params['sold_time'] = self.sold_time.to_alipay_dict()
             else:
                 params['sold_time'] = self.sold_time
+        if self.spu_id:
+            if hasattr(self.spu_id, 'to_alipay_dict'):
+                params['spu_id'] = self.spu_id.to_alipay_dict()
+            else:
+                params['spu_id'] = self.spu_id
         if self.title:
             if hasattr(self.title, 'to_alipay_dict'):
                 params['title'] = self.title.to_alipay_dict()
@@ -240,6 +278,8 @@ class AlipayOpenAppLocalitemModifyModel(object):
             o.category_id = d['category_id']
         if 'customer_service_mobile' in d:
             o.customer_service_mobile = d['customer_service_mobile']
+        if 'guide_info' in d:
+            o.guide_info = d['guide_info']
         if 'head_img' in d:
             o.head_img = d['head_img']
         if 'image_list' in d:
@@ -260,6 +300,8 @@ class AlipayOpenAppLocalitemModifyModel(object):
             o.skus = d['skus']
         if 'sold_time' in d:
             o.sold_time = d['sold_time']
+        if 'spu_id' in d:
+            o.spu_id = d['spu_id']
         if 'title' in d:
             o.title = d['title']
         return o
