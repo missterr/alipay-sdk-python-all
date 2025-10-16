@@ -11,18 +11,25 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
         self._ad_level = None
         self._alipay_pid = None
         self._biz_token = None
+        self._biz_version = None
+        self._conv_code_list = None
+        self._conv_time_join_rule = None
         self._creative_id_list = None
         self._current = None
         self._delivery_mode = None
         self._end_date = None
         self._group_id_list = None
+        self._material_level = None
         self._order_id_list = None
         self._page_size = None
+        self._photo_id_list = None
         self._plan_id_list = None
         self._principal_tag = None
         self._query_type = None
         self._scene_type = None
+        self._show_conv_data = None
         self._start_date = None
+        self._video_id_list = None
 
     @property
     def ad_level(self):
@@ -45,6 +52,30 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
     @biz_token.setter
     def biz_token(self, value):
         self._biz_token = value
+    @property
+    def biz_version(self):
+        return self._biz_version
+
+    @biz_version.setter
+    def biz_version(self, value):
+        self._biz_version = value
+    @property
+    def conv_code_list(self):
+        return self._conv_code_list
+
+    @conv_code_list.setter
+    def conv_code_list(self, value):
+        if isinstance(value, list):
+            self._conv_code_list = list()
+            for i in value:
+                self._conv_code_list.append(i)
+    @property
+    def conv_time_join_rule(self):
+        return self._conv_time_join_rule
+
+    @conv_time_join_rule.setter
+    def conv_time_join_rule(self, value):
+        self._conv_time_join_rule = value
     @property
     def creative_id_list(self):
         return self._creative_id_list
@@ -87,6 +118,13 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
             for i in value:
                 self._group_id_list.append(i)
     @property
+    def material_level(self):
+        return self._material_level
+
+    @material_level.setter
+    def material_level(self, value):
+        self._material_level = value
+    @property
     def order_id_list(self):
         return self._order_id_list
 
@@ -103,6 +141,16 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
     @page_size.setter
     def page_size(self, value):
         self._page_size = value
+    @property
+    def photo_id_list(self):
+        return self._photo_id_list
+
+    @photo_id_list.setter
+    def photo_id_list(self, value):
+        if isinstance(value, list):
+            self._photo_id_list = list()
+            for i in value:
+                self._photo_id_list.append(i)
     @property
     def plan_id_list(self):
         return self._plan_id_list
@@ -135,12 +183,29 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
     def scene_type(self, value):
         self._scene_type = value
     @property
+    def show_conv_data(self):
+        return self._show_conv_data
+
+    @show_conv_data.setter
+    def show_conv_data(self, value):
+        self._show_conv_data = value
+    @property
     def start_date(self):
         return self._start_date
 
     @start_date.setter
     def start_date(self, value):
         self._start_date = value
+    @property
+    def video_id_list(self):
+        return self._video_id_list
+
+    @video_id_list.setter
+    def video_id_list(self, value):
+        if isinstance(value, list):
+            self._video_id_list = list()
+            for i in value:
+                self._video_id_list.append(i)
 
 
     def to_alipay_dict(self):
@@ -160,6 +225,26 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
                 params['biz_token'] = self.biz_token.to_alipay_dict()
             else:
                 params['biz_token'] = self.biz_token
+        if self.biz_version:
+            if hasattr(self.biz_version, 'to_alipay_dict'):
+                params['biz_version'] = self.biz_version.to_alipay_dict()
+            else:
+                params['biz_version'] = self.biz_version
+        if self.conv_code_list:
+            if isinstance(self.conv_code_list, list):
+                for i in range(0, len(self.conv_code_list)):
+                    element = self.conv_code_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.conv_code_list[i] = element.to_alipay_dict()
+            if hasattr(self.conv_code_list, 'to_alipay_dict'):
+                params['conv_code_list'] = self.conv_code_list.to_alipay_dict()
+            else:
+                params['conv_code_list'] = self.conv_code_list
+        if self.conv_time_join_rule:
+            if hasattr(self.conv_time_join_rule, 'to_alipay_dict'):
+                params['conv_time_join_rule'] = self.conv_time_join_rule.to_alipay_dict()
+            else:
+                params['conv_time_join_rule'] = self.conv_time_join_rule
         if self.creative_id_list:
             if isinstance(self.creative_id_list, list):
                 for i in range(0, len(self.creative_id_list)):
@@ -195,6 +280,11 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
                 params['group_id_list'] = self.group_id_list.to_alipay_dict()
             else:
                 params['group_id_list'] = self.group_id_list
+        if self.material_level:
+            if hasattr(self.material_level, 'to_alipay_dict'):
+                params['material_level'] = self.material_level.to_alipay_dict()
+            else:
+                params['material_level'] = self.material_level
         if self.order_id_list:
             if isinstance(self.order_id_list, list):
                 for i in range(0, len(self.order_id_list)):
@@ -210,6 +300,16 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
                 params['page_size'] = self.page_size.to_alipay_dict()
             else:
                 params['page_size'] = self.page_size
+        if self.photo_id_list:
+            if isinstance(self.photo_id_list, list):
+                for i in range(0, len(self.photo_id_list)):
+                    element = self.photo_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.photo_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.photo_id_list, 'to_alipay_dict'):
+                params['photo_id_list'] = self.photo_id_list.to_alipay_dict()
+            else:
+                params['photo_id_list'] = self.photo_id_list
         if self.plan_id_list:
             if isinstance(self.plan_id_list, list):
                 for i in range(0, len(self.plan_id_list)):
@@ -235,11 +335,26 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
                 params['scene_type'] = self.scene_type.to_alipay_dict()
             else:
                 params['scene_type'] = self.scene_type
+        if self.show_conv_data:
+            if hasattr(self.show_conv_data, 'to_alipay_dict'):
+                params['show_conv_data'] = self.show_conv_data.to_alipay_dict()
+            else:
+                params['show_conv_data'] = self.show_conv_data
         if self.start_date:
             if hasattr(self.start_date, 'to_alipay_dict'):
                 params['start_date'] = self.start_date.to_alipay_dict()
             else:
                 params['start_date'] = self.start_date
+        if self.video_id_list:
+            if isinstance(self.video_id_list, list):
+                for i in range(0, len(self.video_id_list)):
+                    element = self.video_id_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.video_id_list[i] = element.to_alipay_dict()
+            if hasattr(self.video_id_list, 'to_alipay_dict'):
+                params['video_id_list'] = self.video_id_list.to_alipay_dict()
+            else:
+                params['video_id_list'] = self.video_id_list
         return params
 
     @staticmethod
@@ -253,6 +368,12 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
             o.alipay_pid = d['alipay_pid']
         if 'biz_token' in d:
             o.biz_token = d['biz_token']
+        if 'biz_version' in d:
+            o.biz_version = d['biz_version']
+        if 'conv_code_list' in d:
+            o.conv_code_list = d['conv_code_list']
+        if 'conv_time_join_rule' in d:
+            o.conv_time_join_rule = d['conv_time_join_rule']
         if 'creative_id_list' in d:
             o.creative_id_list = d['creative_id_list']
         if 'current' in d:
@@ -263,10 +384,14 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
             o.end_date = d['end_date']
         if 'group_id_list' in d:
             o.group_id_list = d['group_id_list']
+        if 'material_level' in d:
+            o.material_level = d['material_level']
         if 'order_id_list' in d:
             o.order_id_list = d['order_id_list']
         if 'page_size' in d:
             o.page_size = d['page_size']
+        if 'photo_id_list' in d:
+            o.photo_id_list = d['photo_id_list']
         if 'plan_id_list' in d:
             o.plan_id_list = d['plan_id_list']
         if 'principal_tag' in d:
@@ -275,8 +400,12 @@ class AlipayDataDataserviceAdReportdataQueryModel(object):
             o.query_type = d['query_type']
         if 'scene_type' in d:
             o.scene_type = d['scene_type']
+        if 'show_conv_data' in d:
+            o.show_conv_data = d['show_conv_data']
         if 'start_date' in d:
             o.start_date = d['start_date']
+        if 'video_id_list' in d:
+            o.video_id_list = d['video_id_list']
         return o
 
 

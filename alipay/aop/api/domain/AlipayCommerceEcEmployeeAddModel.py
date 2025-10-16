@@ -8,6 +8,7 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceEcEmployeeAddModel(object):
 
     def __init__(self):
+        self._accounting_entity_ids = None
         self._create_share_code = None
         self._department_ids = None
         self._employee_cert_no = None
@@ -19,17 +20,29 @@ class AlipayCommerceEcEmployeeAddModel(object):
         self._encrypt_cert_no = None
         self._encrypt_mobile = None
         self._enterprise_id = None
+        self._free_sign_token = None
         self._identity = None
         self._identity_open_id = None
         self._identity_type = None
         self._iot_check_type = None
         self._iot_vid = None
+        self._label_names = None
         self._profiles = None
         self._role_list = None
         self._sign_return_url = None
         self._sign_url_carry_info = None
         self._withholding_sign_str = None
 
+    @property
+    def accounting_entity_ids(self):
+        return self._accounting_entity_ids
+
+    @accounting_entity_ids.setter
+    def accounting_entity_ids(self, value):
+        if isinstance(value, list):
+            self._accounting_entity_ids = list()
+            for i in value:
+                self._accounting_entity_ids.append(i)
     @property
     def create_share_code(self):
         return self._create_share_code
@@ -111,6 +124,13 @@ class AlipayCommerceEcEmployeeAddModel(object):
     def enterprise_id(self, value):
         self._enterprise_id = value
     @property
+    def free_sign_token(self):
+        return self._free_sign_token
+
+    @free_sign_token.setter
+    def free_sign_token(self, value):
+        self._free_sign_token = value
+    @property
     def identity(self):
         return self._identity
 
@@ -145,6 +165,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
     @iot_vid.setter
     def iot_vid(self, value):
         self._iot_vid = value
+    @property
+    def label_names(self):
+        return self._label_names
+
+    @label_names.setter
+    def label_names(self, value):
+        if isinstance(value, list):
+            self._label_names = list()
+            for i in value:
+                self._label_names.append(i)
     @property
     def profiles(self):
         return self._profiles
@@ -187,6 +217,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.accounting_entity_ids:
+            if isinstance(self.accounting_entity_ids, list):
+                for i in range(0, len(self.accounting_entity_ids)):
+                    element = self.accounting_entity_ids[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.accounting_entity_ids[i] = element.to_alipay_dict()
+            if hasattr(self.accounting_entity_ids, 'to_alipay_dict'):
+                params['accounting_entity_ids'] = self.accounting_entity_ids.to_alipay_dict()
+            else:
+                params['accounting_entity_ids'] = self.accounting_entity_ids
         if self.create_share_code:
             if hasattr(self.create_share_code, 'to_alipay_dict'):
                 params['create_share_code'] = self.create_share_code.to_alipay_dict()
@@ -247,6 +287,11 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.free_sign_token:
+            if hasattr(self.free_sign_token, 'to_alipay_dict'):
+                params['free_sign_token'] = self.free_sign_token.to_alipay_dict()
+            else:
+                params['free_sign_token'] = self.free_sign_token
         if self.identity:
             if hasattr(self.identity, 'to_alipay_dict'):
                 params['identity'] = self.identity.to_alipay_dict()
@@ -272,6 +317,16 @@ class AlipayCommerceEcEmployeeAddModel(object):
                 params['iot_vid'] = self.iot_vid.to_alipay_dict()
             else:
                 params['iot_vid'] = self.iot_vid
+        if self.label_names:
+            if isinstance(self.label_names, list):
+                for i in range(0, len(self.label_names)):
+                    element = self.label_names[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.label_names[i] = element.to_alipay_dict()
+            if hasattr(self.label_names, 'to_alipay_dict'):
+                params['label_names'] = self.label_names.to_alipay_dict()
+            else:
+                params['label_names'] = self.label_names
         if self.profiles:
             if hasattr(self.profiles, 'to_alipay_dict'):
                 params['profiles'] = self.profiles.to_alipay_dict()
@@ -309,6 +364,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
         if not d:
             return None
         o = AlipayCommerceEcEmployeeAddModel()
+        if 'accounting_entity_ids' in d:
+            o.accounting_entity_ids = d['accounting_entity_ids']
         if 'create_share_code' in d:
             o.create_share_code = d['create_share_code']
         if 'department_ids' in d:
@@ -331,6 +388,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.encrypt_mobile = d['encrypt_mobile']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'free_sign_token' in d:
+            o.free_sign_token = d['free_sign_token']
         if 'identity' in d:
             o.identity = d['identity']
         if 'identity_open_id' in d:
@@ -341,6 +400,8 @@ class AlipayCommerceEcEmployeeAddModel(object):
             o.iot_check_type = d['iot_check_type']
         if 'iot_vid' in d:
             o.iot_vid = d['iot_vid']
+        if 'label_names' in d:
+            o.label_names = d['label_names']
         if 'profiles' in d:
             o.profiles = d['profiles']
         if 'role_list' in d:

@@ -12,6 +12,7 @@ from alipay.aop.api.domain.HbFqPayInfo import HbFqPayInfo
 from alipay.aop.api.domain.IntactChargeInfo import IntactChargeInfo
 from alipay.aop.api.domain.PaymentInfoWithId import PaymentInfoWithId
 from alipay.aop.api.domain.GoodsDetail import GoodsDetail
+from alipay.aop.api.domain.TapPayInfo import TapPayInfo
 from alipay.aop.api.domain.TradeSettleInfo import TradeSettleInfo
 from alipay.aop.api.domain.VoucherDetail import VoucherDetail
 
@@ -23,6 +24,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._additional_status = None
         self._alipay_store_id = None
         self._alipay_sub_merchant_id = None
+        self._async_pay_apply_status = None
         self._auth_trade_pay_mode = None
         self._biz_settle_mode = None
         self._bkagent_resp_info = None
@@ -33,6 +35,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._buyer_user_id = None
         self._buyer_user_name = None
         self._buyer_user_type = None
+        self._cashier_type = None
         self._charge_amount = None
         self._charge_flags = None
         self._charge_info_list = None
@@ -61,6 +64,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._payment_info_with_id_list = None
         self._period_scene = None
         self._point_amount = None
+        self._pre_auth_pay_amount = None
         self._receipt_amount = None
         self._receipt_currency_type = None
         self._req_goods_detail = None
@@ -72,6 +76,7 @@ class AlipayTradeQueryResponse(AlipayResponse):
         self._store_id = None
         self._store_name = None
         self._subject = None
+        self._tap_pay_info = None
         self._terminal_id = None
         self._total_amount = None
         self._trade_no = None
@@ -102,6 +107,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @alipay_sub_merchant_id.setter
     def alipay_sub_merchant_id(self, value):
         self._alipay_sub_merchant_id = value
+    @property
+    def async_pay_apply_status(self):
+        return self._async_pay_apply_status
+
+    @async_pay_apply_status.setter
+    def async_pay_apply_status(self, value):
+        self._async_pay_apply_status = value
     @property
     def auth_trade_pay_mode(self):
         return self._auth_trade_pay_mode
@@ -175,6 +187,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     @buyer_user_type.setter
     def buyer_user_type(self, value):
         self._buyer_user_type = value
+    @property
+    def cashier_type(self):
+        return self._cashier_type
+
+    @cashier_type.setter
+    def cashier_type(self, value):
+        self._cashier_type = value
     @property
     def charge_amount(self):
         return self._charge_amount
@@ -408,6 +427,13 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def point_amount(self, value):
         self._point_amount = value
     @property
+    def pre_auth_pay_amount(self):
+        return self._pre_auth_pay_amount
+
+    @pre_auth_pay_amount.setter
+    def pre_auth_pay_amount(self, value):
+        self._pre_auth_pay_amount = value
+    @property
     def receipt_amount(self):
         return self._receipt_amount
 
@@ -491,6 +517,16 @@ class AlipayTradeQueryResponse(AlipayResponse):
     def subject(self, value):
         self._subject = value
     @property
+    def tap_pay_info(self):
+        return self._tap_pay_info
+
+    @tap_pay_info.setter
+    def tap_pay_info(self, value):
+        if isinstance(value, TapPayInfo):
+            self._tap_pay_info = value
+        else:
+            self._tap_pay_info = TapPayInfo.from_alipay_dict(value)
+    @property
     def terminal_id(self):
         return self._terminal_id
 
@@ -564,6 +600,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.alipay_store_id = response['alipay_store_id']
         if 'alipay_sub_merchant_id' in response:
             self.alipay_sub_merchant_id = response['alipay_sub_merchant_id']
+        if 'async_pay_apply_status' in response:
+            self.async_pay_apply_status = response['async_pay_apply_status']
         if 'auth_trade_pay_mode' in response:
             self.auth_trade_pay_mode = response['auth_trade_pay_mode']
         if 'biz_settle_mode' in response:
@@ -584,6 +622,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.buyer_user_name = response['buyer_user_name']
         if 'buyer_user_type' in response:
             self.buyer_user_type = response['buyer_user_type']
+        if 'cashier_type' in response:
+            self.cashier_type = response['cashier_type']
         if 'charge_amount' in response:
             self.charge_amount = response['charge_amount']
         if 'charge_flags' in response:
@@ -640,6 +680,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.period_scene = response['period_scene']
         if 'point_amount' in response:
             self.point_amount = response['point_amount']
+        if 'pre_auth_pay_amount' in response:
+            self.pre_auth_pay_amount = response['pre_auth_pay_amount']
         if 'receipt_amount' in response:
             self.receipt_amount = response['receipt_amount']
         if 'receipt_currency_type' in response:
@@ -662,6 +704,8 @@ class AlipayTradeQueryResponse(AlipayResponse):
             self.store_name = response['store_name']
         if 'subject' in response:
             self.subject = response['subject']
+        if 'tap_pay_info' in response:
+            self.tap_pay_info = response['tap_pay_info']
         if 'terminal_id' in response:
             self.terminal_id = response['terminal_id']
         if 'total_amount' in response:

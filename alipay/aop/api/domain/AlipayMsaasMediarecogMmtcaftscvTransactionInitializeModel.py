@@ -10,16 +10,26 @@ from alipay.aop.api.domain.WeightFloor import WeightFloor
 class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
 
     def __init__(self):
+        self._air_identify = None
         self._device_identify_type = None
         self._goods_infos = None
         self._open_id = None
         self._req_id = None
         self._scene = None
+        self._sub_merchant_id = None
+        self._sub_merchant_name = None
         self._terminal_id = None
         self._transaction_id = None
         self._uid = None
         self._weight_template = None
 
+    @property
+    def air_identify(self):
+        return self._air_identify
+
+    @air_identify.setter
+    def air_identify(self, value):
+        self._air_identify = value
     @property
     def device_identify_type(self):
         return self._device_identify_type
@@ -62,6 +72,20 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
     def scene(self, value):
         self._scene = value
     @property
+    def sub_merchant_id(self):
+        return self._sub_merchant_id
+
+    @sub_merchant_id.setter
+    def sub_merchant_id(self, value):
+        self._sub_merchant_id = value
+    @property
+    def sub_merchant_name(self):
+        return self._sub_merchant_name
+
+    @sub_merchant_name.setter
+    def sub_merchant_name(self, value):
+        self._sub_merchant_name = value
+    @property
     def terminal_id(self):
         return self._terminal_id
 
@@ -99,6 +123,11 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.air_identify:
+            if hasattr(self.air_identify, 'to_alipay_dict'):
+                params['air_identify'] = self.air_identify.to_alipay_dict()
+            else:
+                params['air_identify'] = self.air_identify
         if self.device_identify_type:
             if hasattr(self.device_identify_type, 'to_alipay_dict'):
                 params['device_identify_type'] = self.device_identify_type.to_alipay_dict()
@@ -129,6 +158,16 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
                 params['scene'] = self.scene.to_alipay_dict()
             else:
                 params['scene'] = self.scene
+        if self.sub_merchant_id:
+            if hasattr(self.sub_merchant_id, 'to_alipay_dict'):
+                params['sub_merchant_id'] = self.sub_merchant_id.to_alipay_dict()
+            else:
+                params['sub_merchant_id'] = self.sub_merchant_id
+        if self.sub_merchant_name:
+            if hasattr(self.sub_merchant_name, 'to_alipay_dict'):
+                params['sub_merchant_name'] = self.sub_merchant_name.to_alipay_dict()
+            else:
+                params['sub_merchant_name'] = self.sub_merchant_name
         if self.terminal_id:
             if hasattr(self.terminal_id, 'to_alipay_dict'):
                 params['terminal_id'] = self.terminal_id.to_alipay_dict()
@@ -161,6 +200,8 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
         if not d:
             return None
         o = AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel()
+        if 'air_identify' in d:
+            o.air_identify = d['air_identify']
         if 'device_identify_type' in d:
             o.device_identify_type = d['device_identify_type']
         if 'goods_infos' in d:
@@ -171,6 +212,10 @@ class AlipayMsaasMediarecogMmtcaftscvTransactionInitializeModel(object):
             o.req_id = d['req_id']
         if 'scene' in d:
             o.scene = d['scene']
+        if 'sub_merchant_id' in d:
+            o.sub_merchant_id = d['sub_merchant_id']
+        if 'sub_merchant_name' in d:
+            o.sub_merchant_name = d['sub_merchant_name']
         if 'terminal_id' in d:
             o.terminal_id = d['terminal_id']
         if 'transaction_id' in d:

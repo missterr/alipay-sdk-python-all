@@ -9,12 +9,14 @@ class InstitutionBasicInfo(object):
 
     def __init__(self):
         self._consult_mode = None
+        self._currency = None
         self._effective = None
         self._effective_end_date = None
         self._effective_start_date = None
         self._institution_desc = None
         self._institution_id = None
         self._institution_name = None
+        self._multi_employee_share_mode = None
 
     @property
     def consult_mode(self):
@@ -23,6 +25,13 @@ class InstitutionBasicInfo(object):
     @consult_mode.setter
     def consult_mode(self, value):
         self._consult_mode = value
+    @property
+    def currency(self):
+        return self._currency
+
+    @currency.setter
+    def currency(self, value):
+        self._currency = value
     @property
     def effective(self):
         return self._effective
@@ -65,6 +74,13 @@ class InstitutionBasicInfo(object):
     @institution_name.setter
     def institution_name(self, value):
         self._institution_name = value
+    @property
+    def multi_employee_share_mode(self):
+        return self._multi_employee_share_mode
+
+    @multi_employee_share_mode.setter
+    def multi_employee_share_mode(self, value):
+        self._multi_employee_share_mode = value
 
 
     def to_alipay_dict(self):
@@ -74,6 +90,11 @@ class InstitutionBasicInfo(object):
                 params['consult_mode'] = self.consult_mode.to_alipay_dict()
             else:
                 params['consult_mode'] = self.consult_mode
+        if self.currency:
+            if hasattr(self.currency, 'to_alipay_dict'):
+                params['currency'] = self.currency.to_alipay_dict()
+            else:
+                params['currency'] = self.currency
         if self.effective:
             if hasattr(self.effective, 'to_alipay_dict'):
                 params['effective'] = self.effective.to_alipay_dict()
@@ -104,6 +125,11 @@ class InstitutionBasicInfo(object):
                 params['institution_name'] = self.institution_name.to_alipay_dict()
             else:
                 params['institution_name'] = self.institution_name
+        if self.multi_employee_share_mode:
+            if hasattr(self.multi_employee_share_mode, 'to_alipay_dict'):
+                params['multi_employee_share_mode'] = self.multi_employee_share_mode.to_alipay_dict()
+            else:
+                params['multi_employee_share_mode'] = self.multi_employee_share_mode
         return params
 
     @staticmethod
@@ -113,6 +139,8 @@ class InstitutionBasicInfo(object):
         o = InstitutionBasicInfo()
         if 'consult_mode' in d:
             o.consult_mode = d['consult_mode']
+        if 'currency' in d:
+            o.currency = d['currency']
         if 'effective' in d:
             o.effective = d['effective']
         if 'effective_end_date' in d:
@@ -125,6 +153,8 @@ class InstitutionBasicInfo(object):
             o.institution_id = d['institution_id']
         if 'institution_name' in d:
             o.institution_name = d['institution_name']
+        if 'multi_employee_share_mode' in d:
+            o.multi_employee_share_mode = d['multi_employee_share_mode']
         return o
 
 

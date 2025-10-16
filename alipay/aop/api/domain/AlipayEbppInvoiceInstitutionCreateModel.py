@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InstitutionScopeInfo import InstitutionScopeInfo
 from alipay.aop.api.domain.IssueRuleInfo import IssueRuleInfo
 from alipay.aop.api.domain.StandardInfo import StandardInfo
 
@@ -14,13 +15,16 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
         self._adapter_type = None
         self._agreement_no = None
         self._consult_mode = None
+        self._currency = None
         self._effective_end_date = None
         self._effective_start_date = None
         self._enterprise_id = None
         self._expense_type = None
         self._institution_desc = None
         self._institution_name = None
+        self._institution_scope_info = None
         self._issue_rule_info_list = None
+        self._multi_employee_share_mode = None
         self._outer_source_id = None
         self._owner_id_list = None
         self._owner_open_id_list = None
@@ -56,6 +60,13 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
     @consult_mode.setter
     def consult_mode(self, value):
         self._consult_mode = value
+    @property
+    def currency(self):
+        return self._currency
+
+    @currency.setter
+    def currency(self, value):
+        self._currency = value
     @property
     def effective_end_date(self):
         return self._effective_end_date
@@ -99,6 +110,16 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
     def institution_name(self, value):
         self._institution_name = value
     @property
+    def institution_scope_info(self):
+        return self._institution_scope_info
+
+    @institution_scope_info.setter
+    def institution_scope_info(self, value):
+        if isinstance(value, InstitutionScopeInfo):
+            self._institution_scope_info = value
+        else:
+            self._institution_scope_info = InstitutionScopeInfo.from_alipay_dict(value)
+    @property
     def issue_rule_info_list(self):
         return self._issue_rule_info_list
 
@@ -111,6 +132,13 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                     self._issue_rule_info_list.append(i)
                 else:
                     self._issue_rule_info_list.append(IssueRuleInfo.from_alipay_dict(i))
+    @property
+    def multi_employee_share_mode(self):
+        return self._multi_employee_share_mode
+
+    @multi_employee_share_mode.setter
+    def multi_employee_share_mode(self, value):
+        self._multi_employee_share_mode = value
     @property
     def outer_source_id(self):
         return self._outer_source_id
@@ -189,6 +217,11 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 params['consult_mode'] = self.consult_mode.to_alipay_dict()
             else:
                 params['consult_mode'] = self.consult_mode
+        if self.currency:
+            if hasattr(self.currency, 'to_alipay_dict'):
+                params['currency'] = self.currency.to_alipay_dict()
+            else:
+                params['currency'] = self.currency
         if self.effective_end_date:
             if hasattr(self.effective_end_date, 'to_alipay_dict'):
                 params['effective_end_date'] = self.effective_end_date.to_alipay_dict()
@@ -219,6 +252,11 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 params['institution_name'] = self.institution_name.to_alipay_dict()
             else:
                 params['institution_name'] = self.institution_name
+        if self.institution_scope_info:
+            if hasattr(self.institution_scope_info, 'to_alipay_dict'):
+                params['institution_scope_info'] = self.institution_scope_info.to_alipay_dict()
+            else:
+                params['institution_scope_info'] = self.institution_scope_info
         if self.issue_rule_info_list:
             if isinstance(self.issue_rule_info_list, list):
                 for i in range(0, len(self.issue_rule_info_list)):
@@ -229,6 +267,11 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
                 params['issue_rule_info_list'] = self.issue_rule_info_list.to_alipay_dict()
             else:
                 params['issue_rule_info_list'] = self.issue_rule_info_list
+        if self.multi_employee_share_mode:
+            if hasattr(self.multi_employee_share_mode, 'to_alipay_dict'):
+                params['multi_employee_share_mode'] = self.multi_employee_share_mode.to_alipay_dict()
+            else:
+                params['multi_employee_share_mode'] = self.multi_employee_share_mode
         if self.outer_source_id:
             if hasattr(self.outer_source_id, 'to_alipay_dict'):
                 params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
@@ -289,6 +332,8 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
             o.agreement_no = d['agreement_no']
         if 'consult_mode' in d:
             o.consult_mode = d['consult_mode']
+        if 'currency' in d:
+            o.currency = d['currency']
         if 'effective_end_date' in d:
             o.effective_end_date = d['effective_end_date']
         if 'effective_start_date' in d:
@@ -301,8 +346,12 @@ class AlipayEbppInvoiceInstitutionCreateModel(object):
             o.institution_desc = d['institution_desc']
         if 'institution_name' in d:
             o.institution_name = d['institution_name']
+        if 'institution_scope_info' in d:
+            o.institution_scope_info = d['institution_scope_info']
         if 'issue_rule_info_list' in d:
             o.issue_rule_info_list = d['issue_rule_info_list']
+        if 'multi_employee_share_mode' in d:
+            o.multi_employee_share_mode = d['multi_employee_share_mode']
         if 'outer_source_id' in d:
             o.outer_source_id = d['outer_source_id']
         if 'owner_id_list' in d:

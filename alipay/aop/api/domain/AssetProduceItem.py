@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.OptionalItemInfo import OptionalItemInfo
 
 
 class AssetProduceItem(object):
@@ -18,6 +19,7 @@ class AssetProduceItem(object):
         self._biz_tag = None
         self._biz_type = None
         self._city = None
+        self._code_group_flag = None
         self._combination_batch_no = None
         self._combination_count = None
         self._combination_orders = None
@@ -30,6 +32,8 @@ class AssetProduceItem(object):
         self._logistics_name = None
         self._logistics_no = None
         self._memo = None
+        self._optional_item_flag = None
+        self._optional_item_infos = None
         self._ou_code = None
         self._ou_name = None
         self._parent_template_id = None
@@ -45,9 +49,14 @@ class AssetProduceItem(object):
         self._receiver_address = None
         self._receiver_mobile = None
         self._receiver_name = None
+        self._related_children_out_biz_no_count = None
+        self._related_others_out_biz_no = None
+        self._related_out_biz_no = None
+        self._related_parent_out_biz_no = None
         self._supplier_pid = None
         self._template_id = None
         self._template_name = None
+        self._urgent_order_flag = None
         self._work_process = None
 
     @property
@@ -120,6 +129,13 @@ class AssetProduceItem(object):
     @city.setter
     def city(self, value):
         self._city = value
+    @property
+    def code_group_flag(self):
+        return self._code_group_flag
+
+    @code_group_flag.setter
+    def code_group_flag(self, value):
+        self._code_group_flag = value
     @property
     def combination_batch_no(self):
         return self._combination_batch_no
@@ -207,6 +223,26 @@ class AssetProduceItem(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def optional_item_flag(self):
+        return self._optional_item_flag
+
+    @optional_item_flag.setter
+    def optional_item_flag(self, value):
+        self._optional_item_flag = value
+    @property
+    def optional_item_infos(self):
+        return self._optional_item_infos
+
+    @optional_item_infos.setter
+    def optional_item_infos(self, value):
+        if isinstance(value, list):
+            self._optional_item_infos = list()
+            for i in value:
+                if isinstance(i, OptionalItemInfo):
+                    self._optional_item_infos.append(i)
+                else:
+                    self._optional_item_infos.append(OptionalItemInfo.from_alipay_dict(i))
     @property
     def ou_code(self):
         return self._ou_code
@@ -313,6 +349,37 @@ class AssetProduceItem(object):
     def receiver_name(self, value):
         self._receiver_name = value
     @property
+    def related_children_out_biz_no_count(self):
+        return self._related_children_out_biz_no_count
+
+    @related_children_out_biz_no_count.setter
+    def related_children_out_biz_no_count(self, value):
+        self._related_children_out_biz_no_count = value
+    @property
+    def related_others_out_biz_no(self):
+        return self._related_others_out_biz_no
+
+    @related_others_out_biz_no.setter
+    def related_others_out_biz_no(self, value):
+        if isinstance(value, list):
+            self._related_others_out_biz_no = list()
+            for i in value:
+                self._related_others_out_biz_no.append(i)
+    @property
+    def related_out_biz_no(self):
+        return self._related_out_biz_no
+
+    @related_out_biz_no.setter
+    def related_out_biz_no(self, value):
+        self._related_out_biz_no = value
+    @property
+    def related_parent_out_biz_no(self):
+        return self._related_parent_out_biz_no
+
+    @related_parent_out_biz_no.setter
+    def related_parent_out_biz_no(self, value):
+        self._related_parent_out_biz_no = value
+    @property
     def supplier_pid(self):
         return self._supplier_pid
 
@@ -333,6 +400,13 @@ class AssetProduceItem(object):
     @template_name.setter
     def template_name(self, value):
         self._template_name = value
+    @property
+    def urgent_order_flag(self):
+        return self._urgent_order_flag
+
+    @urgent_order_flag.setter
+    def urgent_order_flag(self, value):
+        self._urgent_order_flag = value
     @property
     def work_process(self):
         return self._work_process
@@ -394,6 +468,11 @@ class AssetProduceItem(object):
                 params['city'] = self.city.to_alipay_dict()
             else:
                 params['city'] = self.city
+        if self.code_group_flag:
+            if hasattr(self.code_group_flag, 'to_alipay_dict'):
+                params['code_group_flag'] = self.code_group_flag.to_alipay_dict()
+            else:
+                params['code_group_flag'] = self.code_group_flag
         if self.combination_batch_no:
             if hasattr(self.combination_batch_no, 'to_alipay_dict'):
                 params['combination_batch_no'] = self.combination_batch_no.to_alipay_dict()
@@ -459,6 +538,21 @@ class AssetProduceItem(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.optional_item_flag:
+            if hasattr(self.optional_item_flag, 'to_alipay_dict'):
+                params['optional_item_flag'] = self.optional_item_flag.to_alipay_dict()
+            else:
+                params['optional_item_flag'] = self.optional_item_flag
+        if self.optional_item_infos:
+            if isinstance(self.optional_item_infos, list):
+                for i in range(0, len(self.optional_item_infos)):
+                    element = self.optional_item_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.optional_item_infos[i] = element.to_alipay_dict()
+            if hasattr(self.optional_item_infos, 'to_alipay_dict'):
+                params['optional_item_infos'] = self.optional_item_infos.to_alipay_dict()
+            else:
+                params['optional_item_infos'] = self.optional_item_infos
         if self.ou_code:
             if hasattr(self.ou_code, 'to_alipay_dict'):
                 params['ou_code'] = self.ou_code.to_alipay_dict()
@@ -534,6 +628,31 @@ class AssetProduceItem(object):
                 params['receiver_name'] = self.receiver_name.to_alipay_dict()
             else:
                 params['receiver_name'] = self.receiver_name
+        if self.related_children_out_biz_no_count:
+            if hasattr(self.related_children_out_biz_no_count, 'to_alipay_dict'):
+                params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count.to_alipay_dict()
+            else:
+                params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count
+        if self.related_others_out_biz_no:
+            if isinstance(self.related_others_out_biz_no, list):
+                for i in range(0, len(self.related_others_out_biz_no)):
+                    element = self.related_others_out_biz_no[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.related_others_out_biz_no[i] = element.to_alipay_dict()
+            if hasattr(self.related_others_out_biz_no, 'to_alipay_dict'):
+                params['related_others_out_biz_no'] = self.related_others_out_biz_no.to_alipay_dict()
+            else:
+                params['related_others_out_biz_no'] = self.related_others_out_biz_no
+        if self.related_out_biz_no:
+            if hasattr(self.related_out_biz_no, 'to_alipay_dict'):
+                params['related_out_biz_no'] = self.related_out_biz_no.to_alipay_dict()
+            else:
+                params['related_out_biz_no'] = self.related_out_biz_no
+        if self.related_parent_out_biz_no:
+            if hasattr(self.related_parent_out_biz_no, 'to_alipay_dict'):
+                params['related_parent_out_biz_no'] = self.related_parent_out_biz_no.to_alipay_dict()
+            else:
+                params['related_parent_out_biz_no'] = self.related_parent_out_biz_no
         if self.supplier_pid:
             if hasattr(self.supplier_pid, 'to_alipay_dict'):
                 params['supplier_pid'] = self.supplier_pid.to_alipay_dict()
@@ -549,6 +668,11 @@ class AssetProduceItem(object):
                 params['template_name'] = self.template_name.to_alipay_dict()
             else:
                 params['template_name'] = self.template_name
+        if self.urgent_order_flag:
+            if hasattr(self.urgent_order_flag, 'to_alipay_dict'):
+                params['urgent_order_flag'] = self.urgent_order_flag.to_alipay_dict()
+            else:
+                params['urgent_order_flag'] = self.urgent_order_flag
         if self.work_process:
             if hasattr(self.work_process, 'to_alipay_dict'):
                 params['work_process'] = self.work_process.to_alipay_dict()
@@ -581,6 +705,8 @@ class AssetProduceItem(object):
             o.biz_type = d['biz_type']
         if 'city' in d:
             o.city = d['city']
+        if 'code_group_flag' in d:
+            o.code_group_flag = d['code_group_flag']
         if 'combination_batch_no' in d:
             o.combination_batch_no = d['combination_batch_no']
         if 'combination_count' in d:
@@ -605,6 +731,10 @@ class AssetProduceItem(object):
             o.logistics_no = d['logistics_no']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'optional_item_flag' in d:
+            o.optional_item_flag = d['optional_item_flag']
+        if 'optional_item_infos' in d:
+            o.optional_item_infos = d['optional_item_infos']
         if 'ou_code' in d:
             o.ou_code = d['ou_code']
         if 'ou_name' in d:
@@ -635,12 +765,22 @@ class AssetProduceItem(object):
             o.receiver_mobile = d['receiver_mobile']
         if 'receiver_name' in d:
             o.receiver_name = d['receiver_name']
+        if 'related_children_out_biz_no_count' in d:
+            o.related_children_out_biz_no_count = d['related_children_out_biz_no_count']
+        if 'related_others_out_biz_no' in d:
+            o.related_others_out_biz_no = d['related_others_out_biz_no']
+        if 'related_out_biz_no' in d:
+            o.related_out_biz_no = d['related_out_biz_no']
+        if 'related_parent_out_biz_no' in d:
+            o.related_parent_out_biz_no = d['related_parent_out_biz_no']
         if 'supplier_pid' in d:
             o.supplier_pid = d['supplier_pid']
         if 'template_id' in d:
             o.template_id = d['template_id']
         if 'template_name' in d:
             o.template_name = d['template_name']
+        if 'urgent_order_flag' in d:
+            o.urgent_order_flag = d['urgent_order_flag']
         if 'work_process' in d:
             o.work_process = d['work_process']
         return o

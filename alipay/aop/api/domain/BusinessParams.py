@@ -9,12 +9,15 @@ class BusinessParams(object):
 
     def __init__(self):
         self._actual_order_time = None
+        self._buyer_memo = None
         self._campus_card = None
         self._card_type = None
         self._enterprise_pay_amount = None
         self._enterprise_pay_info = None
+        self._force_pwd = None
         self._good_taxes = None
         self._mc_create_trade_ip = None
+        self._priority_unfreeze_asset = None
         self._tiny_app_merchant_biz_type = None
 
     @property
@@ -24,6 +27,13 @@ class BusinessParams(object):
     @actual_order_time.setter
     def actual_order_time(self, value):
         self._actual_order_time = value
+    @property
+    def buyer_memo(self):
+        return self._buyer_memo
+
+    @buyer_memo.setter
+    def buyer_memo(self, value):
+        self._buyer_memo = value
     @property
     def campus_card(self):
         return self._campus_card
@@ -53,6 +63,13 @@ class BusinessParams(object):
     def enterprise_pay_info(self, value):
         self._enterprise_pay_info = value
     @property
+    def force_pwd(self):
+        return self._force_pwd
+
+    @force_pwd.setter
+    def force_pwd(self, value):
+        self._force_pwd = value
+    @property
     def good_taxes(self):
         return self._good_taxes
 
@@ -66,6 +83,13 @@ class BusinessParams(object):
     @mc_create_trade_ip.setter
     def mc_create_trade_ip(self, value):
         self._mc_create_trade_ip = value
+    @property
+    def priority_unfreeze_asset(self):
+        return self._priority_unfreeze_asset
+
+    @priority_unfreeze_asset.setter
+    def priority_unfreeze_asset(self, value):
+        self._priority_unfreeze_asset = value
     @property
     def tiny_app_merchant_biz_type(self):
         return self._tiny_app_merchant_biz_type
@@ -82,6 +106,11 @@ class BusinessParams(object):
                 params['actual_order_time'] = self.actual_order_time.to_alipay_dict()
             else:
                 params['actual_order_time'] = self.actual_order_time
+        if self.buyer_memo:
+            if hasattr(self.buyer_memo, 'to_alipay_dict'):
+                params['buyer_memo'] = self.buyer_memo.to_alipay_dict()
+            else:
+                params['buyer_memo'] = self.buyer_memo
         if self.campus_card:
             if hasattr(self.campus_card, 'to_alipay_dict'):
                 params['campus_card'] = self.campus_card.to_alipay_dict()
@@ -102,6 +131,11 @@ class BusinessParams(object):
                 params['enterprise_pay_info'] = self.enterprise_pay_info.to_alipay_dict()
             else:
                 params['enterprise_pay_info'] = self.enterprise_pay_info
+        if self.force_pwd:
+            if hasattr(self.force_pwd, 'to_alipay_dict'):
+                params['force_pwd'] = self.force_pwd.to_alipay_dict()
+            else:
+                params['force_pwd'] = self.force_pwd
         if self.good_taxes:
             if hasattr(self.good_taxes, 'to_alipay_dict'):
                 params['good_taxes'] = self.good_taxes.to_alipay_dict()
@@ -112,6 +146,11 @@ class BusinessParams(object):
                 params['mc_create_trade_ip'] = self.mc_create_trade_ip.to_alipay_dict()
             else:
                 params['mc_create_trade_ip'] = self.mc_create_trade_ip
+        if self.priority_unfreeze_asset:
+            if hasattr(self.priority_unfreeze_asset, 'to_alipay_dict'):
+                params['priority_unfreeze_asset'] = self.priority_unfreeze_asset.to_alipay_dict()
+            else:
+                params['priority_unfreeze_asset'] = self.priority_unfreeze_asset
         if self.tiny_app_merchant_biz_type:
             if hasattr(self.tiny_app_merchant_biz_type, 'to_alipay_dict'):
                 params['tiny_app_merchant_biz_type'] = self.tiny_app_merchant_biz_type.to_alipay_dict()
@@ -126,6 +165,8 @@ class BusinessParams(object):
         o = BusinessParams()
         if 'actual_order_time' in d:
             o.actual_order_time = d['actual_order_time']
+        if 'buyer_memo' in d:
+            o.buyer_memo = d['buyer_memo']
         if 'campus_card' in d:
             o.campus_card = d['campus_card']
         if 'card_type' in d:
@@ -134,10 +175,14 @@ class BusinessParams(object):
             o.enterprise_pay_amount = d['enterprise_pay_amount']
         if 'enterprise_pay_info' in d:
             o.enterprise_pay_info = d['enterprise_pay_info']
+        if 'force_pwd' in d:
+            o.force_pwd = d['force_pwd']
         if 'good_taxes' in d:
             o.good_taxes = d['good_taxes']
         if 'mc_create_trade_ip' in d:
             o.mc_create_trade_ip = d['mc_create_trade_ip']
+        if 'priority_unfreeze_asset' in d:
+            o.priority_unfreeze_asset = d['priority_unfreeze_asset']
         if 'tiny_app_merchant_biz_type' in d:
             o.tiny_app_merchant_biz_type = d['tiny_app_merchant_biz_type']
         return o

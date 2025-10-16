@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AmapPoiInfo import AmapPoiInfo
 from alipay.aop.api.domain.SourceMediaInfo import SourceMediaInfo
 from alipay.aop.api.domain.SourceOffer import SourceOffer
 
@@ -11,11 +12,13 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
 
     def __init__(self):
         self._permission_status = None
+        self._poi_info = None
         self._public_id = None
         self._source_author = None
         self._source_content = None
         self._source_link = None
         self._source_media_infos = None
+        self._source_music_code = None
         self._source_offers = None
         self._source_publish_date = None
         self._source_summary = None
@@ -29,6 +32,16 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
     @permission_status.setter
     def permission_status(self, value):
         self._permission_status = value
+    @property
+    def poi_info(self):
+        return self._poi_info
+
+    @poi_info.setter
+    def poi_info(self, value):
+        if isinstance(value, AmapPoiInfo):
+            self._poi_info = value
+        else:
+            self._poi_info = AmapPoiInfo.from_alipay_dict(value)
     @property
     def public_id(self):
         return self._public_id
@@ -70,6 +83,13 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
                     self._source_media_infos.append(i)
                 else:
                     self._source_media_infos.append(SourceMediaInfo.from_alipay_dict(i))
+    @property
+    def source_music_code(self):
+        return self._source_music_code
+
+    @source_music_code.setter
+    def source_music_code(self, value):
+        self._source_music_code = value
     @property
     def source_offers(self):
         return self._source_offers
@@ -120,6 +140,11 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
                 params['permission_status'] = self.permission_status.to_alipay_dict()
             else:
                 params['permission_status'] = self.permission_status
+        if self.poi_info:
+            if hasattr(self.poi_info, 'to_alipay_dict'):
+                params['poi_info'] = self.poi_info.to_alipay_dict()
+            else:
+                params['poi_info'] = self.poi_info
         if self.public_id:
             if hasattr(self.public_id, 'to_alipay_dict'):
                 params['public_id'] = self.public_id.to_alipay_dict()
@@ -150,6 +175,11 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
                 params['source_media_infos'] = self.source_media_infos.to_alipay_dict()
             else:
                 params['source_media_infos'] = self.source_media_infos
+        if self.source_music_code:
+            if hasattr(self.source_music_code, 'to_alipay_dict'):
+                params['source_music_code'] = self.source_music_code.to_alipay_dict()
+            else:
+                params['source_music_code'] = self.source_music_code
         if self.source_offers:
             if isinstance(self.source_offers, list):
                 for i in range(0, len(self.source_offers)):
@@ -189,6 +219,8 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
         o = AlipaySocialBaseContentlibStandardcontentPublishModel()
         if 'permission_status' in d:
             o.permission_status = d['permission_status']
+        if 'poi_info' in d:
+            o.poi_info = d['poi_info']
         if 'public_id' in d:
             o.public_id = d['public_id']
         if 'source_author' in d:
@@ -199,6 +231,8 @@ class AlipaySocialBaseContentlibStandardcontentPublishModel(object):
             o.source_link = d['source_link']
         if 'source_media_infos' in d:
             o.source_media_infos = d['source_media_infos']
+        if 'source_music_code' in d:
+            o.source_music_code = d['source_music_code']
         if 'source_offers' in d:
             o.source_offers = d['source_offers']
         if 'source_publish_date' in d:

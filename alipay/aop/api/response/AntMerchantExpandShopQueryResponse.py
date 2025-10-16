@@ -7,6 +7,9 @@ from alipay.aop.api.domain.AddressInfo import AddressInfo
 from alipay.aop.api.domain.ShopBusinessTime import ShopBusinessTime
 from alipay.aop.api.domain.ContactInfo import ContactInfo
 from alipay.aop.api.domain.ShopExtInfo import ShopExtInfo
+from alipay.aop.api.domain.MerchantShopIndustryInfo import MerchantShopIndustryInfo
+from alipay.aop.api.domain.ShopIndustryLicense import ShopIndustryLicense
+from alipay.aop.api.domain.ComplexBusinessTime import ComplexBusinessTime
 from alipay.aop.api.domain.IndustryQualificationInfo import IndustryQualificationInfo
 from alipay.aop.api.domain.ShopRecommendInfo import ShopRecommendInfo
 
@@ -27,11 +30,14 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
         self._contact_mobile = None
         self._contact_phone = None
         self._ext_infos = None
+        self._industry_info = None
+        self._industry_license = None
         self._ip_role_id = None
         self._legal_cert_no = None
         self._legal_name = None
         self._license_auth_letter_image = None
         self._memo = None
+        self._new_business_time = None
         self._new_shop_category = None
         self._out_door_images = None
         self._qualifications = None
@@ -40,6 +46,7 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
         self._shop_category = None
         self._shop_id = None
         self._shop_info_status = None
+        self._shop_main_type = None
         self._shop_name = None
         self._shop_recommend_info = None
         self._shop_type = None
@@ -151,6 +158,32 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
                 else:
                     self._ext_infos.append(ShopExtInfo.from_alipay_dict(i))
     @property
+    def industry_info(self):
+        return self._industry_info
+
+    @industry_info.setter
+    def industry_info(self, value):
+        if isinstance(value, list):
+            self._industry_info = list()
+            for i in value:
+                if isinstance(i, MerchantShopIndustryInfo):
+                    self._industry_info.append(i)
+                else:
+                    self._industry_info.append(MerchantShopIndustryInfo.from_alipay_dict(i))
+    @property
+    def industry_license(self):
+        return self._industry_license
+
+    @industry_license.setter
+    def industry_license(self, value):
+        if isinstance(value, list):
+            self._industry_license = list()
+            for i in value:
+                if isinstance(i, ShopIndustryLicense):
+                    self._industry_license.append(i)
+                else:
+                    self._industry_license.append(ShopIndustryLicense.from_alipay_dict(i))
+    @property
     def ip_role_id(self):
         return self._ip_role_id
 
@@ -185,6 +218,19 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def new_business_time(self):
+        return self._new_business_time
+
+    @new_business_time.setter
+    def new_business_time(self, value):
+        if isinstance(value, list):
+            self._new_business_time = list()
+            for i in value:
+                if isinstance(i, ComplexBusinessTime):
+                    self._new_business_time.append(i)
+                else:
+                    self._new_business_time.append(ComplexBusinessTime.from_alipay_dict(i))
     @property
     def new_shop_category(self):
         return self._new_shop_category
@@ -251,6 +297,13 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
     def shop_info_status(self, value):
         self._shop_info_status = value
     @property
+    def shop_main_type(self):
+        return self._shop_main_type
+
+    @shop_main_type.setter
+    def shop_main_type(self, value):
+        self._shop_main_type = value
+    @property
     def shop_name(self):
         return self._shop_name
 
@@ -308,6 +361,10 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
             self.contact_phone = response['contact_phone']
         if 'ext_infos' in response:
             self.ext_infos = response['ext_infos']
+        if 'industry_info' in response:
+            self.industry_info = response['industry_info']
+        if 'industry_license' in response:
+            self.industry_license = response['industry_license']
         if 'ip_role_id' in response:
             self.ip_role_id = response['ip_role_id']
         if 'legal_cert_no' in response:
@@ -318,6 +375,8 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
             self.license_auth_letter_image = response['license_auth_letter_image']
         if 'memo' in response:
             self.memo = response['memo']
+        if 'new_business_time' in response:
+            self.new_business_time = response['new_business_time']
         if 'new_shop_category' in response:
             self.new_shop_category = response['new_shop_category']
         if 'out_door_images' in response:
@@ -334,6 +393,8 @@ class AntMerchantExpandShopQueryResponse(AlipayResponse):
             self.shop_id = response['shop_id']
         if 'shop_info_status' in response:
             self.shop_info_status = response['shop_info_status']
+        if 'shop_main_type' in response:
+            self.shop_main_type = response['shop_main_type']
         if 'shop_name' in response:
             self.shop_name = response['shop_name']
         if 'shop_recommend_info' in response:

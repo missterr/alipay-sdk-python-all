@@ -14,6 +14,7 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
         super(AlipayEbppInvoiceInstitutionDetailinfoQueryResponse, self).__init__()
         self._adapter_type = None
         self._consult_mode = None
+        self._currency = None
         self._effective = None
         self._effective_end_date = None
         self._effective_start_date = None
@@ -22,9 +23,11 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
         self._institution_id = None
         self._institution_name = None
         self._issue_rule_info_list = None
+        self._multi_employee_share_mode = None
         self._outer_source_id = None
         self._owner_id_list = None
         self._owner_open_id_list = None
+        self._owner_type = None
         self._scene_type = None
         self._standard_info_detail_list = None
         self._standard_info_list = None
@@ -43,6 +46,13 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
     @consult_mode.setter
     def consult_mode(self, value):
         self._consult_mode = value
+    @property
+    def currency(self):
+        return self._currency
+
+    @currency.setter
+    def currency(self, value):
+        self._currency = value
     @property
     def effective(self):
         return self._effective
@@ -106,6 +116,13 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
                 else:
                     self._issue_rule_info_list.append(IssueRuleInfo.from_alipay_dict(i))
     @property
+    def multi_employee_share_mode(self):
+        return self._multi_employee_share_mode
+
+    @multi_employee_share_mode.setter
+    def multi_employee_share_mode(self, value):
+        self._multi_employee_share_mode = value
+    @property
     def outer_source_id(self):
         return self._outer_source_id
 
@@ -132,6 +149,13 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
             self._owner_open_id_list = list()
             for i in value:
                 self._owner_open_id_list.append(i)
+    @property
+    def owner_type(self):
+        return self._owner_type
+
+    @owner_type.setter
+    def owner_type(self, value):
+        self._owner_type = value
     @property
     def scene_type(self):
         return self._scene_type
@@ -169,6 +193,8 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
             self.adapter_type = response['adapter_type']
         if 'consult_mode' in response:
             self.consult_mode = response['consult_mode']
+        if 'currency' in response:
+            self.currency = response['currency']
         if 'effective' in response:
             self.effective = response['effective']
         if 'effective_end_date' in response:
@@ -185,12 +211,16 @@ class AlipayEbppInvoiceInstitutionDetailinfoQueryResponse(AlipayResponse):
             self.institution_name = response['institution_name']
         if 'issue_rule_info_list' in response:
             self.issue_rule_info_list = response['issue_rule_info_list']
+        if 'multi_employee_share_mode' in response:
+            self.multi_employee_share_mode = response['multi_employee_share_mode']
         if 'outer_source_id' in response:
             self.outer_source_id = response['outer_source_id']
         if 'owner_id_list' in response:
             self.owner_id_list = response['owner_id_list']
         if 'owner_open_id_list' in response:
             self.owner_open_id_list = response['owner_open_id_list']
+        if 'owner_type' in response:
+            self.owner_type = response['owner_type']
         if 'scene_type' in response:
             self.scene_type = response['scene_type']
         if 'standard_info_detail_list' in response:

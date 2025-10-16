@@ -12,13 +12,18 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
         self._biz_agreement_no = None
         self._biz_code = None
         self._biz_msg = None
+        self._card_no = None
         self._deduct_sign_status = None
         self._device_biz_time = None
         self._device_no = None
         self._device_status = None
         self._device_status_detail = None
+        self._first_actived_time = None
         self._order_id = None
         self._order_status = None
+        self._service_exp = None
+        self._vehicle_corp_id = None
+        self._vehicle_corp_name = None
         self._vehicle_id = None
 
     @property
@@ -42,6 +47,13 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
     @biz_msg.setter
     def biz_msg(self, value):
         self._biz_msg = value
+    @property
+    def card_no(self):
+        return self._card_no
+
+    @card_no.setter
+    def card_no(self, value):
+        self._card_no = value
     @property
     def deduct_sign_status(self):
         return self._deduct_sign_status
@@ -78,6 +90,13 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
     def device_status_detail(self, value):
         self._device_status_detail = value
     @property
+    def first_actived_time(self):
+        return self._first_actived_time
+
+    @first_actived_time.setter
+    def first_actived_time(self, value):
+        self._first_actived_time = value
+    @property
     def order_id(self):
         return self._order_id
 
@@ -91,6 +110,27 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
     @order_status.setter
     def order_status(self, value):
         self._order_status = value
+    @property
+    def service_exp(self):
+        return self._service_exp
+
+    @service_exp.setter
+    def service_exp(self, value):
+        self._service_exp = value
+    @property
+    def vehicle_corp_id(self):
+        return self._vehicle_corp_id
+
+    @vehicle_corp_id.setter
+    def vehicle_corp_id(self, value):
+        self._vehicle_corp_id = value
+    @property
+    def vehicle_corp_name(self):
+        return self._vehicle_corp_name
+
+    @vehicle_corp_name.setter
+    def vehicle_corp_name(self, value):
+        self._vehicle_corp_name = value
     @property
     def vehicle_id(self):
         return self._vehicle_id
@@ -107,6 +147,8 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
             self.biz_code = response['biz_code']
         if 'biz_msg' in response:
             self.biz_msg = response['biz_msg']
+        if 'card_no' in response:
+            self.card_no = response['card_no']
         if 'deduct_sign_status' in response:
             self.deduct_sign_status = response['deduct_sign_status']
         if 'device_biz_time' in response:
@@ -117,9 +159,17 @@ class AlipayCommerceTransportEtcenterpriseVehicleQueryResponse(AlipayResponse):
             self.device_status = response['device_status']
         if 'device_status_detail' in response:
             self.device_status_detail = response['device_status_detail']
+        if 'first_actived_time' in response:
+            self.first_actived_time = response['first_actived_time']
         if 'order_id' in response:
             self.order_id = response['order_id']
         if 'order_status' in response:
             self.order_status = response['order_status']
+        if 'service_exp' in response:
+            self.service_exp = response['service_exp']
+        if 'vehicle_corp_id' in response:
+            self.vehicle_corp_id = response['vehicle_corp_id']
+        if 'vehicle_corp_name' in response:
+            self.vehicle_corp_name = response['vehicle_corp_name']
         if 'vehicle_id' in response:
             self.vehicle_id = response['vehicle_id']

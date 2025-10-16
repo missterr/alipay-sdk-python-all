@@ -6,6 +6,7 @@ from alipay.aop.api.constant.ParamConstants import *
 from alipay.aop.api.domain.CCInfo import CCInfo
 from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
 from alipay.aop.api.domain.LogisticsInfo import LogisticsInfo
+from alipay.aop.api.domain.OptionalItemInfo import OptionalItemInfo
 from alipay.aop.api.domain.AssetDeliveryAddress import AssetDeliveryAddress
 
 
@@ -43,6 +44,8 @@ class AssetDeliveryItem(object):
         self._logistics_info = None
         self._memo = None
         self._operate_info = None
+        self._optional_item_flag = None
+        self._optional_item_infos = None
         self._ou_code = None
         self._ou_name = None
         self._out_biz_no = None
@@ -51,9 +54,14 @@ class AssetDeliveryItem(object):
         self._priority = None
         self._produce_order_item_id = None
         self._record_type = None
+        self._related_children_out_biz_no_count = None
+        self._related_others_out_biz_no = None
+        self._related_out_biz_no = None
+        self._related_parent_out_biz_no = None
         self._supplier_id = None
         self._supplier_name = None
         self._to_address = None
+        self._urgent_order_flag = None
         self._work_process = None
 
     @property
@@ -286,6 +294,26 @@ class AssetDeliveryItem(object):
     def operate_info(self, value):
         self._operate_info = value
     @property
+    def optional_item_flag(self):
+        return self._optional_item_flag
+
+    @optional_item_flag.setter
+    def optional_item_flag(self, value):
+        self._optional_item_flag = value
+    @property
+    def optional_item_infos(self):
+        return self._optional_item_infos
+
+    @optional_item_infos.setter
+    def optional_item_infos(self, value):
+        if isinstance(value, list):
+            self._optional_item_infos = list()
+            for i in value:
+                if isinstance(i, OptionalItemInfo):
+                    self._optional_item_infos.append(i)
+                else:
+                    self._optional_item_infos.append(OptionalItemInfo.from_alipay_dict(i))
+    @property
     def ou_code(self):
         return self._ou_code
 
@@ -342,6 +370,37 @@ class AssetDeliveryItem(object):
     def record_type(self, value):
         self._record_type = value
     @property
+    def related_children_out_biz_no_count(self):
+        return self._related_children_out_biz_no_count
+
+    @related_children_out_biz_no_count.setter
+    def related_children_out_biz_no_count(self, value):
+        self._related_children_out_biz_no_count = value
+    @property
+    def related_others_out_biz_no(self):
+        return self._related_others_out_biz_no
+
+    @related_others_out_biz_no.setter
+    def related_others_out_biz_no(self, value):
+        if isinstance(value, list):
+            self._related_others_out_biz_no = list()
+            for i in value:
+                self._related_others_out_biz_no.append(i)
+    @property
+    def related_out_biz_no(self):
+        return self._related_out_biz_no
+
+    @related_out_biz_no.setter
+    def related_out_biz_no(self, value):
+        self._related_out_biz_no = value
+    @property
+    def related_parent_out_biz_no(self):
+        return self._related_parent_out_biz_no
+
+    @related_parent_out_biz_no.setter
+    def related_parent_out_biz_no(self, value):
+        self._related_parent_out_biz_no = value
+    @property
     def supplier_id(self):
         return self._supplier_id
 
@@ -365,6 +424,13 @@ class AssetDeliveryItem(object):
             self._to_address = value
         else:
             self._to_address = AssetDeliveryAddress.from_alipay_dict(value)
+    @property
+    def urgent_order_flag(self):
+        return self._urgent_order_flag
+
+    @urgent_order_flag.setter
+    def urgent_order_flag(self, value):
+        self._urgent_order_flag = value
     @property
     def work_process(self):
         return self._work_process
@@ -536,6 +602,21 @@ class AssetDeliveryItem(object):
                 params['operate_info'] = self.operate_info.to_alipay_dict()
             else:
                 params['operate_info'] = self.operate_info
+        if self.optional_item_flag:
+            if hasattr(self.optional_item_flag, 'to_alipay_dict'):
+                params['optional_item_flag'] = self.optional_item_flag.to_alipay_dict()
+            else:
+                params['optional_item_flag'] = self.optional_item_flag
+        if self.optional_item_infos:
+            if isinstance(self.optional_item_infos, list):
+                for i in range(0, len(self.optional_item_infos)):
+                    element = self.optional_item_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.optional_item_infos[i] = element.to_alipay_dict()
+            if hasattr(self.optional_item_infos, 'to_alipay_dict'):
+                params['optional_item_infos'] = self.optional_item_infos.to_alipay_dict()
+            else:
+                params['optional_item_infos'] = self.optional_item_infos
         if self.ou_code:
             if hasattr(self.ou_code, 'to_alipay_dict'):
                 params['ou_code'] = self.ou_code.to_alipay_dict()
@@ -576,6 +657,31 @@ class AssetDeliveryItem(object):
                 params['record_type'] = self.record_type.to_alipay_dict()
             else:
                 params['record_type'] = self.record_type
+        if self.related_children_out_biz_no_count:
+            if hasattr(self.related_children_out_biz_no_count, 'to_alipay_dict'):
+                params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count.to_alipay_dict()
+            else:
+                params['related_children_out_biz_no_count'] = self.related_children_out_biz_no_count
+        if self.related_others_out_biz_no:
+            if isinstance(self.related_others_out_biz_no, list):
+                for i in range(0, len(self.related_others_out_biz_no)):
+                    element = self.related_others_out_biz_no[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.related_others_out_biz_no[i] = element.to_alipay_dict()
+            if hasattr(self.related_others_out_biz_no, 'to_alipay_dict'):
+                params['related_others_out_biz_no'] = self.related_others_out_biz_no.to_alipay_dict()
+            else:
+                params['related_others_out_biz_no'] = self.related_others_out_biz_no
+        if self.related_out_biz_no:
+            if hasattr(self.related_out_biz_no, 'to_alipay_dict'):
+                params['related_out_biz_no'] = self.related_out_biz_no.to_alipay_dict()
+            else:
+                params['related_out_biz_no'] = self.related_out_biz_no
+        if self.related_parent_out_biz_no:
+            if hasattr(self.related_parent_out_biz_no, 'to_alipay_dict'):
+                params['related_parent_out_biz_no'] = self.related_parent_out_biz_no.to_alipay_dict()
+            else:
+                params['related_parent_out_biz_no'] = self.related_parent_out_biz_no
         if self.supplier_id:
             if hasattr(self.supplier_id, 'to_alipay_dict'):
                 params['supplier_id'] = self.supplier_id.to_alipay_dict()
@@ -591,6 +697,11 @@ class AssetDeliveryItem(object):
                 params['to_address'] = self.to_address.to_alipay_dict()
             else:
                 params['to_address'] = self.to_address
+        if self.urgent_order_flag:
+            if hasattr(self.urgent_order_flag, 'to_alipay_dict'):
+                params['urgent_order_flag'] = self.urgent_order_flag.to_alipay_dict()
+            else:
+                params['urgent_order_flag'] = self.urgent_order_flag
         if self.work_process:
             if hasattr(self.work_process, 'to_alipay_dict'):
                 params['work_process'] = self.work_process.to_alipay_dict()
@@ -665,6 +776,10 @@ class AssetDeliveryItem(object):
             o.memo = d['memo']
         if 'operate_info' in d:
             o.operate_info = d['operate_info']
+        if 'optional_item_flag' in d:
+            o.optional_item_flag = d['optional_item_flag']
+        if 'optional_item_infos' in d:
+            o.optional_item_infos = d['optional_item_infos']
         if 'ou_code' in d:
             o.ou_code = d['ou_code']
         if 'ou_name' in d:
@@ -681,12 +796,22 @@ class AssetDeliveryItem(object):
             o.produce_order_item_id = d['produce_order_item_id']
         if 'record_type' in d:
             o.record_type = d['record_type']
+        if 'related_children_out_biz_no_count' in d:
+            o.related_children_out_biz_no_count = d['related_children_out_biz_no_count']
+        if 'related_others_out_biz_no' in d:
+            o.related_others_out_biz_no = d['related_others_out_biz_no']
+        if 'related_out_biz_no' in d:
+            o.related_out_biz_no = d['related_out_biz_no']
+        if 'related_parent_out_biz_no' in d:
+            o.related_parent_out_biz_no = d['related_parent_out_biz_no']
         if 'supplier_id' in d:
             o.supplier_id = d['supplier_id']
         if 'supplier_name' in d:
             o.supplier_name = d['supplier_name']
         if 'to_address' in d:
             o.to_address = d['to_address']
+        if 'urgent_order_flag' in d:
+            o.urgent_order_flag = d['urgent_order_flag']
         if 'work_process' in d:
             o.work_process = d['work_process']
         return o

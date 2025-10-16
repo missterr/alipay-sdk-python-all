@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.InsOpenPolicyLiabilityDigestDTO import InsOpenPolicyLiabilityDigestDTO
 
 
 class InsOpenPolicyDigestDTO(object):
@@ -10,6 +11,7 @@ class InsOpenPolicyDigestDTO(object):
     def __init__(self):
         self._inst_id = None
         self._inst_policy_no = None
+        self._liabilities = None
         self._policy_effect_time = None
         self._policy_end_time = None
         self._policy_no = None
@@ -17,6 +19,7 @@ class InsOpenPolicyDigestDTO(object):
         self._pre_order_id = None
         self._premium = None
         self._product_code = None
+        self._self_delivery_sum_insured = None
         self._sum_insured = None
 
     @property
@@ -33,6 +36,19 @@ class InsOpenPolicyDigestDTO(object):
     @inst_policy_no.setter
     def inst_policy_no(self, value):
         self._inst_policy_no = value
+    @property
+    def liabilities(self):
+        return self._liabilities
+
+    @liabilities.setter
+    def liabilities(self, value):
+        if isinstance(value, list):
+            self._liabilities = list()
+            for i in value:
+                if isinstance(i, InsOpenPolicyLiabilityDigestDTO):
+                    self._liabilities.append(i)
+                else:
+                    self._liabilities.append(InsOpenPolicyLiabilityDigestDTO.from_alipay_dict(i))
     @property
     def policy_effect_time(self):
         return self._policy_effect_time
@@ -83,6 +99,13 @@ class InsOpenPolicyDigestDTO(object):
     def product_code(self, value):
         self._product_code = value
     @property
+    def self_delivery_sum_insured(self):
+        return self._self_delivery_sum_insured
+
+    @self_delivery_sum_insured.setter
+    def self_delivery_sum_insured(self, value):
+        self._self_delivery_sum_insured = value
+    @property
     def sum_insured(self):
         return self._sum_insured
 
@@ -103,6 +126,16 @@ class InsOpenPolicyDigestDTO(object):
                 params['inst_policy_no'] = self.inst_policy_no.to_alipay_dict()
             else:
                 params['inst_policy_no'] = self.inst_policy_no
+        if self.liabilities:
+            if isinstance(self.liabilities, list):
+                for i in range(0, len(self.liabilities)):
+                    element = self.liabilities[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.liabilities[i] = element.to_alipay_dict()
+            if hasattr(self.liabilities, 'to_alipay_dict'):
+                params['liabilities'] = self.liabilities.to_alipay_dict()
+            else:
+                params['liabilities'] = self.liabilities
         if self.policy_effect_time:
             if hasattr(self.policy_effect_time, 'to_alipay_dict'):
                 params['policy_effect_time'] = self.policy_effect_time.to_alipay_dict()
@@ -138,6 +171,11 @@ class InsOpenPolicyDigestDTO(object):
                 params['product_code'] = self.product_code.to_alipay_dict()
             else:
                 params['product_code'] = self.product_code
+        if self.self_delivery_sum_insured:
+            if hasattr(self.self_delivery_sum_insured, 'to_alipay_dict'):
+                params['self_delivery_sum_insured'] = self.self_delivery_sum_insured.to_alipay_dict()
+            else:
+                params['self_delivery_sum_insured'] = self.self_delivery_sum_insured
         if self.sum_insured:
             if hasattr(self.sum_insured, 'to_alipay_dict'):
                 params['sum_insured'] = self.sum_insured.to_alipay_dict()
@@ -154,6 +192,8 @@ class InsOpenPolicyDigestDTO(object):
             o.inst_id = d['inst_id']
         if 'inst_policy_no' in d:
             o.inst_policy_no = d['inst_policy_no']
+        if 'liabilities' in d:
+            o.liabilities = d['liabilities']
         if 'policy_effect_time' in d:
             o.policy_effect_time = d['policy_effect_time']
         if 'policy_end_time' in d:
@@ -168,6 +208,8 @@ class InsOpenPolicyDigestDTO(object):
             o.premium = d['premium']
         if 'product_code' in d:
             o.product_code = d['product_code']
+        if 'self_delivery_sum_insured' in d:
+            o.self_delivery_sum_insured = d['self_delivery_sum_insured']
         if 'sum_insured' in d:
             o.sum_insured = d['sum_insured']
         return o

@@ -7,6 +7,7 @@ from alipay.aop.api.domain.ItemAttrDto import ItemAttrDto
 from alipay.aop.api.domain.ItemCategoryDto import ItemCategoryDto
 from alipay.aop.api.domain.ItemDescInfoDto import ItemDescInfoDto
 from alipay.aop.api.domain.LandingTypeDto import LandingTypeDto
+from alipay.aop.api.domain.SellsInfo import SellsInfo
 from alipay.aop.api.domain.ItemSkuDto import ItemSkuDto
 
 
@@ -28,6 +29,7 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
         self._original_price = None
         self._out_item_id = None
         self._out_source = None
+        self._owner_oid = None
         self._owner_pid = None
         self._path = None
         self._price_unit = None
@@ -35,6 +37,7 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
         self._prod_app_id = None
         self._sale_price = None
         self._sale_status = None
+        self._sells_info = None
         self._skus = None
         self._stock_num = None
         self._title = None
@@ -166,6 +169,13 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
     def out_source(self, value):
         self._out_source = value
     @property
+    def owner_oid(self):
+        return self._owner_oid
+
+    @owner_oid.setter
+    def owner_oid(self, value):
+        self._owner_oid = value
+    @property
     def owner_pid(self):
         return self._owner_pid
 
@@ -214,6 +224,16 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
     @sale_status.setter
     def sale_status(self, value):
         self._sale_status = value
+    @property
+    def sells_info(self):
+        return self._sells_info
+
+    @sells_info.setter
+    def sells_info(self, value):
+        if isinstance(value, SellsInfo):
+            self._sells_info = value
+        else:
+            self._sells_info = SellsInfo.from_alipay_dict(value)
     @property
     def skus(self):
         return self._skus
@@ -335,6 +355,11 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
                 params['out_source'] = self.out_source.to_alipay_dict()
             else:
                 params['out_source'] = self.out_source
+        if self.owner_oid:
+            if hasattr(self.owner_oid, 'to_alipay_dict'):
+                params['owner_oid'] = self.owner_oid.to_alipay_dict()
+            else:
+                params['owner_oid'] = self.owner_oid
         if self.owner_pid:
             if hasattr(self.owner_pid, 'to_alipay_dict'):
                 params['owner_pid'] = self.owner_pid.to_alipay_dict()
@@ -370,6 +395,11 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
                 params['sale_status'] = self.sale_status.to_alipay_dict()
             else:
                 params['sale_status'] = self.sale_status
+        if self.sells_info:
+            if hasattr(self.sells_info, 'to_alipay_dict'):
+                params['sells_info'] = self.sells_info.to_alipay_dict()
+            else:
+                params['sells_info'] = self.sells_info
         if self.skus:
             if isinstance(self.skus, list):
                 for i in range(0, len(self.skus)):
@@ -427,6 +457,8 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
             o.out_item_id = d['out_item_id']
         if 'out_source' in d:
             o.out_source = d['out_source']
+        if 'owner_oid' in d:
+            o.owner_oid = d['owner_oid']
         if 'owner_pid' in d:
             o.owner_pid = d['owner_pid']
         if 'path' in d:
@@ -441,6 +473,8 @@ class AlipayDataDataserviceProductAppCreateormodifyModel(object):
             o.sale_price = d['sale_price']
         if 'sale_status' in d:
             o.sale_status = d['sale_status']
+        if 'sells_info' in d:
+            o.sells_info = d['sells_info']
         if 'skus' in d:
             o.skus = d['skus']
         if 'stock_num' in d:

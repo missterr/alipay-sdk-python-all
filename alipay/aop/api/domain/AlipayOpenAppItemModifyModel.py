@@ -14,6 +14,7 @@ class AlipayOpenAppItemModifyModel(object):
     def __init__(self):
         self._attrs = None
         self._barcode = None
+        self._business_model = None
         self._category_id = None
         self._desc = None
         self._desc_info = None
@@ -30,6 +31,7 @@ class AlipayOpenAppItemModifyModel(object):
         self._price_unit = None
         self._sale_price = None
         self._sale_status = None
+        self._skip_algorithm_check = None
         self._skus = None
         self._stock_num = None
         self._title = None
@@ -54,6 +56,13 @@ class AlipayOpenAppItemModifyModel(object):
     @barcode.setter
     def barcode(self, value):
         self._barcode = value
+    @property
+    def business_model(self):
+        return self._business_model
+
+    @business_model.setter
+    def business_model(self, value):
+        self._business_model = value
     @property
     def category_id(self):
         return self._category_id
@@ -179,6 +188,13 @@ class AlipayOpenAppItemModifyModel(object):
     def sale_status(self, value):
         self._sale_status = value
     @property
+    def skip_algorithm_check(self):
+        return self._skip_algorithm_check
+
+    @skip_algorithm_check.setter
+    def skip_algorithm_check(self, value):
+        self._skip_algorithm_check = value
+    @property
     def skus(self):
         return self._skus
 
@@ -224,6 +240,11 @@ class AlipayOpenAppItemModifyModel(object):
                 params['barcode'] = self.barcode.to_alipay_dict()
             else:
                 params['barcode'] = self.barcode
+        if self.business_model:
+            if hasattr(self.business_model, 'to_alipay_dict'):
+                params['business_model'] = self.business_model.to_alipay_dict()
+            else:
+                params['business_model'] = self.business_model
         if self.category_id:
             if hasattr(self.category_id, 'to_alipay_dict'):
                 params['category_id'] = self.category_id.to_alipay_dict()
@@ -314,6 +335,11 @@ class AlipayOpenAppItemModifyModel(object):
                 params['sale_status'] = self.sale_status.to_alipay_dict()
             else:
                 params['sale_status'] = self.sale_status
+        if self.skip_algorithm_check:
+            if hasattr(self.skip_algorithm_check, 'to_alipay_dict'):
+                params['skip_algorithm_check'] = self.skip_algorithm_check.to_alipay_dict()
+            else:
+                params['skip_algorithm_check'] = self.skip_algorithm_check
         if self.skus:
             if isinstance(self.skus, list):
                 for i in range(0, len(self.skus)):
@@ -345,6 +371,8 @@ class AlipayOpenAppItemModifyModel(object):
             o.attrs = d['attrs']
         if 'barcode' in d:
             o.barcode = d['barcode']
+        if 'business_model' in d:
+            o.business_model = d['business_model']
         if 'category_id' in d:
             o.category_id = d['category_id']
         if 'desc' in d:
@@ -377,6 +405,8 @@ class AlipayOpenAppItemModifyModel(object):
             o.sale_price = d['sale_price']
         if 'sale_status' in d:
             o.sale_status = d['sale_status']
+        if 'skip_algorithm_check' in d:
+            o.skip_algorithm_check = d['skip_algorithm_check']
         if 'skus' in d:
             o.skus = d['skus']
         if 'stock_num' in d:

@@ -8,6 +8,9 @@ from alipay.aop.api.domain.AddressInfo import AddressInfo
 from alipay.aop.api.domain.ShopBusinessTime import ShopBusinessTime
 from alipay.aop.api.domain.ContactInfo import ContactInfo
 from alipay.aop.api.domain.ShopExtInfo import ShopExtInfo
+from alipay.aop.api.domain.MerchantShopIndustryInfo import MerchantShopIndustryInfo
+from alipay.aop.api.domain.ShopIndustryLicense import ShopIndustryLicense
+from alipay.aop.api.domain.ComplexBusinessTime import ComplexBusinessTime
 from alipay.aop.api.domain.IndustryQualificationInfo import IndustryQualificationInfo
 
 
@@ -27,17 +30,21 @@ class AntMerchantExpandShopModifyModel(object):
         self._contact_phone = None
         self._cover = None
         self._ext_infos = None
+        self._industry_info = None
+        self._industry_license = None
         self._ip_role_id = None
         self._legal_cert_no = None
         self._legal_name = None
         self._license_auth_letter_image = None
         self._memo = None
+        self._new_business_time = None
         self._out_door_images = None
         self._qualifications = None
         self._scene = None
         self._settle_alipay_logon_id = None
         self._shop_category = None
         self._shop_id = None
+        self._shop_main_type = None
         self._shop_name = None
         self._store_id = None
 
@@ -157,6 +164,32 @@ class AntMerchantExpandShopModifyModel(object):
                 else:
                     self._ext_infos.append(ShopExtInfo.from_alipay_dict(i))
     @property
+    def industry_info(self):
+        return self._industry_info
+
+    @industry_info.setter
+    def industry_info(self, value):
+        if isinstance(value, list):
+            self._industry_info = list()
+            for i in value:
+                if isinstance(i, MerchantShopIndustryInfo):
+                    self._industry_info.append(i)
+                else:
+                    self._industry_info.append(MerchantShopIndustryInfo.from_alipay_dict(i))
+    @property
+    def industry_license(self):
+        return self._industry_license
+
+    @industry_license.setter
+    def industry_license(self, value):
+        if isinstance(value, list):
+            self._industry_license = list()
+            for i in value:
+                if isinstance(i, ShopIndustryLicense):
+                    self._industry_license.append(i)
+                else:
+                    self._industry_license.append(ShopIndustryLicense.from_alipay_dict(i))
+    @property
     def ip_role_id(self):
         return self._ip_role_id
 
@@ -191,6 +224,19 @@ class AntMerchantExpandShopModifyModel(object):
     @memo.setter
     def memo(self, value):
         self._memo = value
+    @property
+    def new_business_time(self):
+        return self._new_business_time
+
+    @new_business_time.setter
+    def new_business_time(self, value):
+        if isinstance(value, list):
+            self._new_business_time = list()
+            for i in value:
+                if isinstance(i, ComplexBusinessTime):
+                    self._new_business_time.append(i)
+                else:
+                    self._new_business_time.append(ComplexBusinessTime.from_alipay_dict(i))
     @property
     def out_door_images(self):
         return self._out_door_images
@@ -242,6 +288,13 @@ class AntMerchantExpandShopModifyModel(object):
     @shop_id.setter
     def shop_id(self, value):
         self._shop_id = value
+    @property
+    def shop_main_type(self):
+        return self._shop_main_type
+
+    @shop_main_type.setter
+    def shop_main_type(self, value):
+        self._shop_main_type = value
     @property
     def shop_name(self):
         return self._shop_name
@@ -340,6 +393,26 @@ class AntMerchantExpandShopModifyModel(object):
                 params['ext_infos'] = self.ext_infos.to_alipay_dict()
             else:
                 params['ext_infos'] = self.ext_infos
+        if self.industry_info:
+            if isinstance(self.industry_info, list):
+                for i in range(0, len(self.industry_info)):
+                    element = self.industry_info[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.industry_info[i] = element.to_alipay_dict()
+            if hasattr(self.industry_info, 'to_alipay_dict'):
+                params['industry_info'] = self.industry_info.to_alipay_dict()
+            else:
+                params['industry_info'] = self.industry_info
+        if self.industry_license:
+            if isinstance(self.industry_license, list):
+                for i in range(0, len(self.industry_license)):
+                    element = self.industry_license[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.industry_license[i] = element.to_alipay_dict()
+            if hasattr(self.industry_license, 'to_alipay_dict'):
+                params['industry_license'] = self.industry_license.to_alipay_dict()
+            else:
+                params['industry_license'] = self.industry_license
         if self.ip_role_id:
             if hasattr(self.ip_role_id, 'to_alipay_dict'):
                 params['ip_role_id'] = self.ip_role_id.to_alipay_dict()
@@ -365,6 +438,16 @@ class AntMerchantExpandShopModifyModel(object):
                 params['memo'] = self.memo.to_alipay_dict()
             else:
                 params['memo'] = self.memo
+        if self.new_business_time:
+            if isinstance(self.new_business_time, list):
+                for i in range(0, len(self.new_business_time)):
+                    element = self.new_business_time[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.new_business_time[i] = element.to_alipay_dict()
+            if hasattr(self.new_business_time, 'to_alipay_dict'):
+                params['new_business_time'] = self.new_business_time.to_alipay_dict()
+            else:
+                params['new_business_time'] = self.new_business_time
         if self.out_door_images:
             if isinstance(self.out_door_images, list):
                 for i in range(0, len(self.out_door_images)):
@@ -405,6 +488,11 @@ class AntMerchantExpandShopModifyModel(object):
                 params['shop_id'] = self.shop_id.to_alipay_dict()
             else:
                 params['shop_id'] = self.shop_id
+        if self.shop_main_type:
+            if hasattr(self.shop_main_type, 'to_alipay_dict'):
+                params['shop_main_type'] = self.shop_main_type.to_alipay_dict()
+            else:
+                params['shop_main_type'] = self.shop_main_type
         if self.shop_name:
             if hasattr(self.shop_name, 'to_alipay_dict'):
                 params['shop_name'] = self.shop_name.to_alipay_dict()
@@ -448,6 +536,10 @@ class AntMerchantExpandShopModifyModel(object):
             o.cover = d['cover']
         if 'ext_infos' in d:
             o.ext_infos = d['ext_infos']
+        if 'industry_info' in d:
+            o.industry_info = d['industry_info']
+        if 'industry_license' in d:
+            o.industry_license = d['industry_license']
         if 'ip_role_id' in d:
             o.ip_role_id = d['ip_role_id']
         if 'legal_cert_no' in d:
@@ -458,6 +550,8 @@ class AntMerchantExpandShopModifyModel(object):
             o.license_auth_letter_image = d['license_auth_letter_image']
         if 'memo' in d:
             o.memo = d['memo']
+        if 'new_business_time' in d:
+            o.new_business_time = d['new_business_time']
         if 'out_door_images' in d:
             o.out_door_images = d['out_door_images']
         if 'qualifications' in d:
@@ -470,6 +564,8 @@ class AntMerchantExpandShopModifyModel(object):
             o.shop_category = d['shop_category']
         if 'shop_id' in d:
             o.shop_id = d['shop_id']
+        if 'shop_main_type' in d:
+            o.shop_main_type = d['shop_main_type']
         if 'shop_name' in d:
             o.shop_name = d['shop_name']
         if 'store_id' in d:

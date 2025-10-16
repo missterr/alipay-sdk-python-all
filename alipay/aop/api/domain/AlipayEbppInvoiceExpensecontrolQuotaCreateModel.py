@@ -3,6 +3,7 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.IssueTargetInfoContent import IssueTargetInfoContent
 
 
 class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
@@ -13,6 +14,9 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
         self._effective_end_date = None
         self._effective_start_date = None
         self._enterprise_id = None
+        self._issue_desc = None
+        self._issue_name = None
+        self._issue_quota_target_list = None
         self._outer_source_id = None
         self._owner_id = None
         self._owner_open_id = None
@@ -59,6 +63,33 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
     @enterprise_id.setter
     def enterprise_id(self, value):
         self._enterprise_id = value
+    @property
+    def issue_desc(self):
+        return self._issue_desc
+
+    @issue_desc.setter
+    def issue_desc(self, value):
+        self._issue_desc = value
+    @property
+    def issue_name(self):
+        return self._issue_name
+
+    @issue_name.setter
+    def issue_name(self, value):
+        self._issue_name = value
+    @property
+    def issue_quota_target_list(self):
+        return self._issue_quota_target_list
+
+    @issue_quota_target_list.setter
+    def issue_quota_target_list(self, value):
+        if isinstance(value, list):
+            self._issue_quota_target_list = list()
+            for i in value:
+                if isinstance(i, IssueTargetInfoContent):
+                    self._issue_quota_target_list.append(i)
+                else:
+                    self._issue_quota_target_list.append(IssueTargetInfoContent.from_alipay_dict(i))
     @property
     def outer_source_id(self):
         return self._outer_source_id
@@ -158,6 +189,26 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
                 params['enterprise_id'] = self.enterprise_id.to_alipay_dict()
             else:
                 params['enterprise_id'] = self.enterprise_id
+        if self.issue_desc:
+            if hasattr(self.issue_desc, 'to_alipay_dict'):
+                params['issue_desc'] = self.issue_desc.to_alipay_dict()
+            else:
+                params['issue_desc'] = self.issue_desc
+        if self.issue_name:
+            if hasattr(self.issue_name, 'to_alipay_dict'):
+                params['issue_name'] = self.issue_name.to_alipay_dict()
+            else:
+                params['issue_name'] = self.issue_name
+        if self.issue_quota_target_list:
+            if isinstance(self.issue_quota_target_list, list):
+                for i in range(0, len(self.issue_quota_target_list)):
+                    element = self.issue_quota_target_list[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.issue_quota_target_list[i] = element.to_alipay_dict()
+            if hasattr(self.issue_quota_target_list, 'to_alipay_dict'):
+                params['issue_quota_target_list'] = self.issue_quota_target_list.to_alipay_dict()
+            else:
+                params['issue_quota_target_list'] = self.issue_quota_target_list
         if self.outer_source_id:
             if hasattr(self.outer_source_id, 'to_alipay_dict'):
                 params['outer_source_id'] = self.outer_source_id.to_alipay_dict()
@@ -225,6 +276,12 @@ class AlipayEbppInvoiceExpensecontrolQuotaCreateModel(object):
             o.effective_start_date = d['effective_start_date']
         if 'enterprise_id' in d:
             o.enterprise_id = d['enterprise_id']
+        if 'issue_desc' in d:
+            o.issue_desc = d['issue_desc']
+        if 'issue_name' in d:
+            o.issue_name = d['issue_name']
+        if 'issue_quota_target_list' in d:
+            o.issue_quota_target_list = d['issue_quota_target_list']
         if 'outer_source_id' in d:
             o.outer_source_id = d['outer_source_id']
         if 'owner_id' in d:

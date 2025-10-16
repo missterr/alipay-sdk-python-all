@@ -19,11 +19,14 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
         self._equip_sn = None
         self._equip_status = None
         self._equip_type_no = None
+        self._network_data_begin_time = None
+        self._network_data_end_time = None
         self._operator_id = None
         self._operator_uid = None
         self._rated_current = None
         self._rated_power = None
         self._rated_voltage = None
+        self._s_brand_code = None
         self._unbind_time = None
 
     @property
@@ -104,6 +107,20 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
     def equip_type_no(self, value):
         self._equip_type_no = value
     @property
+    def network_data_begin_time(self):
+        return self._network_data_begin_time
+
+    @network_data_begin_time.setter
+    def network_data_begin_time(self, value):
+        self._network_data_begin_time = value
+    @property
+    def network_data_end_time(self):
+        return self._network_data_end_time
+
+    @network_data_end_time.setter
+    def network_data_end_time(self, value):
+        self._network_data_end_time = value
+    @property
     def operator_id(self):
         return self._operator_id
 
@@ -138,6 +155,13 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
     @rated_voltage.setter
     def rated_voltage(self, value):
         self._rated_voltage = value
+    @property
+    def s_brand_code(self):
+        return self._s_brand_code
+
+    @s_brand_code.setter
+    def s_brand_code(self, value):
+        self._s_brand_code = value
     @property
     def unbind_time(self):
         return self._unbind_time
@@ -204,6 +228,16 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
                 params['equip_type_no'] = self.equip_type_no.to_alipay_dict()
             else:
                 params['equip_type_no'] = self.equip_type_no
+        if self.network_data_begin_time:
+            if hasattr(self.network_data_begin_time, 'to_alipay_dict'):
+                params['network_data_begin_time'] = self.network_data_begin_time.to_alipay_dict()
+            else:
+                params['network_data_begin_time'] = self.network_data_begin_time
+        if self.network_data_end_time:
+            if hasattr(self.network_data_end_time, 'to_alipay_dict'):
+                params['network_data_end_time'] = self.network_data_end_time.to_alipay_dict()
+            else:
+                params['network_data_end_time'] = self.network_data_end_time
         if self.operator_id:
             if hasattr(self.operator_id, 'to_alipay_dict'):
                 params['operator_id'] = self.operator_id.to_alipay_dict()
@@ -229,6 +263,11 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
                 params['rated_voltage'] = self.rated_voltage.to_alipay_dict()
             else:
                 params['rated_voltage'] = self.rated_voltage
+        if self.s_brand_code:
+            if hasattr(self.s_brand_code, 'to_alipay_dict'):
+                params['s_brand_code'] = self.s_brand_code.to_alipay_dict()
+            else:
+                params['s_brand_code'] = self.s_brand_code
         if self.unbind_time:
             if hasattr(self.unbind_time, 'to_alipay_dict'):
                 params['unbind_time'] = self.unbind_time.to_alipay_dict()
@@ -263,6 +302,10 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
             o.equip_status = d['equip_status']
         if 'equip_type_no' in d:
             o.equip_type_no = d['equip_type_no']
+        if 'network_data_begin_time' in d:
+            o.network_data_begin_time = d['network_data_begin_time']
+        if 'network_data_end_time' in d:
+            o.network_data_end_time = d['network_data_end_time']
         if 'operator_id' in d:
             o.operator_id = d['operator_id']
         if 'operator_uid' in d:
@@ -273,6 +316,8 @@ class AlipayCommerceTransportChargerChargerbindinfoSyncModel(object):
             o.rated_power = d['rated_power']
         if 'rated_voltage' in d:
             o.rated_voltage = d['rated_voltage']
+        if 's_brand_code' in d:
+            o.s_brand_code = d['s_brand_code']
         if 'unbind_time' in d:
             o.unbind_time = d['unbind_time']
         return o

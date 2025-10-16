@@ -8,12 +8,15 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
 
     def __init__(self):
+        self._agent_param = None
         self._app_type = None
         self._chat_id = None
+        self._city_code = None
         self._city_name = None
         self._latitude = None
         self._longitude = None
         self._open_id = None
+        self._org_id = None
         self._out_user_id = None
         self._outer_user_type = None
         self._pre_intention = None
@@ -22,6 +25,13 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
         self._scene_code = None
         self._session_id = None
 
+    @property
+    def agent_param(self):
+        return self._agent_param
+
+    @agent_param.setter
+    def agent_param(self, value):
+        self._agent_param = value
     @property
     def app_type(self):
         return self._app_type
@@ -36,6 +46,13 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
     @chat_id.setter
     def chat_id(self, value):
         self._chat_id = value
+    @property
+    def city_code(self):
+        return self._city_code
+
+    @city_code.setter
+    def city_code(self, value):
+        self._city_code = value
     @property
     def city_name(self):
         return self._city_name
@@ -64,6 +81,13 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def org_id(self):
+        return self._org_id
+
+    @org_id.setter
+    def org_id(self, value):
+        self._org_id = value
     @property
     def out_user_id(self):
         return self._out_user_id
@@ -117,6 +141,11 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.agent_param:
+            if hasattr(self.agent_param, 'to_alipay_dict'):
+                params['agent_param'] = self.agent_param.to_alipay_dict()
+            else:
+                params['agent_param'] = self.agent_param
         if self.app_type:
             if hasattr(self.app_type, 'to_alipay_dict'):
                 params['app_type'] = self.app_type.to_alipay_dict()
@@ -127,6 +156,11 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
                 params['chat_id'] = self.chat_id.to_alipay_dict()
             else:
                 params['chat_id'] = self.chat_id
+        if self.city_code:
+            if hasattr(self.city_code, 'to_alipay_dict'):
+                params['city_code'] = self.city_code.to_alipay_dict()
+            else:
+                params['city_code'] = self.city_code
         if self.city_name:
             if hasattr(self.city_name, 'to_alipay_dict'):
                 params['city_name'] = self.city_name.to_alipay_dict()
@@ -147,6 +181,11 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.org_id:
+            if hasattr(self.org_id, 'to_alipay_dict'):
+                params['org_id'] = self.org_id.to_alipay_dict()
+            else:
+                params['org_id'] = self.org_id
         if self.out_user_id:
             if hasattr(self.out_user_id, 'to_alipay_dict'):
                 params['out_user_id'] = self.out_user_id.to_alipay_dict()
@@ -189,10 +228,14 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
         if not d:
             return None
         o = AlipayCommerceMedicalLargermodelSessionQueryModel()
+        if 'agent_param' in d:
+            o.agent_param = d['agent_param']
         if 'app_type' in d:
             o.app_type = d['app_type']
         if 'chat_id' in d:
             o.chat_id = d['chat_id']
+        if 'city_code' in d:
+            o.city_code = d['city_code']
         if 'city_name' in d:
             o.city_name = d['city_name']
         if 'latitude' in d:
@@ -201,6 +244,8 @@ class AlipayCommerceMedicalLargermodelSessionQueryModel(object):
             o.longitude = d['longitude']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'org_id' in d:
+            o.org_id = d['org_id']
         if 'out_user_id' in d:
             o.out_user_id = d['out_user_id']
         if 'outer_user_type' in d:

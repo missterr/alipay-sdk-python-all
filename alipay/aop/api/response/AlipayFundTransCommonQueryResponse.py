@@ -12,18 +12,25 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
         self._arrival_time_end = None
         self._deduct_bill_info = None
         self._error_code = None
+        self._fail_inst_error_code = None
+        self._fail_inst_name = None
+        self._fail_inst_reason = None
         self._fail_reason = None
+        self._inflow_settle_serial_no = None
         self._order_fee = None
         self._order_id = None
         self._out_biz_no = None
         self._passback_params = None
         self._pay_date = None
         self._pay_fund_order_id = None
+        self._receiver_open_id = None
+        self._receiver_user_id = None
         self._settle_serial_no = None
         self._status = None
         self._sub_order_error_code = None
         self._sub_order_fail_reason = None
         self._sub_order_status = None
+        self._sub_status = None
         self._trans_amount = None
         self._transfer_bill_info = None
 
@@ -49,12 +56,40 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
     def error_code(self, value):
         self._error_code = value
     @property
+    def fail_inst_error_code(self):
+        return self._fail_inst_error_code
+
+    @fail_inst_error_code.setter
+    def fail_inst_error_code(self, value):
+        self._fail_inst_error_code = value
+    @property
+    def fail_inst_name(self):
+        return self._fail_inst_name
+
+    @fail_inst_name.setter
+    def fail_inst_name(self, value):
+        self._fail_inst_name = value
+    @property
+    def fail_inst_reason(self):
+        return self._fail_inst_reason
+
+    @fail_inst_reason.setter
+    def fail_inst_reason(self, value):
+        self._fail_inst_reason = value
+    @property
     def fail_reason(self):
         return self._fail_reason
 
     @fail_reason.setter
     def fail_reason(self, value):
         self._fail_reason = value
+    @property
+    def inflow_settle_serial_no(self):
+        return self._inflow_settle_serial_no
+
+    @inflow_settle_serial_no.setter
+    def inflow_settle_serial_no(self, value):
+        self._inflow_settle_serial_no = value
     @property
     def order_fee(self):
         return self._order_fee
@@ -98,6 +133,20 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
     def pay_fund_order_id(self, value):
         self._pay_fund_order_id = value
     @property
+    def receiver_open_id(self):
+        return self._receiver_open_id
+
+    @receiver_open_id.setter
+    def receiver_open_id(self, value):
+        self._receiver_open_id = value
+    @property
+    def receiver_user_id(self):
+        return self._receiver_user_id
+
+    @receiver_user_id.setter
+    def receiver_user_id(self, value):
+        self._receiver_user_id = value
+    @property
     def settle_serial_no(self):
         return self._settle_serial_no
 
@@ -133,6 +182,13 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
     def sub_order_status(self, value):
         self._sub_order_status = value
     @property
+    def sub_status(self):
+        return self._sub_status
+
+    @sub_status.setter
+    def sub_status(self, value):
+        self._sub_status = value
+    @property
     def trans_amount(self):
         return self._trans_amount
 
@@ -155,8 +211,16 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
             self.deduct_bill_info = response['deduct_bill_info']
         if 'error_code' in response:
             self.error_code = response['error_code']
+        if 'fail_inst_error_code' in response:
+            self.fail_inst_error_code = response['fail_inst_error_code']
+        if 'fail_inst_name' in response:
+            self.fail_inst_name = response['fail_inst_name']
+        if 'fail_inst_reason' in response:
+            self.fail_inst_reason = response['fail_inst_reason']
         if 'fail_reason' in response:
             self.fail_reason = response['fail_reason']
+        if 'inflow_settle_serial_no' in response:
+            self.inflow_settle_serial_no = response['inflow_settle_serial_no']
         if 'order_fee' in response:
             self.order_fee = response['order_fee']
         if 'order_id' in response:
@@ -169,6 +233,10 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
             self.pay_date = response['pay_date']
         if 'pay_fund_order_id' in response:
             self.pay_fund_order_id = response['pay_fund_order_id']
+        if 'receiver_open_id' in response:
+            self.receiver_open_id = response['receiver_open_id']
+        if 'receiver_user_id' in response:
+            self.receiver_user_id = response['receiver_user_id']
         if 'settle_serial_no' in response:
             self.settle_serial_no = response['settle_serial_no']
         if 'status' in response:
@@ -179,6 +247,8 @@ class AlipayFundTransCommonQueryResponse(AlipayResponse):
             self.sub_order_fail_reason = response['sub_order_fail_reason']
         if 'sub_order_status' in response:
             self.sub_order_status = response['sub_order_status']
+        if 'sub_status' in response:
+            self.sub_status = response['sub_status']
         if 'trans_amount' in response:
             self.trans_amount = response['trans_amount']
         if 'transfer_bill_info' in response:

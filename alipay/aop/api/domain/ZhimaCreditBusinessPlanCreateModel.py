@@ -12,6 +12,8 @@ class ZhimaCreditBusinessPlanCreateModel(object):
         self._out_order_no = None
         self._plan_info = None
         self._plan_mode = None
+        self._plan_sub_mode = None
+        self._plan_type = None
         self._product_code = None
         self._zm_service_id = None
 
@@ -39,6 +41,20 @@ class ZhimaCreditBusinessPlanCreateModel(object):
     @plan_mode.setter
     def plan_mode(self, value):
         self._plan_mode = value
+    @property
+    def plan_sub_mode(self):
+        return self._plan_sub_mode
+
+    @plan_sub_mode.setter
+    def plan_sub_mode(self, value):
+        self._plan_sub_mode = value
+    @property
+    def plan_type(self):
+        return self._plan_type
+
+    @plan_type.setter
+    def plan_type(self, value):
+        self._plan_type = value
     @property
     def product_code(self):
         return self._product_code
@@ -72,6 +88,16 @@ class ZhimaCreditBusinessPlanCreateModel(object):
                 params['plan_mode'] = self.plan_mode.to_alipay_dict()
             else:
                 params['plan_mode'] = self.plan_mode
+        if self.plan_sub_mode:
+            if hasattr(self.plan_sub_mode, 'to_alipay_dict'):
+                params['plan_sub_mode'] = self.plan_sub_mode.to_alipay_dict()
+            else:
+                params['plan_sub_mode'] = self.plan_sub_mode
+        if self.plan_type:
+            if hasattr(self.plan_type, 'to_alipay_dict'):
+                params['plan_type'] = self.plan_type.to_alipay_dict()
+            else:
+                params['plan_type'] = self.plan_type
         if self.product_code:
             if hasattr(self.product_code, 'to_alipay_dict'):
                 params['product_code'] = self.product_code.to_alipay_dict()
@@ -95,6 +121,10 @@ class ZhimaCreditBusinessPlanCreateModel(object):
             o.plan_info = d['plan_info']
         if 'plan_mode' in d:
             o.plan_mode = d['plan_mode']
+        if 'plan_sub_mode' in d:
+            o.plan_sub_mode = d['plan_sub_mode']
+        if 'plan_type' in d:
+            o.plan_type = d['plan_type']
         if 'product_code' in d:
             o.product_code = d['product_code']
         if 'zm_service_id' in d:

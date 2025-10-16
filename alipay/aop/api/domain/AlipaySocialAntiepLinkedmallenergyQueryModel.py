@@ -8,13 +8,22 @@ from alipay.aop.api.constant.ParamConstants import *
 class AlipaySocialAntiepLinkedmallenergyQueryModel(object):
 
     def __init__(self):
+        self._biz_context = None
         self._biz_id = None
         self._item_id = None
         self._open_id = None
+        self._right_id = None
         self._scene_code = None
         self._sku_id = None
         self._user_id = None
 
+    @property
+    def biz_context(self):
+        return self._biz_context
+
+    @biz_context.setter
+    def biz_context(self, value):
+        self._biz_context = value
     @property
     def biz_id(self):
         return self._biz_id
@@ -36,6 +45,13 @@ class AlipaySocialAntiepLinkedmallenergyQueryModel(object):
     @open_id.setter
     def open_id(self, value):
         self._open_id = value
+    @property
+    def right_id(self):
+        return self._right_id
+
+    @right_id.setter
+    def right_id(self, value):
+        self._right_id = value
     @property
     def scene_code(self):
         return self._scene_code
@@ -61,6 +77,11 @@ class AlipaySocialAntiepLinkedmallenergyQueryModel(object):
 
     def to_alipay_dict(self):
         params = dict()
+        if self.biz_context:
+            if hasattr(self.biz_context, 'to_alipay_dict'):
+                params['biz_context'] = self.biz_context.to_alipay_dict()
+            else:
+                params['biz_context'] = self.biz_context
         if self.biz_id:
             if hasattr(self.biz_id, 'to_alipay_dict'):
                 params['biz_id'] = self.biz_id.to_alipay_dict()
@@ -76,6 +97,11 @@ class AlipaySocialAntiepLinkedmallenergyQueryModel(object):
                 params['open_id'] = self.open_id.to_alipay_dict()
             else:
                 params['open_id'] = self.open_id
+        if self.right_id:
+            if hasattr(self.right_id, 'to_alipay_dict'):
+                params['right_id'] = self.right_id.to_alipay_dict()
+            else:
+                params['right_id'] = self.right_id
         if self.scene_code:
             if hasattr(self.scene_code, 'to_alipay_dict'):
                 params['scene_code'] = self.scene_code.to_alipay_dict()
@@ -98,12 +124,16 @@ class AlipaySocialAntiepLinkedmallenergyQueryModel(object):
         if not d:
             return None
         o = AlipaySocialAntiepLinkedmallenergyQueryModel()
+        if 'biz_context' in d:
+            o.biz_context = d['biz_context']
         if 'biz_id' in d:
             o.biz_id = d['biz_id']
         if 'item_id' in d:
             o.item_id = d['item_id']
         if 'open_id' in d:
             o.open_id = d['open_id']
+        if 'right_id' in d:
+            o.right_id = d['right_id']
         if 'scene_code' in d:
             o.scene_code = d['scene_code']
         if 'sku_id' in d:

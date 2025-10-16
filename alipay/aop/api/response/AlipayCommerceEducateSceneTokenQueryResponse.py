@@ -9,12 +9,15 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
 
     def __init__(self):
         super(AlipayCommerceEducateSceneTokenQueryResponse, self).__init__()
+        self._asset = None
         self._biz_code = None
         self._open_id = None
         self._out_user_id = None
         self._parent_logon_id = None
         self._parent_open_id = None
         self._parent_user_id = None
+        self._pay_open_id = None
+        self._pay_uid = None
         self._payment_pid_list = None
         self._school_code = None
         self._school_face_pass_status = None
@@ -22,6 +25,13 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
         self._school_std_code = None
         self._user_id = None
 
+    @property
+    def asset(self):
+        return self._asset
+
+    @asset.setter
+    def asset(self, value):
+        self._asset = value
     @property
     def biz_code(self):
         return self._biz_code
@@ -64,6 +74,20 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
     @parent_user_id.setter
     def parent_user_id(self, value):
         self._parent_user_id = value
+    @property
+    def pay_open_id(self):
+        return self._pay_open_id
+
+    @pay_open_id.setter
+    def pay_open_id(self, value):
+        self._pay_open_id = value
+    @property
+    def pay_uid(self):
+        return self._pay_uid
+
+    @pay_uid.setter
+    def pay_uid(self, value):
+        self._pay_uid = value
     @property
     def payment_pid_list(self):
         return self._payment_pid_list
@@ -112,6 +136,8 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
 
     def parse_response_content(self, response_content):
         response = super(AlipayCommerceEducateSceneTokenQueryResponse, self).parse_response_content(response_content)
+        if 'asset' in response:
+            self.asset = response['asset']
         if 'biz_code' in response:
             self.biz_code = response['biz_code']
         if 'open_id' in response:
@@ -124,6 +150,10 @@ class AlipayCommerceEducateSceneTokenQueryResponse(AlipayResponse):
             self.parent_open_id = response['parent_open_id']
         if 'parent_user_id' in response:
             self.parent_user_id = response['parent_user_id']
+        if 'pay_open_id' in response:
+            self.pay_open_id = response['pay_open_id']
+        if 'pay_uid' in response:
+            self.pay_uid = response['pay_uid']
         if 'payment_pid_list' in response:
             self.payment_pid_list = response['payment_pid_list']
         if 'school_code' in response:

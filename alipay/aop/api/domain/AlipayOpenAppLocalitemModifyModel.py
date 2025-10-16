@@ -25,6 +25,7 @@ class AlipayOpenAppLocalitemModifyModel(object):
         self._merchant_name = None
         self._out_item_id = None
         self._path = None
+        self._sale_status = None
         self._skus = None
         self._sold_time = None
         self._spu_id = None
@@ -133,15 +134,25 @@ class AlipayOpenAppLocalitemModifyModel(object):
     def path(self, value):
         self._path = value
     @property
+    def sale_status(self):
+        return self._sale_status
+
+    @sale_status.setter
+    def sale_status(self, value):
+        self._sale_status = value
+    @property
     def skus(self):
         return self._skus
 
     @skus.setter
     def skus(self, value):
-        if isinstance(value, LocalItemSkuModifyVO):
-            self._skus = value
-        else:
-            self._skus = LocalItemSkuModifyVO.from_alipay_dict(value)
+        if isinstance(value, list):
+            self._skus = list()
+            for i in value:
+                if isinstance(i, LocalItemSkuModifyVO):
+                    self._skus.append(i)
+                else:
+                    self._skus.append(LocalItemSkuModifyVO.from_alipay_dict(i))
     @property
     def sold_time(self):
         return self._sold_time
@@ -245,7 +256,17 @@ class AlipayOpenAppLocalitemModifyModel(object):
                 params['path'] = self.path.to_alipay_dict()
             else:
                 params['path'] = self.path
+        if self.sale_status:
+            if hasattr(self.sale_status, 'to_alipay_dict'):
+                params['sale_status'] = self.sale_status.to_alipay_dict()
+            else:
+                params['sale_status'] = self.sale_status
         if self.skus:
+            if isinstance(self.skus, list):
+                for i in range(0, len(self.skus)):
+                    element = self.skus[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.skus[i] = element.to_alipay_dict()
             if hasattr(self.skus, 'to_alipay_dict'):
                 params['skus'] = self.skus.to_alipay_dict()
             else:
@@ -296,6 +317,8 @@ class AlipayOpenAppLocalitemModifyModel(object):
             o.out_item_id = d['out_item_id']
         if 'path' in d:
             o.path = d['path']
+        if 'sale_status' in d:
+            o.sale_status = d['sale_status']
         if 'skus' in d:
             o.skus = d['skus']
         if 'sold_time' in d:

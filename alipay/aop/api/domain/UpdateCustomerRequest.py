@@ -11,8 +11,10 @@ class UpdateCustomerRequest(object):
         self._bd = None
         self._charge_person_name = None
         self._cid = None
+        self._cloud_tag = None
         self._country = None
         self._customer_industry = None
+        self._customer_short_name = None
         self._customer_source = None
         self._ep_cert_no = None
         self._ep_name = None
@@ -22,9 +24,14 @@ class UpdateCustomerRequest(object):
         self._established_date = None
         self._industry = None
         self._industry_category = None
+        self._key_customer = None
+        self._leads_cloud_tag = None
         self._location = None
         self._memo = None
         self._operator = None
+        self._platform_cloud_tag = None
+        self._pub_cloud_first_level_industry = None
+        self._pub_cloud_second_level_industry = None
         self._region = None
         self._registered_address = None
         self._registered_capital = None
@@ -52,6 +59,13 @@ class UpdateCustomerRequest(object):
     def cid(self, value):
         self._cid = value
     @property
+    def cloud_tag(self):
+        return self._cloud_tag
+
+    @cloud_tag.setter
+    def cloud_tag(self, value):
+        self._cloud_tag = value
+    @property
     def country(self):
         return self._country
 
@@ -65,6 +79,13 @@ class UpdateCustomerRequest(object):
     @customer_industry.setter
     def customer_industry(self, value):
         self._customer_industry = value
+    @property
+    def customer_short_name(self):
+        return self._customer_short_name
+
+    @customer_short_name.setter
+    def customer_short_name(self, value):
+        self._customer_short_name = value
     @property
     def customer_source(self):
         return self._customer_source
@@ -129,6 +150,20 @@ class UpdateCustomerRequest(object):
     def industry_category(self, value):
         self._industry_category = value
     @property
+    def key_customer(self):
+        return self._key_customer
+
+    @key_customer.setter
+    def key_customer(self, value):
+        self._key_customer = value
+    @property
+    def leads_cloud_tag(self):
+        return self._leads_cloud_tag
+
+    @leads_cloud_tag.setter
+    def leads_cloud_tag(self, value):
+        self._leads_cloud_tag = value
+    @property
     def location(self):
         return self._location
 
@@ -149,6 +184,27 @@ class UpdateCustomerRequest(object):
     @operator.setter
     def operator(self, value):
         self._operator = value
+    @property
+    def platform_cloud_tag(self):
+        return self._platform_cloud_tag
+
+    @platform_cloud_tag.setter
+    def platform_cloud_tag(self, value):
+        self._platform_cloud_tag = value
+    @property
+    def pub_cloud_first_level_industry(self):
+        return self._pub_cloud_first_level_industry
+
+    @pub_cloud_first_level_industry.setter
+    def pub_cloud_first_level_industry(self, value):
+        self._pub_cloud_first_level_industry = value
+    @property
+    def pub_cloud_second_level_industry(self):
+        return self._pub_cloud_second_level_industry
+
+    @pub_cloud_second_level_industry.setter
+    def pub_cloud_second_level_industry(self, value):
+        self._pub_cloud_second_level_industry = value
     @property
     def region(self):
         return self._region
@@ -196,6 +252,11 @@ class UpdateCustomerRequest(object):
                 params['cid'] = self.cid.to_alipay_dict()
             else:
                 params['cid'] = self.cid
+        if self.cloud_tag:
+            if hasattr(self.cloud_tag, 'to_alipay_dict'):
+                params['cloud_tag'] = self.cloud_tag.to_alipay_dict()
+            else:
+                params['cloud_tag'] = self.cloud_tag
         if self.country:
             if hasattr(self.country, 'to_alipay_dict'):
                 params['country'] = self.country.to_alipay_dict()
@@ -206,6 +267,11 @@ class UpdateCustomerRequest(object):
                 params['customer_industry'] = self.customer_industry.to_alipay_dict()
             else:
                 params['customer_industry'] = self.customer_industry
+        if self.customer_short_name:
+            if hasattr(self.customer_short_name, 'to_alipay_dict'):
+                params['customer_short_name'] = self.customer_short_name.to_alipay_dict()
+            else:
+                params['customer_short_name'] = self.customer_short_name
         if self.customer_source:
             if hasattr(self.customer_source, 'to_alipay_dict'):
                 params['customer_source'] = self.customer_source.to_alipay_dict()
@@ -251,6 +317,16 @@ class UpdateCustomerRequest(object):
                 params['industry_category'] = self.industry_category.to_alipay_dict()
             else:
                 params['industry_category'] = self.industry_category
+        if self.key_customer:
+            if hasattr(self.key_customer, 'to_alipay_dict'):
+                params['key_customer'] = self.key_customer.to_alipay_dict()
+            else:
+                params['key_customer'] = self.key_customer
+        if self.leads_cloud_tag:
+            if hasattr(self.leads_cloud_tag, 'to_alipay_dict'):
+                params['leads_cloud_tag'] = self.leads_cloud_tag.to_alipay_dict()
+            else:
+                params['leads_cloud_tag'] = self.leads_cloud_tag
         if self.location:
             if hasattr(self.location, 'to_alipay_dict'):
                 params['location'] = self.location.to_alipay_dict()
@@ -266,6 +342,21 @@ class UpdateCustomerRequest(object):
                 params['operator'] = self.operator.to_alipay_dict()
             else:
                 params['operator'] = self.operator
+        if self.platform_cloud_tag:
+            if hasattr(self.platform_cloud_tag, 'to_alipay_dict'):
+                params['platform_cloud_tag'] = self.platform_cloud_tag.to_alipay_dict()
+            else:
+                params['platform_cloud_tag'] = self.platform_cloud_tag
+        if self.pub_cloud_first_level_industry:
+            if hasattr(self.pub_cloud_first_level_industry, 'to_alipay_dict'):
+                params['pub_cloud_first_level_industry'] = self.pub_cloud_first_level_industry.to_alipay_dict()
+            else:
+                params['pub_cloud_first_level_industry'] = self.pub_cloud_first_level_industry
+        if self.pub_cloud_second_level_industry:
+            if hasattr(self.pub_cloud_second_level_industry, 'to_alipay_dict'):
+                params['pub_cloud_second_level_industry'] = self.pub_cloud_second_level_industry.to_alipay_dict()
+            else:
+                params['pub_cloud_second_level_industry'] = self.pub_cloud_second_level_industry
         if self.region:
             if hasattr(self.region, 'to_alipay_dict'):
                 params['region'] = self.region.to_alipay_dict()
@@ -299,10 +390,14 @@ class UpdateCustomerRequest(object):
             o.charge_person_name = d['charge_person_name']
         if 'cid' in d:
             o.cid = d['cid']
+        if 'cloud_tag' in d:
+            o.cloud_tag = d['cloud_tag']
         if 'country' in d:
             o.country = d['country']
         if 'customer_industry' in d:
             o.customer_industry = d['customer_industry']
+        if 'customer_short_name' in d:
+            o.customer_short_name = d['customer_short_name']
         if 'customer_source' in d:
             o.customer_source = d['customer_source']
         if 'ep_cert_no' in d:
@@ -321,12 +416,22 @@ class UpdateCustomerRequest(object):
             o.industry = d['industry']
         if 'industry_category' in d:
             o.industry_category = d['industry_category']
+        if 'key_customer' in d:
+            o.key_customer = d['key_customer']
+        if 'leads_cloud_tag' in d:
+            o.leads_cloud_tag = d['leads_cloud_tag']
         if 'location' in d:
             o.location = d['location']
         if 'memo' in d:
             o.memo = d['memo']
         if 'operator' in d:
             o.operator = d['operator']
+        if 'platform_cloud_tag' in d:
+            o.platform_cloud_tag = d['platform_cloud_tag']
+        if 'pub_cloud_first_level_industry' in d:
+            o.pub_cloud_first_level_industry = d['pub_cloud_first_level_industry']
+        if 'pub_cloud_second_level_industry' in d:
+            o.pub_cloud_second_level_industry = d['pub_cloud_second_level_industry']
         if 'region' in d:
             o.region = d['region']
         if 'registered_address' in d:

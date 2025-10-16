@@ -3,6 +3,8 @@
 import json
 
 from alipay.aop.api.constant.ParamConstants import *
+from alipay.aop.api.domain.AssetItemVersion import AssetItemVersion
+from alipay.aop.api.domain.OptionalItemInfo import OptionalItemInfo
 
 
 class ItemDeliveryDetail(object):
@@ -11,9 +13,11 @@ class ItemDeliveryDetail(object):
         self._amount = None
         self._assign_item_id = None
         self._batch_no = None
+        self._item_version_info = None
         self._logistic_code = None
         self._logistics_name = None
         self._logistics_no = None
+        self._optional_item_infos = None
         self._voucher_time = None
 
     @property
@@ -38,6 +42,16 @@ class ItemDeliveryDetail(object):
     def batch_no(self, value):
         self._batch_no = value
     @property
+    def item_version_info(self):
+        return self._item_version_info
+
+    @item_version_info.setter
+    def item_version_info(self, value):
+        if isinstance(value, AssetItemVersion):
+            self._item_version_info = value
+        else:
+            self._item_version_info = AssetItemVersion.from_alipay_dict(value)
+    @property
     def logistic_code(self):
         return self._logistic_code
 
@@ -58,6 +72,19 @@ class ItemDeliveryDetail(object):
     @logistics_no.setter
     def logistics_no(self, value):
         self._logistics_no = value
+    @property
+    def optional_item_infos(self):
+        return self._optional_item_infos
+
+    @optional_item_infos.setter
+    def optional_item_infos(self, value):
+        if isinstance(value, list):
+            self._optional_item_infos = list()
+            for i in value:
+                if isinstance(i, OptionalItemInfo):
+                    self._optional_item_infos.append(i)
+                else:
+                    self._optional_item_infos.append(OptionalItemInfo.from_alipay_dict(i))
     @property
     def voucher_time(self):
         return self._voucher_time
@@ -84,6 +111,11 @@ class ItemDeliveryDetail(object):
                 params['batch_no'] = self.batch_no.to_alipay_dict()
             else:
                 params['batch_no'] = self.batch_no
+        if self.item_version_info:
+            if hasattr(self.item_version_info, 'to_alipay_dict'):
+                params['item_version_info'] = self.item_version_info.to_alipay_dict()
+            else:
+                params['item_version_info'] = self.item_version_info
         if self.logistic_code:
             if hasattr(self.logistic_code, 'to_alipay_dict'):
                 params['logistic_code'] = self.logistic_code.to_alipay_dict()
@@ -99,6 +131,16 @@ class ItemDeliveryDetail(object):
                 params['logistics_no'] = self.logistics_no.to_alipay_dict()
             else:
                 params['logistics_no'] = self.logistics_no
+        if self.optional_item_infos:
+            if isinstance(self.optional_item_infos, list):
+                for i in range(0, len(self.optional_item_infos)):
+                    element = self.optional_item_infos[i]
+                    if hasattr(element, 'to_alipay_dict'):
+                        self.optional_item_infos[i] = element.to_alipay_dict()
+            if hasattr(self.optional_item_infos, 'to_alipay_dict'):
+                params['optional_item_infos'] = self.optional_item_infos.to_alipay_dict()
+            else:
+                params['optional_item_infos'] = self.optional_item_infos
         if self.voucher_time:
             if hasattr(self.voucher_time, 'to_alipay_dict'):
                 params['voucher_time'] = self.voucher_time.to_alipay_dict()
@@ -117,12 +159,16 @@ class ItemDeliveryDetail(object):
             o.assign_item_id = d['assign_item_id']
         if 'batch_no' in d:
             o.batch_no = d['batch_no']
+        if 'item_version_info' in d:
+            o.item_version_info = d['item_version_info']
         if 'logistic_code' in d:
             o.logistic_code = d['logistic_code']
         if 'logistics_name' in d:
             o.logistics_name = d['logistics_name']
         if 'logistics_no' in d:
             o.logistics_no = d['logistics_no']
+        if 'optional_item_infos' in d:
+            o.optional_item_infos = d['optional_item_infos']
         if 'voucher_time' in d:
             o.voucher_time = d['voucher_time']
         return o
